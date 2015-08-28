@@ -3,7 +3,7 @@
 文本和代码工具：**Sublime Text 3**
 版本控制工具：**Git和GitHub**
 程序设计语言：**Python 3**
-文本格式化语言及转换：**Markdown和Pandoc**
+文本格式化语言：**Markdown和Latex**
 多平台笔记工具：**印象笔记（Evernote）**
 数据库工具：**MongoDB**
 统计开发平台：**R和Stata**
