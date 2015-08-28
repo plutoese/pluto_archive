@@ -71,6 +71,7 @@ git remote add origin https://github.com/plutoese/pluto.git
 git push -u origin master
 ```
 
+### GUI工具 —— SourceTree
 
 
 
