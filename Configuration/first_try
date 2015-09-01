@@ -1,0 +1,9 @@
+\documentClass{article}
+
+\begin{document}
+
+This is my first document.
+
+Happy \Tex ing!
+
+\end{document}
