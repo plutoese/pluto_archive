@@ -1,7 +1,28 @@
-\documentclass[UTF8]{article}
+% -*- coding:UTF-8 -*-
+% a note template
+
+% preamble
+\documentclass[UTF8,a4paper,12pt]{article}
 \usepackage[space,noindent]{ctex}
 
+% body
 \begin{document}
-论文内容
+\title{题目}
+\author{张晨峰}
+\date{\today}
+\maketitle
+
+\section{如何开始}
+
+文字可以\emph{强调}。文字可以是\textit{意大利形式}，也可以是\textbf{粗体}的，\textsl{倾斜}的或者\textsc{capital}。
+命令还可以是嵌套，比如\textit{\textbf{意大利粗体}}。网址可以用打印机表示，例如\texttt{http://www.ctan.org}。
+
+\noindent\tiny We \scriptsize start \footnotesize \small small,
+\normalsize get \large big \Large and \LARGE bigger,\huge huge and \Huge gigantic!
+
+\normalsize Statement \#1:
+50\% of \$100 makes \$50.
+More special symbols are \&, \_, \{ and \}.
+
 The hypotenuse: $\sqrt{a^{2} + b^{2}}$. I can type math!
-\end{document}
+\end{document} 
