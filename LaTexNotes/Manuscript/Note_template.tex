@@ -4,25 +4,98 @@
 % preamble
 \documentclass[UTF8,a4paper,12pt]{article}
 \usepackage[space,noindent]{ctex}
+\usepackage{listings}
 
-% body
-\begin{document}
 \title{题目}
 \author{张晨峰}
 \date{\today}
+
+% body
+\begin{document}
 \maketitle
 
-\section{如何开始}
+\section{笔记}
 
-文字可以\emph{强调}。文字可以是\textit{意大利形式}，也可以是\textbf{粗体}的，\textsl{倾斜}的或者\textsc{capital}。
-命令还可以是嵌套，比如\textit{\textbf{意大利粗体}}。网址可以用打印机表示，例如\texttt{http://www.ctan.org}。
+正确使用符号
+
+使用破折号，我-们，我--们，我---们。
+使用省略号，1,2,3\ldots;4,5,6\dots;7,8,9...
+不能直接录入的标点符号，\# \quad \$ \quad \% \quad \& \quad \{ \quad \} \quad \_ \quad \textbackslash
+
+
+空格与换行
+
+任意多个空格     和一个空格 的功能相同。
+单个换行也被看做是一个空格。
+以字母命令的宏，后面的空格会被忽略，如果需要在命令后面使用空格，例如Happy \TeX\ ing;也可以在命令后面加一个空的分组{}，例如Happy \TeX{} ing。
+在空格中，最神奇的一种是被称为幻影(phantom)的空格，例如幻影\phantom{我是空格}速速隐形。
+另起一行，并不分段，可以用\\命令，或者\linebreak命令。
+
+
+字体
+
+带参数的修改字体命令，用于少量字体的更换。
+预定义命令的字体族有三种：\textrm{罗马},\textsf{无衬线},\texttt{打字机}。
+预定义命令的字体形状有四种：\textup{直立},\textit{意大利},\textsl{倾斜},\textsc{small capitals shape}。
+预定义命令的字体系列有两类：\textmd{中等},\textbf{加宽加粗}。
+字体声明的修改字体命令，用于分组或环境中字体的整体更换。
+\sffamily
+\textnormal{相比较正常字体},这是无衬线的整体修改方案。
+\rmfamily
+中文字体
+{\CJKfamily{zhhei}这是黑体},{\CJKfamily{zhkai}这是楷书},{\songti 宋体 \quad \heiti 黑体 \quad \fangsong 仿宋 \quad \kaishu 楷书}
+
+
+强调文字
+
+\rmfamily
+文字可以\emph{强调}, 或者用\underline{下划线}。
+
+
+字体大小
 
 \noindent\tiny We \scriptsize start \footnotesize \small small,
 \normalsize get \large big \Large and \LARGE bigger,\huge huge and \Huge gigantic!
 
-\normalsize Statement \#1:
-50\% of \$100 makes \$50.
-More special symbols are \&, \_, \{ and \}.
+\normalsize
 
-The hypotenuse: $\sqrt{a^{2} + b^{2}}$. I can type math!
+
+文本环境
+
+\begin{quote}
+  这是引用环境。
+\end{quote}
+
+\begin{abstract}
+  这是摘要环境。
+\end{abstract}
+
+
+列表环境
+
+\begin{enumerate}
+  \item 中文
+  \item 英文
+  \item 日文
+\end{enumerate}
+
+\begin{itemize}
+  \item 中文
+  \item 英文
+  \item 日文
+\end{itemize}
+
+
+程序代码
+
+\lstset{columns=flexible,numbers=left,numberstyle=\footnotesize}
+\begin{lstlisting}[language=C]
+/* hello.c */
+#include <stdio.h>
+main() {
+    printf("hello.\n");
+}
+\end{lstlisting}
+
+
 \end{document} 
