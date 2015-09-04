@@ -13,9 +13,9 @@ class Excel:
     data: 读入的数据
 
     方法：
-    read(self, sheetnum=0): 读取Excel表的数据，参数sheetnum表示Excel文件表单号，类型整数，默认为0。返回值为Excel表中所有数据，类型列表。
+    read(self, sheetnum=0): 读取Excel表的数据，参数sheetnum表示Excel文件表单号，默认为0。返回值为Excel表中所有数据，类型列表。
     new(self): 新建一个Excel文件，文件名为self.filename。无返回值。
-    def append(self, data=None): 把数据写入Excel文件，参数data表示要写入Excel文件的数据，类型列表，默认值None表示用self.data。无返回值。
+    def append(self, data=None): 把数据写入Excel文件，参数data表示要写入Excel文件的数据，默认值None表示用self.data。无返回值。
     close(self): 关闭Excel文件，无参数。无返回值。
     '''
     def __init__(self, filename):
