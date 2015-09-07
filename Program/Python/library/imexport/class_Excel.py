@@ -11,6 +11,7 @@ class Excel:
     属性：
     filename: 文件名
     data: 读入的数据
+    
     方法：
     read(self, sheetnum=0): 读取Excel表的数据，参数sheetnum表示Excel文件表单号，类型整数，默认为0。返回值为Excel表中所有数据，类型列表。
     new(self): 新建一个Excel文件，文件名为self.filename。无返回值。

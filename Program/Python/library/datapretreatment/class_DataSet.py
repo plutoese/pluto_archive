@@ -22,14 +22,25 @@ class DataSet:
         # load data
         self._data = data
         self.data = self._data
-        self.AD = AdminDistrict()
+        self.AD = AdminCode()
 
     # subset of the dataset
     def setSubset(self,year=None,region=None,variable=None,mindex=None):
         if year is None:
             year = slice(None)
+        else:
+            if isinstance(year,(range,list)):
+                year = [str(y) for y in year]
         if region is None:
             region = slice(None)
+        else:
+            regions = []
+            for item in region:
+                if len(item) == 1:
+                    regions.append(self.AD[item[0]]['acode'])
+                else:
+                    regions.append(self.AD[tuple(item)]['acode'])
+            region = regions
         if variable is None:
             variable = slice(None)
 
@@ -49,11 +60,43 @@ class DataSet:
         else:
             self.data = self.data.loc[year,region,variable]
 
-        self.data = self.data.applymap(self._setMissingData)
+        # transform
+        shape = self.data.shape
+        if len(shape) == 3:
+            if shape[0] == 1:
+                self.data = self.data.xs(key=year,axis=0)
+            if len(self.data.shape) < 3:
+                if shape[1] == 1:
+                    self.data = self.data.xs(key=region[0],axis=0)
+                if len(self.data.shape) < 2:
+                    if shape[2] == 1:
+                        self.data = self.data.xs(key=variable[0],axis=0)
+                else:
+                    if shape[2] == 1:
+                        self.data = self.data.xs(key=variable[0],axis=1)
+            else:
+                if shape[1] == 1:
+                    self.data = self.data.xs(key=region[0],axis=1)
+                if len(self.data.shape) < 3:
+                    if shape[2] == 1:
+                        pass
+                else:
+                    if shape[2] == 1:
+                        self.data = self.data.xs(key=variable[0],axis=2)
+
+        shape = self.data.shape
+        if len(shape) == 1:
+            self.data = self.data.apply(self._setMissingData)
+        if len(shape) == 2:
+            self.data = self.data.applymap(self._setMissingData)
+        if len(shape) == 3:
+            self.data = self.data.apply(self._setMissingData,0)
+            self.data = self.data.apply(self._setMissingData,1)
+            self.data = self.data.apply(self._setMissingData,2)
 
     # to delete any row with NA
     # 删除任何保护缺失值的行
-    def toBalancedPanel(self):
+    def noNA(self):
         self.data = self.data.dropna()
 
     # 辅助函数，用来生成缺失值
@@ -112,8 +155,12 @@ if __name__ == '__main__':
     F = open(r'C:\Room\Warehouse\GitWork\Program\Python\library\dataset\CEICPdata.pkl','rb')
     pdata = pickle.load(F)
     dset = DataSet(pdata)
-    dset.setSubset(year='2002',variable=[u'财政支出',u'国内生产总值',u'国内生产总值_人均'])
-    dset.toBalancedPanel()
+    dset.setSubset(year=range(2000,2013),region=[[u'上海']],variable=[u'国内生产总值_人均'])
+    #dset.setSubset(year='2012',region=[[u'北京'],[u'上海'],[u'浙江',u'嘉兴']],variable=[u'财政支出',u'国内生产总值',u'国内生产总值_人均'])
+    #dset.setSubset(year=range(2010,2013),region=[[u'北京'],[u'上海'],[u'浙江',u'嘉兴']],variable=[u'财政支出',u'国内生产总值',u'国内生产总值_人均'])
+    #dset.setSubset(year=range(2000,2013),region=[[u'北京']],variable=[u'财政支出',u'国内生产总值',u'国内生产总值_人均'])
+    #dset.setSubset(year=range(2000,2014),region=[[u'北京'],[u'上海'],[u'浙江',u'杭州']],variable=[u'国内生产总值_人均'])
+    dset.noNA()
     mdata = dset.data
 
     print(mdata)

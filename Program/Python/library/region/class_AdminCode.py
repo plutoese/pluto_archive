@@ -3,9 +3,28 @@
 import re
 from pymongo import MongoClient
 
-# Class Desconstruction City Statistical Year Book
-# Purpose: to deconstruct data table from a excel file
-class AdminDistrict:
+# 类AdminCode用来获取区域代码
+class AdminCode:
+    '''
+    类AdminCode用来提取区域代码及其他信息。
+    
+    属性：
+    Province: 所有省级行政区域
+    Prefecture: 所有地级行政区域
+    County：所有县级行政区域
+    ProvincePrefecture：所有的省级和地级行政区域
+    ProvincePrefectureCounty：所有的省级地级县级区域
+
+    方法：
+    __getitem__(self, key)：重载运算符[]。其中的key表示表示区域名称，方法如下：（1）省级区域，用名字直接表示，例如ad[u'北京']；
+    （2）地级区域，用省级、地级名称表示，例如ad[u'浙江',u'嘉兴']；（3）县级区域，用省级、地级、县级名称表示，例如ad[u'湖北', u'恩施',u'来凤']；
+    （4）如果是本级行政区域加上下级行政区域，下级行政区域用f（first）表示，例如表示浙江省及其所有地级行政区域，用ad[u'浙江',u'f']；
+    （5）如果是本级行政区域加上下下级行政区域，下下级行政区域用s（second）表示，例如表示浙江省及其所有县级行政区域，用ad[u'浙江',u's']；
+    （6）如果是本级行政区域加上下级及下下级行政区域，下级及下下级行政区域用b（both）表示，例如表示浙江省及其所有地县级行政区域，用ad[u'浙江',u'b']。
+    返回值是数据库中查询得到的行政区划的字典（单个）或者列表（多个）。
+
+    getByAcode(self,acode)：通过acode查询区域信息，参数acode表示区域行政代码，类型字符串。返回值为数据库中查询得到的行政区域，类型字典。
+    '''
     # Construction
     def __init__(self,index=None):
         self.Client = MongoClient('localhost', 27017)
@@ -158,7 +177,7 @@ if __name__ == '__main__':
     print(ad[u'浙江',u'嘉兴',u'海宁'])
     print(ad[u'安徽',u'巢湖'])
 
-    adold = AdminDistrict(index=u'09')
+    adold = AdminCode(index=u'09')
     print(adold.Province)
     print(adold[u'吉林'])
     print(adold[[u'吉林']])
@@ -172,3 +191,6 @@ if __name__ == '__main__':
 
     print(ad[u'河南', u'漯河',u'临颍'])
     print(ad[u'湖北', u'恩施',u'来凤'])
+
+    region = [u'北京']
+    print(ad[region[0]])
