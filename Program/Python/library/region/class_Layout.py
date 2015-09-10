@@ -20,8 +20,9 @@ class Layout:
         if (self.ndim['variable'] == 1) and (self.ndim['region'] == 1):
             #data = pd.Series(dict(zip(year,[group for name, group in self._data.groupby(['acode','variable'],sort=True)][0]['value'])))
             #d = dict(zip(year,data))
-            sname = '|'.join([self.region[0],self.variable[0]])
-            return pd.Series(dict(zip(self.year,[group for name, group in self._data.groupby(['acode','variable'],sort=True)][0]['value'])),name=sname)
+            #sname = '|'.join([self.region[0],self.variable[0]])
+            self.information = [self.region[0],self.variable[0]]
+            return pd.Series(dict(zip(self.year,[group for name, group in self._data.groupby(['acode','variable'],sort=True)][0]['value'])))
 
         # 构建横截面数据(地区|变量)
         if self.ndim['year'] == 1:
@@ -37,6 +38,7 @@ class Layout:
                     mdata = pd.merge(mdata,rdata,left_index=True,right_index=True,how='outer')
                 i = i + 1
             mdata.insert(0, 'region', [self.ad.getByAcode(item)['region'] for item in mdata.index])
+            self.information = self.type['year']
             return mdata
 
         # 构建横截面数据(地区|时间)
@@ -52,6 +54,7 @@ class Layout:
                     mdata = pd.merge(mdata,rdata,left_index=True,right_index=True,how='outer')
                 i = i + 1
             mdata.insert(0, 'region', [self.ad.getByAcode(item)['region'] for item in mdata.index])
+            self.information = self.type['variable']
             return mdata
 
         # panel data
@@ -73,8 +76,8 @@ class Layout:
             year.append(str(y))
             pdata.append(mdata)
         result = pd.Panel(dict(zip(year,pdata)))
+        self.information = []
         return result
-
 
     # 辅助函数，返回数据结构
     def _type(self):
@@ -84,7 +87,7 @@ class Layout:
 
         g = self._data.groupby(['acode'], sort=True)
         self.acode = [name for name, group in g]
-        self.region = [ad.getByAcode(item)['region'] for item in self.acode]
+        self.region = [self.ad.getByAcode(item)['region'] for item in self.acode]
 
         g = self._data.groupby(['variable'], sort=True)
         self.variable = [name for name, group in g]
@@ -94,11 +97,12 @@ class Layout:
 if __name__ == '__main__':
     ad = AdminCode()
     rdata = RegionalData()
-    mdata = rdata.query(region=ad[u'浙江',u'f'],year=range(2006,2010),variable=[u'财政支出',u'从业人数_在岗职工'])
+    #mdata = rdata.query(region=ad[u'浙江',u'f'],year=range(2006,2010),variable=[u'财政支出',u'从业人数_在岗职工'])
     #mdata = rdata.query(region=[ad[u'浙江',u'杭州']],variable=[u'财政支出'])
-    #mdata = rdata.query(region=ad[u'浙江',u'f'],variable=[u'财政支出'],year=range(2005,2013))
+    mdata = rdata.query(region=ad[u'浙江',u'f'],variable=[u'财政支出'],year=2012)
     #mdata = rdata.query(region=ad[u'浙江',u'杭州'],variable=u'财政支出',year=range(2000,2012))
     lout = Layout(mdata)
+    print(lout.stackToNormal())
     print(lout.type)
     print(lout.ndim)
 
@@ -125,4 +129,9 @@ if __name__ == '__main__':
     print(mdata)
     print(mdata.axes)
     print(mdata['2007'])
+
+    print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+    mdata = mdata.swapaxes('items','minor')
+    mdata = mdata.swapaxes('major','minor')
+    print(mdata.to_frame())
 
