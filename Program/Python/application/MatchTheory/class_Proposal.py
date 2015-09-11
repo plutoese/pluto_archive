@@ -93,7 +93,6 @@ class Propose:
 
         return statistics
 
-
     def print(self):
         print('result:--------------------------------')
         #print('hello',self.proposal_dict)
@@ -262,8 +261,8 @@ if __name__ == '__main__':
     preference_female = {0:[0,1,2,3],1:[3,1,2,0],2:[3,2,0,1],3:[0,3,2,1],4:[0,1,3]}
     preference_male = {0:[1,2,0,3,4],1:[2,0,1,3,4],2:[4,3,0,1,2],3:[0,3,4,1,2]}
 
-    preference_male = {0:[0,1,2,3],1:[3,1,2,0],2:[3,2,0,1],3:[0,3,2,1],4:[0,1,3]}
-    preference_female = {0:[1,2,0,3,4],1:[2,0,1,3,4],2:[4,3,0,1,2],3:[0,3,4,1,2]}
+    #preference_male = {0:[0,1,2,3],1:[3,1,2,0],2:[3,2,0,1],3:[0,3,2,1],4:[0,1,3]}
+    #preference_female = {0:[1,2,0,3,4],1:[2,0,1,3,4],2:[4,3,0,1,2],3:[0,3,4,1,2]}
 
     proposeds = {key:Proposed(name=key,preference=preference_female[key]) for key in sorted(preference_female)}
     proposals = {key:Proposal(name=key,preference=preference_male[key],roll=proposeds) for key in sorted(preference_male)}
@@ -271,6 +270,7 @@ if __name__ == '__main__':
     match = Propose(proposals,proposeds)
     match.topropose()
     match.print()
+    print(match.stat)
 
     #match.printTest()
 
