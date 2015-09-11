@@ -1,10 +1,10 @@
 # coding=UTF-8
 
 import random
-from application.MatchTheory.class_Match import *
+from application.MatchTheory.class_Proposal import *
 
 # 1. to set up number
-N = 10
+N = 100
 person = list(range(N))
 
 preference_male = {}
@@ -19,11 +19,10 @@ for i in range(N):
 
 print(preference_male,preference_female)
 
-proposals = proposalList(preference_female)
-proposeds = proposedList(preference_male)
+proposeds = {key:Proposed(name=key,preference=preference_female[key]) for key in sorted(preference_female)}
+proposals = {key:Proposal(name=key,preference=preference_male[key],roll=proposeds) for key in sorted(preference_male)}
 
 match = Propose(proposals,proposeds)
 match.topropose()
 match.print()
 
-match.printTest()

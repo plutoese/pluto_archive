@@ -75,17 +75,17 @@ class Propose:
         print('result:--------------------------------')
         #print('hello',self.proposal_dict)
         #print('hello',self.proposed_dict)
-        for key in proposeds:
-            if proposeds[key].accepted is not None:
-                print(proposeds[key].name,' accept  ',proposeds[key].accepted.name)
+        for key in self.proposed_dict:
+            if self.proposed_dict[key].accepted is not None:
+                print(self.proposed_dict[key].name,' accept  ',self.proposed_dict[key].accepted.name)
             else:
-                print(proposeds[key].name,' accept  ','None')
+                print(self.proposed_dict[key].name,' accept  ','None')
         print('--------------------------------')
-        for key in proposals:
-            if proposals[key].beAccepted is not None:
-                print(proposals[key].name,' accepted by  ',proposals[key].beAccepted)
+        for key in self.proposal_dict:
+            if self.proposal_dict[key].beAccepted is not None:
+                print(self.proposal_dict[key].name,' accepted by  ',self.proposal_dict[key].beAccepted.name)
             else:
-                print(proposals[key].name,' accepted by  ','None')
+                print(self.proposal_dict[key].name,' accepted by  ','None')
         print('--------------------------------')
 
     # assist function to find a proposed object
@@ -233,14 +233,15 @@ if __name__ == '__main__':
     preference_male = {0:[0,1,2,3],1:[3,1,2,0],2:[3,2,0,1],3:[0,3,2,1],4:[0,1,3]}
     preference_female = {0:[1,2,0,3,4],1:[2,0,1,3,4],2:[4,3,0,1,2],3:[0,3,4,1,2]}
 
-    #preference_male = {0: [1, 2, 4, 0, 3], 1: [4, 1, 3, 0, 2], 2: [2, 3, 4, 0, 1], 3: [2, 3, 0, 1, 4], 4: [3, 0, 1, 4, 2]}
-    #preference_female = {0: [2, 4, 1, 3, 0], 1: [4, 1, 3, 0, 2], 2: [1, 4, 0, 3, 2], 3: [0, 4, 1, 2, 3], 4: [2, 3, 1, 4, 0]}
+    preference_male = {0: [1, 2, 4, 0, 3], 1: [4, 1, 3, 0, 2], 2: [2, 3, 4, 0, 1], 3: [2, 3, 0, 1, 4], 4: [3, 0, 1, 4, 2]}
+    preference_female = {0: [2, 4, 1, 3, 0], 1: [4, 1, 3, 0, 2], 2: [1, 4, 0, 3, 2], 3: [0, 4, 1, 2, 3], 4: [2, 3, 1, 4, 0]}
 
-    #preference_female = {0:[0,1,2,3],1:[3,1,2,0],2:[3,2,0,1],3:[0,3,2,1],4:[0,1,3]}
-    #preference_male = {0:[1,2,0,3,4],1:[2,0,1,3,4],2:[4,3,0,1,2],3:[0,3,4,1,2]}
+    preference_female = {0:[0,1,2,3],1:[3,1,2,0],2:[3,2,0,1],3:[0,3,2,1],4:[0,1,3]}
+    preference_male = {0:[1,2,0,3,4],1:[2,0,1,3,4],2:[4,3,0,1,2],3:[0,3,4,1,2]}
 
-    #preference_male = {0:[0,1,2,3],1:[3,1,2,0],2:[3,2,0,1],3:[0,3,2,1],4:[0,1,3]}
-    #preference_female = {0:[1,2,0,3,4],1:[2,0,1,3,4],2:[4,3,0,1,2],3:[0,3,4,1,2]}
+    preference_male = {0:[0,1,2,3],1:[3,1,2,0],2:[3,2,0,1],3:[0,3,2,1],4:[0,1,3]}
+    preference_female = {0:[1,2,0,3,4],1:[2,0,1,3,4],2:[4,3,0,1,2],3:[0,3,4,1,2]}
+
     proposeds = {key:Proposed(name=key,preference=preference_female[key]) for key in sorted(preference_female)}
     proposals = {key:Proposal(name=key,preference=preference_male[key],roll=proposeds) for key in sorted(preference_male)}
 
