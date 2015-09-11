@@ -2,42 +2,57 @@
 
 import math
 
+# 类Propose表示求婚
 class Propose:
-    '''An algorithm to match'''
-    def __init__(self,proposal_list=None,proposed_list=None):
+    '''
+    类Propose用来模拟求婚过程。
+    
+    属性：
+    self.proposal_dict：求婚者的集合，类型Person对象的字典
+    self.proposed_dict：被求婚者的集合，类型Person对象的字典
+    self.denied：被拒绝的求婚者的列表，初始值为所有的求婚者的列表
+    '''
+    def __init__(self,proposaldict=None,proposeddict=None):
         # who propose
-        self.proposal_list = proposal_list
+        self.proposal_dict = proposaldict
         # who to be proposed
-        self.proposed_list = proposed_list
+        self.proposed_dict = proposeddict
 
         # number of proposal
-        self.numberofproposal = len(self.proposal_list)
+        self.numberofproposal = len(self.proposal_dict)
         # number of proposed
-        self.numberofproposed = len(self.proposed_list)
+        self.numberofproposed = len(self.proposed_dict)
 
         # initial denied list
-        self.denied = [self.proposal_list[key] for key in sorted(self.proposal_list)]
+        self.denied = [self.proposal_dict[key] for key in sorted(self.proposal_dict)]
 
+    # 方法topropose用来模拟求婚过程
     def topropose(self):
+        # 变量i记录求婚过程进行了多少轮
         i = 0
+        # 如果被拒绝的名单里还有人，就继续进行求婚过程
         while len(self.denied) > 0:
+            # 赋值求婚者就是上轮被拒绝的Proposal对象
             proposal = self.denied
+            # 清空上一轮的被拒绝者，等待新一轮加入新的被拒绝者
             self.denied = []
+            # 依次对每个求婚者进行求婚过程
             for person in proposal:
+                # 如果求婚者是None，那么下一个求婚者继续
                 if person is None:
                     continue
+                # 当前求婚者弹出一个求婚对象，即赋值求婚对象给person.cursor
                 person.next()
+                # 如果该求婚者没有求婚对象了，那么下一个求婚者继续
                 if person.cursor is None:
                     continue
-                beproposed = self.findInProposed(person.cursor)
-                if beproposed is None:
-                    continue
-                #print('beprosed',beproposed)
+                beproposed = person.cursor
                 self.denied.append(beproposed.update(person))
                 #print(self.proposed_list)
             i = i + 1
             #print(i)
 
+    # 输出最终的结果
     def printTest(self):
         proposalc = [item.index(item.beAccepted)+1 for item in proposals if item.beAccepted is not None]
         proposedc = [item.index(item.accepted.name)+1 for item in proposeds if item.accepted is not None]
@@ -58,7 +73,8 @@ class Propose:
 
     def print(self):
         print('result:--------------------------------')
-        print('hello',proposeds)
+        #print('hello',self.proposal_dict)
+        #print('hello',self.proposed_dict)
         for key in proposeds:
             if proposeds[key].accepted is not None:
                 print(proposeds[key].name,' accept  ',proposeds[key].accepted.name)
@@ -75,8 +91,8 @@ class Propose:
     # assist function to find a proposed object
     def findInProposed(self,obj):
         #result = [item for item in self.proposed_list if obj.name==item.name]
-        if obj.name in self.proposed_list:
-            result = self.proposed_list[obj.name]
+        if obj.name in self.proposed_dict:
+            result = self.proposed_dict[obj.name]
             return result
         else:
             return None
@@ -115,11 +131,13 @@ class Proposal(Person):
     属性：
     rest_object：表示剩余的偏好集，类型list
     self.preference_order: 偏好次序，类型字典
+    self.preferenceobj：偏好集合，类型是Person对象的列表
     self.denied：表示是否被拒绝的指示变量，类型布尔值
     self.beAccepted：表示被哪个对象接受，类型Person类
     self.cursor：表示当前求婚的对象，类型Person类
 
     方法：
+    构造函数：初始化求婚者的偏好集，以及状态。和被求婚者不同的在于，它包含一个属性preferenceobj。
     next(self)：弹出下一个求婚对象（也就是偏好次序中下一个对象），如果偏好集中还有对象，返回下一个求婚对象，类型Person类，不然返回None。
     toPropose(self,proposed)：对某个对象proposed求婚，如果求婚被接受，设置状态denied为False，beAccepted为被求婚对象；否则设置denied状态为True。
     '''
@@ -156,8 +174,10 @@ class Proposal(Person):
             self.denied = True
 
     def __repr__(self):
-        pattern = '{0}:current({1});acceptedby({2}).'
-        return pattern.format(self.name,self.cursor.name,self.beAccepted.name)
+        pattern = "{0} is accepted by {1}"
+        return pattern.format(self.name,self.beAccepted.name)
+        #pattern = '{0}:current({1});acceptedby({2}).'
+        #return pattern.format(self.name,self.cursor.name,self.beAccepted.name)
 
 # 类Proposed表示被求婚对象，它同样是Person的子类
 class Proposed(Person):
@@ -186,21 +206,28 @@ class Proposed(Person):
             else:
                 return True
 
-    # to accept who and reject who
+    # 方法update是被求婚者对求婚者的一次更新，并且返回被拒绝者
     def update(self,proposal):
         rejected = None
+        # 如果被求婚者接受了当前求婚者
         if self.isAccepted(proposal):
+            # 那么拒绝者就成了之前被接受的人
             rejected = self.accepted
+            # 被接受的人就是当前的求婚者
             self.accepted = proposal
+            # 同时更新求婚者的状态，即他的属性beAccepted变成了当前被求婚者
             proposal.beAccepted = self
         else:
+            # 如果被求婚者拒绝了当前求婚者，设置当前求婚者的属性beAccepted为None
             proposal.beAccepted = None
+            # 被拒绝者就是当前的求婚者
             rejected = proposal
         return rejected
 
+    # 打印当前对象
     def __repr__(self):
         pattern = "{0} accept {1}"
-        return pattern.format(self.name,self.accepted)
+        return pattern.format(self.name,self.accepted.name)
 
 if __name__ == '__main__':
     preference_male = {0:[0,1,2,3],1:[3,1,2,0],2:[3,2,0,1],3:[0,3,2,1],4:[0,1,3]}
@@ -221,5 +248,5 @@ if __name__ == '__main__':
     match.topropose()
     match.print()
 
-    match.printTest()
+    #match.printTest()
 
