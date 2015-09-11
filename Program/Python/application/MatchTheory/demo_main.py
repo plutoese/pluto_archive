@@ -4,18 +4,21 @@ import random
 from application.MatchTheory.class_Proposal import *
 
 # 1. to set up number
-N = 100
-person = list(range(N))
+N1 = 100
+N2 = 100
+person1 = list(range(N1))
+person2 = list(range(N2))
 
+# 随机生成男性的偏好
 preference_male = {}
-for i in range(N):
-    random.shuffle(person)
-    preference_male[i] = person[:]
+for i in range(N1):
+    random.shuffle(person2)
+    preference_male[i] = person2[:]
 
 preference_female = {}
-for i in range(N):
-    random.shuffle(person)
-    preference_female[i] = person[:]
+for i in range(N2):
+    random.shuffle(person1)
+    preference_female[i] = person1[:]
 
 print(preference_male,preference_female)
 
@@ -25,4 +28,5 @@ proposals = {key:Proposal(name=key,preference=preference_male[key],roll=proposed
 match = Propose(proposals,proposeds)
 match.topropose()
 match.print()
+print(match.stat)
 

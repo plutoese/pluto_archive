@@ -71,6 +71,29 @@ class Propose:
         print(positionofproposed)
         print(positionoftotal)
 
+    # 返回结果的各种参数
+    @property
+    def stat(self):
+        statistics = dict()
+
+        proposalc = [self.proposal_dict[key].index(self.proposal_dict[key].beAccepted.name) for key in sorted(self.proposal_dict) if self.proposal_dict[key].beAccepted is not None]
+        proposedc = [self.proposed_dict[key].index(self.proposed_dict[key].accepted.name) for key in sorted(self.proposed_dict) if self.proposed_dict[key].accepted is not None]
+
+        statistics['number_of_proposal'] = self.numberofproposal
+        statistics['number_of_proposed'] = self.numberofproposed
+
+        # 最终单身的求婚者和被求婚者占的比重
+        statistics['singleofproposal'] = 100 * (1 - len(proposalc)/self.numberofproposal)
+        statistics['singleofproposed'] = 100 * (1 - len(proposedc)/self.numberofproposed)
+        statistics['singleoftotal'] = 100 * (1 - (len(proposedc) + len(proposalc)) / (self.numberofproposal + self.numberofproposed))
+
+        statistics['positionofproposal'] = float(sum(proposalc)/len(proposalc))
+        statistics['positionofproposed'] = float(sum(proposedc)/len(proposedc))
+        statistics['positionoftotal'] = float((sum(proposalc) + sum(proposedc))/((len(proposalc) + len(proposedc))))
+
+        return statistics
+
+
     def print(self):
         print('result:--------------------------------')
         #print('hello',self.proposal_dict)
