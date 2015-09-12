@@ -4,6 +4,7 @@ import random
 import numpy as np
 from application.MatchTheory.class_Proposal import *
 from library.imexport.class_Excel import *
+from application.MatchTheory.class_SampleGenerator import *
 
 # 1. to set up number
 man_rank_woman_pbyman = []
@@ -17,39 +18,25 @@ for NUM in range(20,61):
     # 女性数量
     N2 = 40
 
-    RUN = 100
+    RUN = 10
     result1 = []
     result2 = []
     for n in range(RUN):
 
-        person1 = list(range(N1))
-        person2 = list(range(N2))
-
-        # 随机生成男性的偏好
-        preference_male = {}
-        for i in range(N1):
-            random.shuffle(person2)
-            preference_male[i] = person2[:]
-
-        # 随机生成女性偏好
-        preference_female = {}
-        for i in range(N2):
-            random.shuffle(person1)
-            preference_female[i] = person1[:]
-
-        print(preference_male,preference_female)
+        generator = SampleGenerator(N1,N2)
+        sample = generator.toSample(preference='wealth',ratio=0)
 
         # 男性求婚
-        proposeds = {key:Proposed(name=key,preference=preference_female[key]) for key in sorted(preference_female)}
-        proposals = {key:Proposal(name=key,preference=preference_male[key],roll=proposeds) for key in sorted(preference_male)}
+        proposeds = sample['men2women']['proposeds']
+        proposals = sample['men2women']['proposals']
 
         match = Propose(proposals,proposeds)
         match.topropose()
         result1.append(match.stat)
 
-         # 女性求婚
-        proposeds = {key:Proposed(name=key,preference=preference_male[key]) for key in sorted(preference_male)}
-        proposals = {key:Proposal(name=key,preference=preference_female[key],roll=proposeds) for key in sorted(preference_female)}
+        # 男性求婚
+        proposeds = sample['women2men']['proposeds']
+        proposals = sample['women2men']['proposals']
 
         match = Propose(proposals,proposeds)
         match.topropose()
@@ -84,7 +71,7 @@ print(man_rank_woman_pbyman)
 print(man_rank_woman_pbywoman)
 print(mdata)
 
-outfile = u'c:\\down\\demo1.xlsx'
+outfile = u'c:\\down\\demo3.xlsx'
 moutexcel = Excel(outfile)
 moutexcel.new()
 moutexcel.append(mdata)

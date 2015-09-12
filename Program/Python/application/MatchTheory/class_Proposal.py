@@ -76,9 +76,12 @@ class Propose:
     def stat(self):
         statistics = dict()
 
-        proposalc = [self.proposal_dict[key].index(self.proposal_dict[key].beAccepted.name) for key in sorted(self.proposal_dict) if self.proposal_dict[key].beAccepted is not None]
-        proposedc = [self.proposed_dict[key].index(self.proposed_dict[key].accepted.name) for key in sorted(self.proposed_dict) if self.proposed_dict[key].accepted is not None]
+        proposalc = [self.proposal_dict[key].index(self.proposal_dict[key].beAccepted.name) + 1 for key in sorted(self.proposal_dict) if self.proposal_dict[key].beAccepted is not None]
+        proposedc = [self.proposed_dict[key].index(self.proposed_dict[key].accepted.name) + 1 for key in sorted(self.proposed_dict) if self.proposed_dict[key].accepted is not None]
 
+        wealth = [self.proposal_dict[key].wealth + self.proposal_dict[key].beAccepted.wealth for key in sorted(self.proposal_dict) if self.proposal_dict[key].beAccepted is not None]
+
+        statistics['gini'] = self.calc_gini(wealth)
         statistics['number_of_proposal'] = self.numberofproposal
         statistics['number_of_proposed'] = self.numberofproposed
 
@@ -123,6 +126,21 @@ class Propose:
         #else:
         #    return result[0]
 
+    # gini    
+    def calc_gini(slef,x):
+        '''Return computed Gini coefficient.
+
+        :note: follows basic formula
+        :see: `calc_gini2`
+        :contact: aisaac AT american.edu
+        '''
+        x = list(x)
+        n = len(x)
+        x.sort()  # increasing order
+        G = sum( xi * (n-i) for i,xi in enumerate(x) )  #Bgross
+        G = 2.0*G/(n*sum(x))
+        return 1 + (1./n) - G
+
 # 类Person代表个体
 class Person:
     ''' 
@@ -132,10 +150,11 @@ class Person:
 
     方法index，输入参数为对象名字，返回该对象的偏好次序
     '''
-    def __init__(self,name=None,preference=None):
+    def __init__(self,name=None,preference=None,wealth=0):
         self.preference = preference
         self.preference_order = dict(zip(self.preference,range(len(self.preference))))
         self.name = name
+        self.wealth = wealth
 
     # index函数返回某个对象的偏好次序
     # 参数为对象的名字
@@ -164,8 +183,8 @@ class Proposal(Person):
     toPropose(self,proposed)：对某个对象proposed求婚，如果求婚被接受，设置状态denied为False，beAccepted为被求婚对象；否则设置denied状态为True。
     '''
     '''A proposal'''
-    def __init__(self,name=None,preference=None,roll=None):
-        super().__init__(name,preference)
+    def __init__(self,name=None,preference=None,wealth=0,roll=None):
+        super().__init__(name,preference,wealth)
 
         # 余下的偏好集
         self.roll = roll
@@ -197,7 +216,10 @@ class Proposal(Person):
 
     def __repr__(self):
         pattern = "{0} is accepted by {1}"
-        return pattern.format(self.name,self.beAccepted.name)
+        if self.beAccepted is not None:
+            return pattern.format(self.name,self.beAccepted.name)
+        else:
+            return pattern.format(self.name,self.beAccepted)
         #pattern = '{0}:current({1});acceptedby({2}).'
         #return pattern.format(self.name,self.cursor.name,self.beAccepted.name)
 
@@ -209,8 +231,8 @@ class Proposed(Person):
     属性：
     accept：表示接受的求婚者。
     '''
-    def __init__(self,name=None,preference=None):
-        super().__init__(name,preference)
+    def __init__(self,name=None,preference=None,wealth=0):
+        super().__init__(name,preference,wealth)
         self.accepted = None
 
     # 检验是否接受某个对象的求婚
@@ -249,7 +271,10 @@ class Proposed(Person):
     # 打印当前对象
     def __repr__(self):
         pattern = "{0} accept {1}"
-        return pattern.format(self.name,self.accepted.name)
+        if self.accepted is not None:
+            return pattern.format(self.name,self.accepted.name)
+        else:
+            return pattern.format(self.name,self.accepted)
 
 if __name__ == '__main__':
     preference_male = {0:[0,1,2,3],1:[3,1,2,0],2:[3,2,0,1],3:[0,3,2,1],4:[0,1,3]}
