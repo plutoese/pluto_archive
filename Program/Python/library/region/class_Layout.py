@@ -5,11 +5,42 @@ import pandas as pd
 
 # 类Layout用于各种数据结构的转换
 class Layout:
+    '''
+    类Layout用于各种数据结构的转换。
+    
+    属性：
+    self.ad: AdminCode的一个实例
+    self._data: 读入的数据
+    self.year：代表数据的时间，是一个str的列表
+    self.acode：代表地区的行政代码，是一个str的list
+    self.region：代表地区名称，是一个str的list
+    self.variable：代表数据的变量，是一个str的list
+    self.ndim：代表数据的维度，是一个字典
+    
+    方法：
+    __init__(self,data=None)：构造函数，用来进行初始化设置。
+    _type(self)->dict：辅助函数，用来返回数据的结构类型，无输入参数。返回值是一个字典。：
+    stackToNormal(self)：转换数据，从stack格式到normal格式
+
+    Demo：
+    转换区域数据的格式，从stack到normal
+    ad = AdminCode()
+    rdata = RegionalData()    # 构建一个RegionalData的实例
+    mdata = rdata.query(region=ad[u'浙江',u'f'],variable=[u'财政支出'],year=2012)    # 查询数据
+    lout = Layout(mdata)    # 进行格式转换
+    print(lout.stackToNormal())
+
+    得到的结果类似于
+           region   财政支出
+    330100    杭州市  78628
+    330200    宁波市  82844
+    330300    温州市  38779
+    330400    嘉兴市  26070
+    '''
     # 构造函数
     def __init__(self,data=None):
         self.ad = AdminCode()
         self._data = data
-        self._type()
 
         self.type = self._type()
         self.ndim = {'year':len(self.type['year']),'variable':len(self.type['variable']),'region':len(self.type['region'])}
@@ -80,10 +111,9 @@ class Layout:
         return result
 
     # 辅助函数，返回数据结构
-    def _type(self):
+    def _type(self)->dict:
         g = self._data.groupby(['year'], sort=True)
-        self.year = [name for name, group in g]
-        self.year = [str(item) for item in self.year]
+        self.year = [str(name) for name, group in g]
 
         g = self._data.groupby(['acode'], sort=True)
         self.acode = [name for name, group in g]

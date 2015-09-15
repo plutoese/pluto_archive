@@ -4,22 +4,51 @@ from library.imexport.class_MongoDB import *
 from library.region.class_AdminCode import *
 import pandas as pd
 
-# 类RegionData用来从数据库MongoDB中导出区域数据
+# 类RegionalData用来从数据库MongoDB中导出区域数据
 class RegionalData:
+    '''
+    类RegionalData用来从数据库MongoDB中导出区域数据。
+    
+    属性：
+    self.conn: 数据库MongoDB某集合的接口
+    
+    方法：
+    __init__(self,collection:str='CEIC')：构造函数，参数collection表示集合名称。
+    query(self,region:list=None,year:list=None,variable:list=None,projection:dict={'region':1,'year':1,'value':1,'acode':1,'_id':0,'variable':1,'year':1},sorts:list=[('year',ASCENDING),('acode',ASCENDING)])->pd.DataFrame：查询返回区域数据。
+
+    Demo：
+    查询返回区域数据
+    ad = AdminCode()
+    rdata = RegionalData()    # 初始化，连接MongoDB中的区域数据
+    mdata = rdata.query(region=ad[u'浙江',u'f'],year=range(2006,2010),variable=[u'财政支出',u'从业人数_在岗职工'])    # 查询返回区域数据
+    mdata = rdata.query(region=ad[u'浙江',u'杭州'],variable=u'财政支出',year=2012)    # 查询返回区域数据
+
+    mdata得到的结果
+             acode region    value   variable  year
+    0   330100    杭州市  27548.0       财政支出  2006
+    1   330100    杭州市   1162.4  从业人数_在岗职工  2006
+    2   330200    宁波市  29270.0       财政支出  2006
+    3   330200    宁波市    887.8  从业人数_在岗职工  2006
+
+    '''
     # 构造函数
-    def __init__(self,collection='CEIC'):
+    def __init__(self,collection:str='CEIC'):
         # to connect to Mongodb database
         self.db = MongoDB()
         self.conn = self.db.connect('regionDB',collection)
 
     # 从数据库中获取区域数据
-    def query(self,region=None,year=None,variable=None,projection={'region':1,'year':1,'value':1,'acode':1,'_id':0,'variable':1,'year':1},sorts=[('year',ASCENDING),('acode',ASCENDING)]):
+    def query(self,region:list=None,year:list=None,variable:list=None,projection:dict={'region':1,'year':1,'value':1,'acode':1,'_id':0,'variable':1,'year':1},sorts:list=[('year',ASCENDING),('acode',ASCENDING)])->pd.DataFrame:
         if region is not None:
+            # 如果参数region类型是dict，那么转换为list
             if isinstance(region,dict):
                 region = [region]
+            # 获得区域的行政代码
             regioncode = [item['acode'] for item in region]
+        # 如果参数year类型是str或者int，那么转换为list
         if isinstance(year,(int,str)):
             year = [year]
+        # 如果参数variable类型是str，那么转换为list
         if isinstance(variable,(str)):
             variable = [variable]
 
@@ -37,13 +66,14 @@ class RegionalData:
             result = pd.DataFrame(list(self.conn.find({'year':{'$gte':year[0],'$lte':year[len(year)-1]}},projection).sort(sorts)))
         else:
             result = pd.DataFrame(list(self.conn.find({'variable':{'$in':variable}},projection).sort(sorts)))
+        # 返回的是pd.DataFrame类型
         return result
 
 if __name__ == '__main__':
     ad = AdminCode()
     rdata = RegionalData()
-    #mdata = rdata.query(region=ad[u'浙江',u'f'],year=range(2006,2010),variable=[u'财政支出',u'从业人数_在岗职工'])
+    mdata = rdata.query(region=ad[u'浙江',u'f'],year=range(2006,2010),variable=[u'财政支出',u'从业人数_在岗职工'])
     #mdata = rdata.query(region=[ad[u'浙江',u'杭州']],variable=[u'财政支出'])
     #mdata = rdata.query(region=ad[u'浙江',u'f'],variable=u'财政支出',year=2012)
-    mdata = rdata.query(region=ad[u'浙江',u'杭州'],variable=u'财政支出',year=2012)
+    #mdata = rdata.query(region=ad[u'浙江',u'杭州'],variable=u'财政支出',year=2012)
     print(mdata)

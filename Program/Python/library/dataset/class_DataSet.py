@@ -4,16 +4,19 @@ from library.region.class_Layout import *
 from library.dataanalysis.class_DataVisualization import *
 
 # 类DataSet代表数据集
-# 用来生成和转换数据
 class DataSet:
     '''
     类DataSet代表数据集。
-
+    
     属性：
-    data: 数据，类型是pandas对象
+    self._data: 数据，类型是pandas对象。
+    
+    方法：
+    __init__(self, data:pandas=None)：构造函数，初始化self._data。参数data是Pandas对象。
+    noNA(self)：删除任何包含缺失值的行。
     '''
     # 构造函数
-    def __init__(self, data):
+    def __init__(self, data=None):
         # load data
         self._data = data
 
