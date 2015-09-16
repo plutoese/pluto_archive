@@ -37,6 +37,11 @@ class RegionalData:
         self.db = MongoDB()
         self.conn = self.db.connect('regionDB',collection)
 
+    # 获得所有的变量名
+    def variables(self):
+        posts = self.conn.find()
+        return posts.distinct('variable')
+
     # 从数据库中获取区域数据
     def query(self,region:list=None,year:list=None,variable:list=None,projection:dict={'region':1,'year':1,'value':1,'acode':1,'_id':0,'variable':1,'year':1},sorts:list=[('year',ASCENDING),('acode',ASCENDING)])->pd.DataFrame:
         if region is not None:
@@ -72,6 +77,7 @@ class RegionalData:
 if __name__ == '__main__':
     ad = AdminCode()
     rdata = RegionalData()
+    print(rdata.variables())
     mdata = rdata.query(region=ad[u'浙江',u'f'],year=range(2006,2010),variable=[u'财政支出',u'从业人数_在岗职工'])
     #mdata = rdata.query(region=[ad[u'浙江',u'杭州']],variable=[u'财政支出'])
     #mdata = rdata.query(region=ad[u'浙江',u'f'],variable=u'财政支出',year=2012)
