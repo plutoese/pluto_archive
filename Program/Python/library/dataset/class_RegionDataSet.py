@@ -20,7 +20,7 @@ class RegionDataSet(DataSet):
     
     方法：
     __init__(self, data)：构造函数，用来进行初始化数据并进行格式转换。
-    plot(self,**kargs)：通用作图函数
+    plot(self,data=None,**kargs)：通用作图函数
 
     Demo：
     ad = AdminCode()
@@ -44,9 +44,12 @@ class RegionDataSet(DataSet):
                 self._data_regionrow = self._data.set_index('region')
 
     # 通用作图函数
-    def plot(self,data,**kargs):
+    def plot(self,data=None,**kargs):
         kargs['grid'] = True
-        data.plot(**kargs)
+        if data is not None:
+            data.plot(**kargs)
+        else:
+            self._data.plot(**kargs)
         plt.show()
 
     # 时间序列图
