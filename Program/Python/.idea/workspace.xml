@@ -15,28 +15,29 @@
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Python$class_Excel.coverage" NAME="class_Excel Coverage Results" MODIFIED="1442299703444" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/imexport" />
-    <SUITE FILE_PATH="coverage/Python$demo_pandas.coverage" NAME="demo_pandas Coverage Results" MODIFIED="1441420563954" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/datapretreatment" />
     <SUITE FILE_PATH="coverage/Python$class_DataExplore.coverage" NAME="class_DataExplore Coverage Results" MODIFIED="1441716973869" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/dataanalysis" />
+    <SUITE FILE_PATH="coverage/Python$class_SeriesData.coverage" NAME="class_SeriesData Coverage Results" MODIFIED="1442578181462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/dataset" />
+    <SUITE FILE_PATH="coverage/Python$class_AdminCode.coverage" NAME="class_AdminCode Coverage Results" MODIFIED="1441504641723" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/region" />
+    <SUITE FILE_PATH="coverage/Python$class_RegionDataSet.coverage" NAME="class_RegionDataSet Coverage Results" MODIFIED="1442407786226" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/dataset" />
+    <SUITE FILE_PATH="coverage/Python$demo_dataanalysis_template.coverage" NAME="demo_dataanalysis_template Coverage Results" MODIFIED="1442578306303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/dataanalysis" />
+    <SUITE FILE_PATH="coverage/Python$demo_001.coverage" NAME="demo_001 Coverage Results" MODIFIED="1441885847718" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/Graphs" />
+    <SUITE FILE_PATH="coverage/Python$class_Match.coverage" NAME="class_Match Coverage Results" MODIFIED="1441952119500" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/MatchTheory" />
+    <SUITE FILE_PATH="coverage/Python$demo_main.coverage" NAME="demo_main Coverage Results" MODIFIED="1441962359668" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/MatchTheory" />
+    <SUITE FILE_PATH="coverage/Python$demo_pandas.coverage" NAME="demo_pandas Coverage Results" MODIFIED="1441420563954" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/datapretreatment" />
     <SUITE FILE_PATH="coverage/Python$class_Layout.coverage" NAME="class_Layout Coverage Results" MODIFIED="1442307696261" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/region" />
     <SUITE FILE_PATH="coverage/Python$class_DataVisualization.coverage" NAME="class_DataVisualization Coverage Results" MODIFIED="1442316438063" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/dataanalysis" />
     <SUITE FILE_PATH="coverage/Python$demo_dataexplore.coverage" NAME="demo_dataexplore Coverage Results" MODIFIED="1442407328414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/dataanalysis" />
     <SUITE FILE_PATH="coverage/Python$demo_match_next2version.coverage" NAME="demo_match_next2version Coverage Results" MODIFIED="1442027194061" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/MatchTheory" />
     <SUITE FILE_PATH="coverage/Python$class_DataSheet.coverage" NAME="class_DataSheet Coverage Results" MODIFIED="1441350911186" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/DataPretreatment" />
-    <SUITE FILE_PATH="coverage/Python$class_AdminCode.coverage" NAME="class_AdminCode Coverage Results" MODIFIED="1441504641723" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/region" />
     <SUITE FILE_PATH="coverage/Python$class_RegionData.coverage" NAME="class_RegionData Coverage Results" MODIFIED="1441452444151" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/region" />
-    <SUITE FILE_PATH="coverage/Python$class_RegionDataSet.coverage" NAME="class_RegionDataSet Coverage Results" MODIFIED="1442407786226" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/dataset" />
     <SUITE FILE_PATH="coverage/Python$tip001.coverage" NAME="tip001 Coverage Results" MODIFIED="1442218807527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scratch/cookbook" />
     <SUITE FILE_PATH="coverage/Python$class_DataSet.coverage" NAME="class_DataSet Coverage Results" MODIFIED="1442316378578" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/dataset" />
     <SUITE FILE_PATH="coverage/Python$class_CEICData.coverage" NAME="class_CEICData Coverage Results" MODIFIED="1441369800415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/region" />
     <SUITE FILE_PATH="coverage/Python$demo_match_nextversion.coverage" NAME="demo_match_nextversion Coverage Results" MODIFIED="1442024740559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/MatchTheory" />
     <SUITE FILE_PATH="coverage/Python$demo_match_originversion.coverage" NAME="demo_match_originversion Coverage Results" MODIFIED="1442019106996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/MatchTheory" />
     <SUITE FILE_PATH="coverage/Python$class_MongoDB.coverage" NAME="class_MongoDB Coverage Results" MODIFIED="1442302147098" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/imexport" />
-    <SUITE FILE_PATH="coverage/Python$demo_dataanalysis_template.coverage" NAME="demo_dataanalysis_template Coverage Results" MODIFIED="1442567641148" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/dataanalysis" />
     <SUITE FILE_PATH="coverage/Python$class_Proposal.coverage" NAME="class_Proposal Coverage Results" MODIFIED="1441962112934" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/MatchTheory" />
     <SUITE FILE_PATH="coverage/Python$class_SampleGenerator.coverage" NAME="class_SampleGenerator Coverage Results" MODIFIED="1442024031254" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/MatchTheory" />
-    <SUITE FILE_PATH="coverage/Python$demo_001.coverage" NAME="demo_001 Coverage Results" MODIFIED="1441885847718" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/Graphs" />
-    <SUITE FILE_PATH="coverage/Python$class_Match.coverage" NAME="class_Match Coverage Results" MODIFIED="1441952119500" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/MatchTheory" />
-    <SUITE FILE_PATH="coverage/Python$demo_main.coverage" NAME="demo_main Coverage Results" MODIFIED="1441962359668" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/MatchTheory" />
     <SUITE FILE_PATH="coverage/Python$class_RegionalData.coverage" NAME="class_RegionalData Coverage Results" MODIFIED="1442317568463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/region" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -84,9 +85,33 @@
       <file leaf-file-name="demo_dataanalysis_template.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/library/dataanalysis/demo_dataanalysis_template.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6957747" vertical-offset="114" max-vertical-offset="684">
-              <caret line="19" column="32" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.8028169" vertical-offset="0" max-vertical-offset="836">
+              <caret line="15" column="37" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
+              <folding>
+                <element signature="e#16#65#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="class_Layout.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/library/region/class_Layout.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="718" max-vertical-offset="3306">
+              <caret line="45" column="111" selection-start-line="45" selection-start-column="111" selection-end-line="45" selection-end-column="111" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="class_SeriesData.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/library/dataset/class_SeriesData.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="836">
+              <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+              <folding>
+                <element signature="e#16#35#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -94,9 +119,11 @@
       <file leaf-file-name="class_RegionalData.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/library/region/class_RegionalData.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="1672">
-              <caret line="79" column="27" selection-start-line="79" selection-start-column="27" selection-end-line="79" selection-end-column="27" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1292" max-vertical-offset="1710">
+              <caret line="84" column="16" selection-start-line="6" selection-start-column="0" selection-end-line="84" selection-end-column="16" />
+              <folding>
+                <element signature="e#16#60#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -131,9 +158,10 @@
         <option value="$PROJECT_DIR$/library/dataset/class_DataSet.py" />
         <option value="$PROJECT_DIR$/library/region/class_RegionalData.py" />
         <option value="$PROJECT_DIR$/library/dataanalysis/demo_dataexplore.py" />
-        <option value="$PROJECT_DIR$/library/region/class_Layout.py" />
         <option value="$PROJECT_DIR$/library/dataset/class_RegionDataSet.py" />
+        <option value="$PROJECT_DIR$/library/region/class_Layout.py" />
         <option value="$PROJECT_DIR$/library/dataanalysis/demo_dataanalysis_template.py" />
+        <option value="$PROJECT_DIR$/library/dataset/class_SeriesData.py" />
       </list>
     </option>
   </component>
@@ -300,26 +328,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.demo_dataanalysis_template">
-    <configuration default="false" name="class_DataVisualization" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/library/dataanalysis" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Python" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/library/dataanalysis/class_DataVisualization.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
     <configuration default="false" name="demo_dataexplore" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -394,6 +402,26 @@
       <module name="Python" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/library/dataanalysis/demo_dataanalysis_template.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="class_SeriesData" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/library/dataset" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Python" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/library/dataset/class_SeriesData.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <RunnerSettings RunnerId="PythonRunner" />
@@ -589,19 +617,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.class_DataVisualization" />
-      <item index="1" class="java.lang.String" itemvalue="Python.demo_dataexplore" />
-      <item index="2" class="java.lang.String" itemvalue="Python.class_RegionDataSet" />
-      <item index="3" class="java.lang.String" itemvalue="Python.class_RegionalData" />
-      <item index="4" class="java.lang.String" itemvalue="Python.demo_dataanalysis_template" />
+      <item index="0" class="java.lang.String" itemvalue="Python.demo_dataexplore" />
+      <item index="1" class="java.lang.String" itemvalue="Python.class_RegionDataSet" />
+      <item index="2" class="java.lang.String" itemvalue="Python.class_RegionalData" />
+      <item index="3" class="java.lang.String" itemvalue="Python.demo_dataanalysis_template" />
+      <item index="4" class="java.lang.String" itemvalue="Python.class_SeriesData" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.demo_dataanalysis_template" />
-        <item index="1" class="java.lang.String" itemvalue="Python.class_RegionDataSet" />
-        <item index="2" class="java.lang.String" itemvalue="Python.demo_dataexplore" />
-        <item index="3" class="java.lang.String" itemvalue="Python.class_RegionalData" />
-        <item index="4" class="java.lang.String" itemvalue="Python.class_DataVisualization" />
+        <item index="1" class="java.lang.String" itemvalue="Python.class_SeriesData" />
+        <item index="2" class="java.lang.String" itemvalue="Python.class_RegionDataSet" />
+        <item index="3" class="java.lang.String" itemvalue="Python.demo_dataexplore" />
+        <item index="4" class="java.lang.String" itemvalue="Python.class_RegionalData" />
       </list>
     </recent_temporary>
   </component>
@@ -619,8 +647,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -628,9 +656,9 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3557047" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3557047" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2632375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26701966" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -674,13 +702,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/library/region/class_RegionalData.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="627" max-vertical-offset="1026">
-          <caret line="42" column="4" selection-start-line="42" selection-start-column="4" selection-end-line="47" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/library/region/class_Layout.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="190" max-vertical-offset="950">
@@ -1008,17 +1029,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/library/region/class_RegionalData.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="1672">
-          <caret line="79" column="27" selection-start-line="79" selection-start-column="27" selection-end-line="79" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/library/region/class_Layout.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1995" max-vertical-offset="3268">
-          <caret line="112" column="0" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1292" max-vertical-offset="1710">
+          <caret line="84" column="16" selection-start-line="6" selection-start-column="0" selection-end-line="84" selection-end-column="16" />
+          <folding>
+            <element signature="e#16#60#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1032,11 +1047,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/library/region/class_Layout.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="718" max-vertical-offset="3306">
+          <caret line="45" column="111" selection-start-line="45" selection-start-column="111" selection-end-line="45" selection-end-column="111" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/dataset/class_SeriesData.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="836">
+          <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+          <folding>
+            <element signature="e#16#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/library/dataanalysis/demo_dataanalysis_template.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6957747" vertical-offset="114" max-vertical-offset="684">
-          <caret line="19" column="32" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
-          <folding />
+        <state vertical-scroll-proportion="0.8028169" vertical-offset="0" max-vertical-offset="836">
+          <caret line="15" column="37" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
+          <folding>
+            <element signature="e#16#65#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

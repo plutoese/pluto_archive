@@ -42,8 +42,8 @@ class Layout:
         self.ad = AdminCode()
         self._data = data
 
-        self.type = self._type()
-        self.ndim = {'year':len(self.type['year']),'variable':len(self.type['variable']),'region':len(self.type['region'])}
+        self.tags = self._type()
+        self.ndim = {'year':len(self.tags['year']),'variable':len(self.tags['variable']),'region':len(self.tags['region'])}
 
     # 格式转换
     def stackToNormal(self):
@@ -52,7 +52,8 @@ class Layout:
             #data = pd.Series(dict(zip(year,[group for name, group in self._data.groupby(['acode','variable'],sort=True)][0]['value'])))
             #d = dict(zip(year,data))
             #sname = '|'.join([self.region[0],self.variable[0]])
-            self.information = [self.region[0],self.variable[0]]
+            #self.tags = [self.region[0],self.variable[0]]
+            #self.tags = {'region':self.region[0],'variable':self.variable[0]}
             return pd.Series(dict(zip(self.year,[group for name, group in self._data.groupby(['acode','variable'],sort=True)][0]['value'])))
 
         # 构建横截面数据(地区|变量)
@@ -69,7 +70,8 @@ class Layout:
                     mdata = pd.merge(mdata,rdata,left_index=True,right_index=True,how='outer')
                 i = i + 1
             mdata.insert(0, 'region', [self.ad.getByAcode(item)['region'] for item in mdata.index])
-            self.information = self.type['year']
+            #self.information = self.type['year']
+            #self.tags = {'region':}
             return mdata
 
         # 构建横截面数据(地区|时间)
@@ -85,7 +87,7 @@ class Layout:
                     mdata = pd.merge(mdata,rdata,left_index=True,right_index=True,how='outer')
                 i = i + 1
             mdata.insert(0, 'region', [self.ad.getByAcode(item)['region'] for item in mdata.index])
-            self.information = self.type['variable']
+            #self.information = self.type['variable']
             return mdata
 
         # panel data
@@ -107,7 +109,7 @@ class Layout:
             year.append(str(y))
             pdata.append(mdata)
         result = pd.Panel(dict(zip(year,pdata)))
-        self.information = []
+        #self.information = []
         return result
 
     # 辅助函数，返回数据结构
