@@ -39,18 +39,38 @@ class RegionDataSet(DataSet):
         if information is not None:
             self.information = information
             self.ndim = len(information)
+        if self.ndim == 1:
+            if 'region' in self._data.columns:
+                self._data_regionrow = self._data.set_index('region')
 
     # 通用作图函数
-    def plot(self,**kargs):
+    def plot(self,data,**kargs):
         kargs['grid'] = True
-        self._data.plot(**kargs)
+        data.plot(**kargs)
         plt.show()
 
     # 时间序列图
     def tsline(self,var:str=None,region:str=None):
         if self.ndim == 2:
-            self.plot()
-
+            self.plot(self._data,title='-'.join(self.information))
+        if self.ndim == 1:
+            if region is not None:
+                if isinstance(region, (str,unicode)):
+                    self.plot(self._data_regionrow.loc[region],title='_'.join([region,self.information[0]]))
+                else:
+                    tmpdata = self._data_regionrow.reindex(region).T
+                    self.plot(tmpdata,title=self.information[0])
+        if self.ndim == 0:
+            dframe = self._data.minor_xs(var)
+            print(self._data.items[0])
+            regionname = self._data.minor_xs('region')[self._data.items[0]]
+            dframe['region'] = regionname
+            dframe2 = dframe.set_index('region')
+            if isinstance(region, (str,unicode)):
+                self.plot(dframe2.loc[region],title='_'.join([region,var]))
+            else:
+                tmpdata = dframe2.reindex(region).T
+                self.plot(tmpdata,title=var)
 
 
 if __name__ == '__main__':
@@ -59,8 +79,8 @@ if __name__ == '__main__':
     #rdata = RegionDataSet(regiondata.query(region=ad[u'浙江',u'f'],variable=[u'财政支出',u'国内生产总值_人均'],year=2012))
     # 初始化数据和类型
     #layout = Layout(regiondata.query(region=ad[u'浙江',u'f'],variable=[u'财政支出',u'国内生产总值_人均'],year=range(2010,2012)))
-    #layout = Layout(regiondata.query(region=ad[u'浙江',u'杭州'],variable=[u'国内生产总值_人均']))
-    layout = Layout(regiondata.query(region=ad[u'浙江',u'f'],variable=[u'国内生产总值_人均']))
+    layout = Layout(regiondata.query(region=ad[u'浙江',u'杭州'],variable=[u'国内生产总值_人均']))
+    #layout = Layout(regiondata.query(region=ad[u'浙江',u'f'],variable=[u'财政支出',u'国内生产总值_人均']))
     data = layout.stackToNormal()
     information = layout.information
     #data[u'财政支出'] = np.log(data[u'财政支出'])
@@ -68,6 +88,9 @@ if __name__ == '__main__':
     #data.iloc([1,2]).applymap(np.log)
     rdata = RegionDataSet(data,information)
     print(data)
+    print('region' in data.columns)
+    rdata2 = data.set_index('region')
+    print(rdata2)
     print(rdata.information)
     print(rdata.ndim)
     rdata.tsline()
