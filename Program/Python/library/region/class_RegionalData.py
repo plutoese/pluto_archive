@@ -43,7 +43,7 @@ class RegionalData:
         return posts.distinct('variable')
 
     # 从数据库中获取区域数据
-    def query(self,region:list=None,year:list=None,variable:list=None,projection:dict={'region':1,'year':1,'value':1,'acode':1,'_id':0,'variable':1,'year':1},sorts:list=[('year',ASCENDING),('acode',ASCENDING)])->pd.DataFrame:
+    def query(self,region:list=None,year:list=None,variable:list=None,scale:str=None,projection:dict={'region':1,'year':1,'value':1,'acode':1,'_id':0,'variable':1,'year':1},sorts:list=[('year',ASCENDING),('acode',ASCENDING)])->pd.DataFrame:
         if region is not None:
             # 如果参数region类型是dict，那么转换为list
             if isinstance(region,dict):
@@ -58,19 +58,40 @@ class RegionalData:
             variable = [variable]
 
         if (region is not None) and (year is not None) and (variable is not None):
-            result = pd.DataFrame(list(self.conn.find({'year':{'$gte':year[0],'$lte':year[len(year)-1]},'variable':{'$in':variable},'acode':{'$in':regioncode}},projection).sort(sorts)))
+            if scale is None:
+                result = pd.DataFrame(list(self.conn.find({'year':{'$gte':year[0],'$lte':year[len(year)-1]},'variable':{'$in':variable},'acode':{'$in':regioncode}},projection).sort(sorts)))
+            else:
+                result = pd.DataFrame(list(self.conn.find({'year':{'$gte':year[0],'$lte':year[len(year)-1]},'variable':{'$in':variable},'acode':{'$in':regioncode},'scale':scale},projection).sort(sorts)))
         elif (region is not None) and (year is not None):
-            result = pd.DataFrame(list(self.conn.find({'year':{'$gte':year[0],'$lte':year[len(year)-1]},'acode':{'$in':regioncode}},projection).sort(sorts)))
+            if scale is None:
+                result = pd.DataFrame(list(self.conn.find({'year':{'$gte':year[0],'$lte':year[len(year)-1]},'acode':{'$in':regioncode}},projection).sort(sorts)))
+            else:
+                result = pd.DataFrame(list(self.conn.find({'year':{'$gte':year[0],'$lte':year[len(year)-1]},'acode':{'$in':regioncode},'scale':scale},projection).sort(sorts)))
         elif (region is not None) and (variable is not None):
-            result = pd.DataFrame(list(self.conn.find({'variable':{'$in':variable},'acode':{'$in':regioncode}},projection).sort(sorts)))
+            if scale is None:
+                result = pd.DataFrame(list(self.conn.find({'variable':{'$in':variable},'acode':{'$in':regioncode}},projection).sort(sorts)))
+            else:
+                result = pd.DataFrame(list(self.conn.find({'variable':{'$in':variable},'acode':{'$in':regioncode},'scale':scale},projection).sort(sorts)))
         elif (year is not None) and (variable is not None):
-            result = pd.DataFrame(list(self.conn.find({'year':{'$gte':year[0],'$lte':year[len(year)-1]},'variable':{'$in':variable}},projection).sort(sorts)))
+            if scale is None:
+                result = pd.DataFrame(list(self.conn.find({'year':{'$gte':year[0],'$lte':year[len(year)-1]},'variable':{'$in':variable}},projection).sort(sorts)))
+            else:
+                result = pd.DataFrame(list(self.conn.find({'year':{'$gte':year[0],'$lte':year[len(year)-1]},'variable':{'$in':variable},'scale':scale},projection).sort(sorts)))
         elif (region is not None):
-            result = pd.DataFrame(list(self.conn.find({'acode':{'$in':regioncode}},projection).sort(sorts)))
+            if scale is None:
+                result = pd.DataFrame(list(self.conn.find({'acode':{'$in':regioncode}},projection).sort(sorts)))
+            else:
+                result = pd.DataFrame(list(self.conn.find({'acode':{'$in':regioncode},'scale':scale},projection).sort(sorts)))
         elif(year is not None):
-            result = pd.DataFrame(list(self.conn.find({'year':{'$gte':year[0],'$lte':year[len(year)-1]}},projection).sort(sorts)))
+            if scale is None:
+                result = pd.DataFrame(list(self.conn.find({'year':{'$gte':year[0],'$lte':year[len(year)-1]}},projection).sort(sorts)))
+            else:
+                result = pd.DataFrame(list(self.conn.find({'year':{'$gte':year[0],'$lte':year[len(year)-1]},'scale':scale},projection).sort(sorts)))
         else:
-            result = pd.DataFrame(list(self.conn.find({'variable':{'$in':variable}},projection).sort(sorts)))
+            if scale is None:
+                result = pd.DataFrame(list(self.conn.find({'variable':{'$in':variable}},projection).sort(sorts)))
+            else:
+                result = pd.DataFrame(list(self.conn.find({'variable':{'$in':variable},'scale':scale},projection).sort(sorts)))
         # 返回的是pd.DataFrame类型
         return result
 
