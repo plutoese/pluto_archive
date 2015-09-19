@@ -1,7 +1,7 @@
 # coding=UTF-8
 
-from library.dataset.class_RegionDataSet import *
-from library.dataset.class_SeriesData import *
+from library.datastruct.class_SeriesData import *
+from library.datalayout.class_Layout import *
 
 # 1. to setup Parameters and Objects
 AD = AdminCode()

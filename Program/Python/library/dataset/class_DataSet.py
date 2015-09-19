@@ -1,7 +1,5 @@
 # coding=UTF-8
 
-from library.region.class_Layout import *
-
 # 类DataSet代表数据集
 class DataSet:
     '''

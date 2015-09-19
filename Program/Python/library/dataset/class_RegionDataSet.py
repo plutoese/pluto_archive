@@ -1,9 +1,9 @@
 # coding=UTF-8
 
-from library.dataset.class_DataSet import *
-from library.region.class_Layout import *
-from library.dataanalysis.class_DataVisualization import *
 from pylab import *
+
+from library.dataanalysis.class_DataVisualization import *
+from library.dataset.class_DataSet import *
 
 mpl.rcParams['font.sans-serif'] = ['SimHei']
 mpl.rcParams['axes.unicode_minus'] = False
