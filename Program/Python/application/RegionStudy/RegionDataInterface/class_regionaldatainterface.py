@@ -26,7 +26,8 @@ class RegionDataInterface:
         # 查询数据返回结果
         result = self.regionData.query(**query)
         # 重新转换格式
-        print(result)
+        if result.size < 1:
+            return None
         layout = Layout(result)
         data = layout.stackToNormal()
         # 记录数据集的信息
@@ -39,11 +40,13 @@ class RegionDataInterface:
     def variable(self):
         return self.regionData.variables()
 
-
 if __name__ == '__main__':
     dinterface = RegionDataInterface(collection='cCity')
+    #dinterface = RegionDataInterface()
     print(dinterface.variable)
     ad = AdminCode()
-    querydict = {'region':ad[u'浙江',u'f'],'variable':[u'人均地区生产总值'],'scale':'全市','year':[2012]}
+    querydict = {'variable':[u'年末总人口'],'scale':'全市','year':2001}
+    #querydict = {'region':ad[u'浙江',u'f'],'variable':[u'人均地区生产总值'],'scale':'全市','year':[2012]}
+    #querydict = {'region':ad[u'浙江',u'f'],'variable':[u'财政支出'],'year':[2012]}
     result = dinterface.query(querydict)
     print(result['data'])

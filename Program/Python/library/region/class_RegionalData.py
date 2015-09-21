@@ -34,6 +34,7 @@ class RegionalData:
     # 构造函数
     def __init__(self,collection:str='CEIC'):
         # to connect to Mongodb database
+        self.collectionname = collection
         self.db = MongoDB()
         self.conn = self.db.connect('regionDB',collection)
 
@@ -51,8 +52,15 @@ class RegionalData:
             # 获得区域的行政代码
             regioncode = [item['acode'] for item in region]
         # 如果参数year类型是str或者int，那么转换为list
-        if isinstance(year,(int,str)):
-            year = [year]
+        if re.match('^cCity$',self.collectionname) is not None:
+            if isinstance(year,int):
+                year = [str(year)]
+            else:
+                year = [str(y) for y in year]
+        else:
+            if isinstance(year,(int,str)):
+                year = [year]
+        print(year)
         # 如果参数variable类型是str，那么转换为list
         if isinstance(variable,(str)):
             variable = [variable]
