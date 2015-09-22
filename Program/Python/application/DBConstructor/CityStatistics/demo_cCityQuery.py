@@ -11,7 +11,7 @@ db = client['regionDB']
 collection = db['cCity']
 
 # 2. query
-YEAR = '2001'
+YEAR = '2000'
 #SORT = [('source.tablenum',ASCENDING),('acode',ASCENDING)]
 #querydict = {'year':YEAR}
 #mdata = list(collection.find(querydict).sort(SORT).distinct('variable')
@@ -25,16 +25,22 @@ for tnum in mdata:
     for item in rdata:
         cdata1 = collection.find_one({'year':YEAR,'variable':item,'scale':'全市'})
         if cdata1 is not None:
-            inresult.append(':'.join([item,'全市',cdata1['unit']]))
+            if cdata1['unit'] is not None:
+                inresult.append(':'.join([item,'全市',cdata1['unit']]))
+            else:
+                inresult.append(':'.join([item,'全市']))
         cdata2 = collection.find_one({'year':YEAR,'variable':item,'scale':u'市辖区'})
         if cdata2 is not None:
-            inresult.append(':'.join([item,u'市辖区',cdata2['unit']]))
+            if cdata2['unit'] is not None:
+                inresult.append(':'.join([item,u'市辖区',cdata2['unit']]))
+            else:
+                inresult.append(':'.join([item,u'市辖区']))
     result.append(inresult)
     print(inresult)
 
 print(result)
 
-outfile = 'C:/Data/database/m2001.xlsx'
+outfile = 'C:/Data/database/m2000.xlsx'
 moutexcel = Excel(outfile)
 moutexcel.new()
 moutexcel.append(result)
