@@ -1,6 +1,6 @@
 # coding=UTF-8
 
-from flask import Flask, render_template, redirect, url_for, session, request
+from flask import Flask, render_template, redirect, url_for, session, send_file
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.wtf import Form
 from wtforms import SubmitField, SelectMultipleField
@@ -76,7 +76,17 @@ def region():
 
 @app.route('/result')
 def result():
-    return render_template('result.html',variable=session.get('variable'),year=session.get('year'),region=session.get('region'))
+    vars = session.get('variable')
+    year = [int(y) for y in session.get('year')]
+    regions = [AD.getByAcode(code) for code in session.get('region')]
+    querydict = {'region':regions,'variable':vars,'year':year}
+    query = regionData.query(**querydict)
+    layout = Layout(query)
+    data = layout.stackToNormal()
+    file = r'C:\Room\Warehouse\GitWork\Program\Python\application\FlaskWeb\practise\result.xlsx'
+    data.to_excel(file)
+    return send_file('result.xlsx')
+    #return render_template('result.html',variable=session.get('variable'),year=session.get('year'),region=session.get('region'))
 
 if __name__ == '__main__':
     app.run(debug=True)
