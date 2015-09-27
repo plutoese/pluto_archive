@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Flasky{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+		<h1>欢迎使用聚合数据查询!</h1>
+</div>
+{{wtf.quick_form(rform)}}
+{% endblock %}
+

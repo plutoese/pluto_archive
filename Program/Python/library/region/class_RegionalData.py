@@ -38,10 +38,23 @@ class RegionalData:
         self.db = MongoDB()
         self.conn = self.db.connect('regionDB',collection)
 
+        self.AD = AdminCode()
+
     # 获得所有的变量名
     def variables(self):
         posts = self.conn.find()
-        return posts.distinct('variable')
+        return sorted(posts.distinct('variable'))
+
+    # 获得变量所有的时期
+    def period(self,variable):
+        posts = self.conn.find({'variable':{'$in':variable}})
+        return sorted(posts.distinct('year'))
+
+    # 获得变量，时期的区域
+    def region(self,variable,year):
+        print(variable,year)
+        posts = self.conn.find({'year':{'$gte':year[0],'$lte':year[len(year)-1]},'variable':{'$in':variable}})
+        return [(code,self.AD.getByAcode(code)['region']) for code in sorted(posts.distinct('acode'))]
 
     # 从数据库中获取区域数据
     def query(self,region:list=None,year:list=None,variable:list=None,scale:str=None,projection:dict={'region':1,'year':1,'value':1,'acode':1,'_id':0,'variable':1,'year':1},sorts:list=[('year',ASCENDING),('acode',ASCENDING)])->pd.DataFrame:
