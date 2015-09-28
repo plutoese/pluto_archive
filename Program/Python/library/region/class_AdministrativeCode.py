@@ -1,16 +1,14 @@
 # coding=UTF-8
-#-------------------------------------------
-# 被废弃的版本，改用AdministrativeCode类
-#-------------------------------------------
+
+from library.imexport.class_MongoDB import *
+from library.region.class_AdminCode import *
+import pandas as pd
 
 
-import re
-from pymongo import MongoClient
-
-# 类AdminCode用来获取区域代码
-class AdminCode:
+# 类AdministrativeCode用来获取区域代码
+class AdministrativeCode:
     '''
-    类AdminCode用来提取区域代码及其他信息。
+    类AdministrativeCode用来提取区域代码及其他信息。
     
     属性：
     Province: 所有省级行政区域
@@ -30,17 +28,29 @@ class AdminCode:
     getByAcode(self,acode)：通过acode查询区域信息，参数acode表示区域行政代码，类型字符串。返回值为数据库中查询得到的行政区域，类型字典。
     '''
     # Construction
-    def __init__(self,index=None):
+    def __init__(self,version=None,year=None):
+        # 连接数据库
         self.Client = MongoClient('localhost', 27017)
         self.DB = self.Client['regionDB']
-        if index is None:
-            self.Collection = self.DB['cAdministrationLevel']
+        self.Collection = self.DB['AdminCode']
+
+        # 设置最新的版本
+        self.latestversion = self.versions[len(self.versions)-1]
+
+        # 设置版本和年份
+        if (version is None) and (year is None):
+            self.version = self.latestversion
+            self.year = re.split('_',self.version)[0]
+        elif version is not None:
+            self.version = version
+            self.year = re.split('_',self.version)[0]
         else:
-            dbname = 'cAdministrationLevel' + index
-            self.Collection = self.DB[dbname]
-        self.Province = self._sorted(list(self.Collection.find({'adminlevel':2})))
-        self.Prefecture = self._sorted(list(self.Collection.find({'adminlevel':3})))
-        self.County = self._sorted(list(self.Collection.find({'adminlevel':4})))
+            self.year = str(year)
+            self.version = self.yearToVersion(self.year)
+
+        self.Province = self._sorted(list(self.Collection.find({'adminlevel':2,'version':self.version})))
+        self.Prefecture = self._sorted(list(self.Collection.find({'adminlevel':3,'version':self.version})))
+        self.County = self._sorted(list(self.Collection.find({'adminlevel':4,'version':self.version})))
 
     # to get item
     # f to get all first level
@@ -78,11 +88,7 @@ class AdminCode:
                     result = self._getCounty(key[0],key[1],key[2])
                     return result
 
-    # to sort regions
-    def _sorted(self,regions):
-        return sorted(regions,key = lambda x:x['acode'])
-
-    # to get a Province
+    # 获得一个省级单位
     def _getProvince(self,province):
         _provincepattern = u'省|市|自治区|维吾尔自治区|回族自治区|壮族自治区'
         province = re.sub('\s+','',province)
@@ -94,7 +100,7 @@ class AdminCode:
         else:
             return  result[0]
 
-    # to get a Prefecture
+    # 获得一个地级单位
     def _getPrefecture(self,province,prefecture):
         prefectures =  self._getPrefectureChildren(province)
         result = [item for item in prefectures if re.match(prefecture,item['region']) is not None]
@@ -104,41 +110,45 @@ class AdminCode:
             result = result[0]
         return result
 
-    # to get a County
+    # 获得一个县级单位
     def _getCounty(self,province,prefecture,county):
         counties =  self._getCountyChildren(province,prefecture)
-        result = [item for item in counties if re.match(county,item['region']) is not None][0]
+        result = [item for item in counties if re.match(county,item['region']) is not None]
+        if len(result) < 1:
+            return None
+        #result = [item for item in counties if re.match(county,item['region']) is not None][0]
         return result
 
-    # to get Prefecture of a Province
+    # 获得一个省级单位所有的地级单位
     def _getPrefectureChildren(self,province):
         # to find province item
         provinces = [item for item in self.Province if re.match(province,item['region']) is not None]
         if len(provinces) > 1:
             return None
-        prefecture = self.Collection.find({'parent':provinces[0]['_id']})
+        prefecture = self.Collection.find({'parent':provinces[0]['_id'],'version':self.version})
         return list(prefecture)
 
-    # to get County of a Province and Prefecture
+    # 获得一个地级单位所有的县级单位
     def _getCountyChildren(self,province,prefecture):
         # to find province item
         prefectures = self._getPrefectureChildren(province)
         theprefecture = [item for item in prefectures if re.match(prefecture,item['region']) is not None]
         if len(theprefecture) > 1:
             return None
-        county = self.Collection.find({'parent':theprefecture[0]['_id']})
+        county = self.Collection.find({'parent':theprefecture[0]['_id'],'version':self.version})
         return list(county)
 
-    # to get by acode
+    # 通过Acode获得区域
     def getByAcode(self,acode):
-        result = self.Collection.find_one({'acode':acode})
+        result = self.Collection.find_one({'acode':acode,'version':self.version})
         return result
 
-    # to get by id
+    # 通过ID获得区域
     def getByID(self,id):
-        result = self.Collection.find_one({'_id':id})
+        result = self.Collection.find_one({'_id':id,'version':self.version})
         return result
 
+    # 获得省级和地级单位
     @property
     def ProvincePrefecture(self):
         result = []
@@ -148,6 +158,7 @@ class AdminCode:
             result.extend(self._getPrefectureChildren(province['region']))
         return result
 
+    # 获得省级、地级和县级单位
     @property
     def ProvincePrefectureCounty(self):
         result = []
@@ -160,8 +171,47 @@ class AdminCode:
                 result.extend(self._getCountyChildren(province['region'],prefecture['region']))
         return result
 
+    # 设置版本
+    def setVersion(self,version):
+        self.version = version
+        self.year = re.split('_',self.version)[0]
+
+    # 设置年份
+    def setYear(self,year):
+        self.year = year
+        self.version = self.yearToVersion(self.year)
+
+    # 把year转化为version
+    def yearToVersion(self,year=None,latest=True):
+        result = sorted([v for v in self.versions if re.search(str(year),v) is not None])
+        return result[len(result)-1]
+
+    # 根据Acode对地区进行排序
+    def _sorted(self,regions):
+        return sorted(regions,key = lambda x:x['acode'])
+
+    # 显示所有的版本号
+    @property
+    def versions(self):
+        return sorted(self.Collection.find().distinct('version'))
+
+    # 显示所有年份
+    @property
+    def years(self):
+        return sorted(self.Collection.find().distinct('year'))
+
+    # 显示当前版本的所有区域
+    @property
+    def regions(self):
+        projection ={'region':1,'acode':1,'_id':0}
+        sorts = [('acode',ASCENDING)]
+        region = pd.DataFrame(list(self.Collection.find({'version':self.version},projection=projection).sort(sorts)))
+        region = region.set_index('acode')
+        region.columns = [self.year]
+        return region
+
 if __name__ == '__main__':
-    ad = AdminCode()
+    ad = AdministrativeCode(year=2004)
     print(ad.Province)
     print(ad._getPrefectureChildren(u'云南'))
     print(ad._getCountyChildren(u'江苏',u'南京'))
@@ -179,11 +229,3 @@ if __name__ == '__main__':
     print(ad[u'浙江',u'嘉兴',u'f'])
     print(ad[u'浙江',u'嘉兴',u'海宁'])
     print(ad[u'安徽',u'巢湖'])
-
-    #print(ad.ProvincePrefecture)
-    #print(ad.ProvincePrefectureCounty)
-    #print(ad.Prefecture)
-
-    print(ad[u'河南', u'漯河',u'临颍'])
-    print(ad[u'湖北', u'恩施',u'来凤'])
-

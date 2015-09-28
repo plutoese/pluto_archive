@@ -19,7 +19,6 @@ class DataSheet:
         else:
             self.rawdata = pd.read_excel(filename,sheetnum)
 
-
     @property
     def data(self):
         return self._data

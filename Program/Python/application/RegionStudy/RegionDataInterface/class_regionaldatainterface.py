@@ -45,8 +45,12 @@ if __name__ == '__main__':
     #dinterface = RegionDataInterface()
     print(dinterface.variable)
     ad = AdminCode()
-    querydict = {'variable':[u'年末总人口'],'scale':'全市','year':2001}
+    querydict = {'variable':[u'年末总人口',u'固定资产投资'],'scale':'全市','year':range(2001,2003)}
     #querydict = {'region':ad[u'浙江',u'f'],'variable':[u'人均地区生产总值'],'scale':'全市','year':[2012]}
     #querydict = {'region':ad[u'浙江',u'f'],'variable':[u'财政支出'],'year':[2012]}
     result = dinterface.query(querydict)
-    print(result['data'])
+    mdata = result['data']
+    mdata = mdata.swapaxes(0,2)
+    mdata = mdata.to_frame()
+    file = 'c:/down/mresult.xls'
+    mdata.to_excel(file)
