@@ -5,9 +5,9 @@ from library.imexport.class_FileSystem import *
 from library.imexport.class_Excel import *
 
 # 设置参数
-YEAR = 2001
+YEAR = 2002
 DATADIR = r'C:\Data\city\data'
-VARFILE = r'C:\Data\city\var\m2001.xlsx'
+VARFILE = r'C:\Data\city\var\m2002.xlsx'
 
 ad = AdministrativeCode(year=YEAR)
 
@@ -39,8 +39,8 @@ for file in files:
     regions.append(mdatasheet.region)
     wrongnumber.extend(mdatasheet.wrongnumber)
 
-    #for item in result:
-    #    collection.insert(item)
+    for item in result:
+        collection.insert(item)
 
 outfile = u'c:\\down\\wrong1.xlsx'
 moutexcel = Excel(outfile)
