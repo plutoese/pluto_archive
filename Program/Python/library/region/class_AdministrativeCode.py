@@ -211,7 +211,8 @@ class AdministrativeCode:
         return region
 
 if __name__ == '__main__':
-    ad = AdministrativeCode(year=2004)
+    ad = AdministrativeCode(year=2003)
+    print(ad.versions)
     print(ad.Province)
     print(ad._getPrefectureChildren(u'云南'))
     print(ad._getCountyChildren(u'江苏',u'南京'))
@@ -228,4 +229,4 @@ if __name__ == '__main__':
     print(ad[u'浙江',u'嘉兴'])
     print(ad[u'浙江',u'嘉兴',u'f'])
     print(ad[u'浙江',u'嘉兴',u'海宁'])
-    print(ad[u'安徽',u'巢湖'])
+    print(ad[u'山东省',u'荷泽市'])

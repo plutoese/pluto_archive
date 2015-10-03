@@ -13,6 +13,7 @@ collection = db['AdminCode']
 # 2. versions
 versions = collection.find().distinct('version')
 versions = sorted(versions)
+print(versions)
 versions = versions[1:(len(versions)-1)]
 
 # 3. my collection
@@ -30,6 +31,6 @@ for ver in versions:
 
 print(mregions)
 
-file = 'C:/Data/database/region.xlsx'
+file = 'C:/down/region.xlsx'
 mregions.to_excel(file)
 
