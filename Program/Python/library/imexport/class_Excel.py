@@ -40,13 +40,27 @@ class Excel:
     def read(self, sheetnum:int=0)->list:
         # 连接文件
         self.file = xlrd.open_workbook(self.filename)
+        self.sheets = self.file.sheet_names()
         # 设定页
-        self.table = self.file.sheet_by_index(sheetnum)
-        # excel表的行和列
-        self.nrows = self.table.nrows
-        self.ncols = self.table.ncols
-        # 读取数据
-        self.data = [self.table.row_values(i) for i in range(self.nrows)]
+        if isinstance(sheetnum,int):
+            self.table = self.file.sheet_by_index(sheetnum)
+            # excel表的行和列
+            self.nrows = self.table.nrows
+            self.ncols = self.table.ncols
+            self.data = [self.table.row_values(i) for i in range(self.nrows)]
+        elif isinstance(sheetnum,str):
+            self.table = self.file.sheet_by_name(sheetnum)
+            # excel表的行和列
+            self.nrows = self.table.nrows
+            self.ncols = self.table.ncols
+            self.data = [self.table.row_values(i) for i in range(self.nrows)]
+        else:
+            self.data = []
+            for item in self.sheets:
+                ttable = self.file.sheet_by_name(item)
+                nrows = ttable.nrows
+                self.data.extend([ttable.row_values(i) for i in range(nrows)])
+
         return self.data
 
     # 新建Excel文件和页面
@@ -68,9 +82,10 @@ class Excel:
 
 
 if __name__ == '__main__':
-    filename = r'C:\Down\student.xls'
+    filename = r'C:\Data\city\data\m29.xls'
     mexcel = Excel(filename)
-    mdata = mexcel.read()
+    mdata = mexcel.read(sheetnum=None)
+    print(mexcel.sheets)
     print(mdata)
     
 

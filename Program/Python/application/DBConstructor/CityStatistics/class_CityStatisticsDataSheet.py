@@ -28,7 +28,7 @@ class CityStatisticsDataSheet(DataSheet):
                 self.title = item[0]
                 break
 
-        self.rowdatastart = 1
+        self.rowdatastart = 2
 
     # 导入变量和单位
     def setVariables(self,varlist):

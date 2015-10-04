@@ -5,9 +5,9 @@ from library.imexport.class_FileSystem import *
 from library.imexport.class_Excel import *
 
 # 设置参数
-YEAR = 2002
+YEAR = 2013
 DATADIR = r'C:\Data\city\data'
-VARFILE = r'C:\Data\city\var\m2002.xlsx'
+VARFILE = r'C:\Data\city\var\m2013.xlsx'
 
 ad = AdministrativeCode(year=YEAR)
 
@@ -26,7 +26,7 @@ wrongnumber = []
 regions = []
 # 2. 循环开始
 for file in files:
-    mdatasheet = CityStatisticsDataSheet(filename=file,year=YEAR)
+    mdatasheet = CityStatisticsDataSheet(filename=file,year=YEAR,sheetnum=None)
 
     variables = Excel(VARFILE).read(sheetnum=0)
     var = variables[n][1:]
