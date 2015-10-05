@@ -1,10 +1,7 @@
 # coding=UTF-8
 
-from pymongo import *
-import pandas as pd
 from library.region.class_AdminCode import *
-from library.region.class_RegionalData import *
-from library.imexport.class_Excel import *
+from library.region.RegionData.class_RegionalData import *
 
 ad = AdminCode()
 client = MongoClient('localhost',27017)

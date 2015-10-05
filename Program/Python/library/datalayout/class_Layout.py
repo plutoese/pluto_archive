@@ -1,7 +1,9 @@
 # coding=UTF-8
 
-from library.region.class_RegionalData import *
 import pandas as pd
+
+from library.region.RegionData.class_RegionalData import *
+
 
 # 类Layout用于各种数据结构的转换
 class Layout:

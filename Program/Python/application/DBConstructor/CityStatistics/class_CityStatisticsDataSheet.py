@@ -1,7 +1,7 @@
 # coding=UTF-8
 
 from library.datapretreatment.class_DataSheet import *
-from library.region.class_AdministrativeCode import *
+from library.region.AdminCode.class_AdministrativeCode import *
 
 # 类CityStatisticsDataSheet用来处理中国城市统计年鉴的数据
 class CityStatisticsDataSheet(DataSheet):

@@ -1,9 +1,9 @@
 # coding=UTF-8
 
-from library.imexport.class_FileSystem import *
-from library.datapretreatment.class_AdminCodeDataSheet import *
 from pymongo import *
-import pandas as pd
+
+from application.DBConstructor.AdminCode.class_AdminCodeDataSheet import *
+
 
 # 1. Connect to MongoDB collection
 client = MongoClient('localhost', 27017)

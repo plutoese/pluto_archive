@@ -1,8 +1,10 @@
 # coding=UTF-8
 
-from library.imexport.class_FileSystem import *
-from library.datapretreatment.class_AdminCodeDataSheet import *
 from pymongo import *
+
+from library.imexport.class_FileSystem import *
+from application.DBConstructor.AdminCode.class_AdminCodeDataSheet import *
+
 
 # 0. file directory
 path = r'C:\Data\acode'

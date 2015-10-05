@@ -2,7 +2,8 @@
 
 from pymongo import *
 import pandas as pd
-from library.region.class_AdminCode import *
+import re
+from library.region.AdminCode.class_AdministrativeCode import *
 
 # 类MongoDB用来连接MongoDB数据库
 class MongoDB:
@@ -60,7 +61,7 @@ class MongoDB:
 if __name__ == '__main__':
     db = MongoDB()
     db.connect('regionDB','CEIC')
-    ad = AdminCode()
+    ad = AdministrativeCode(year=2014)
     regions = [item['acode'] for item in ad[u'浙江',u'f']]
     regions.append('110000')
     #print(list(db.find({'year':2012,'variable':u'财政支出'},{'region':1,'year':1,'value':1,'acode':1,'_id':0}))[0:10])
