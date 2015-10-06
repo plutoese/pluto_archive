@@ -2,7 +2,7 @@
 
 import pandas as pd
 
-from library.region.RegionData.class_RegionalData import *
+from library.region.RegionData.class_RegionData import *
 
 
 # 类Layout用于各种数据结构的转换
@@ -41,7 +41,7 @@ class Layout:
     '''
     # 构造函数
     def __init__(self,data=None):
-        self.ad = AdminCode()
+        self.ad = AdministrativeCode()
         self._data = data
 
         self.tags = self._type()
@@ -129,15 +129,14 @@ class Layout:
         return {'year':self.year,'region':self.region,'variable':self.variable}
 
 if __name__ == '__main__':
-    ad = AdminCode()
-    rdata = RegionalData()
+    rdata = RegionData()
     #mdata = rdata.query(region=ad[u'浙江',u'f'],year=range(2006,2010),variable=[u'财政支出',u'从业人数_在岗职工'])
     #mdata = rdata.query(region=[ad[u'浙江',u'杭州']],variable=[u'财政支出'])
-    mdata = rdata.query(region=ad[u'浙江',u'f'],variable=[u'财政支出'],year=2012)
+    mdata = rdata.query(region=[[u'浙江',u'f']],variable=[u'人均地区生产总值'],year=[2012])
     #mdata = rdata.query(region=ad[u'浙江',u'杭州'],variable=u'财政支出',year=range(2000,2012))
     lout = Layout(mdata)
     print(lout.stackToNormal())
-    print(lout.type)
+    #print(lout.type)
     print(lout.ndim)
 
     print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
@@ -145,8 +144,9 @@ if __name__ == '__main__':
     print(g)
 
     for name, group in g:
-        print(name)
-        print(group)
+        print('hello',name)
+        print('good',group)
+        print('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&')
         print(group['value'])
 
     print('*****************************************')
@@ -162,7 +162,7 @@ if __name__ == '__main__':
     mdata = lout.stackToNormal()
     print(mdata)
     print(mdata.axes)
-    print(mdata['2007'])
+    #print(mdata['2007'])
 
     print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
     mdata = mdata.swapaxes('items','minor')

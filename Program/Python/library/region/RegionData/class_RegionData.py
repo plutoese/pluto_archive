@@ -6,6 +6,7 @@
 from library.imexport.class_MongoDB import *
 from library.region.AdminCode.class_AdministrativeCode import *
 import pandas as pd
+import time
 
 # 类RegionalData是区域数据输入输出更改的接口
 class RegionData:
@@ -75,36 +76,107 @@ class RegionData:
         else:
             conds.pop('sorts')
 
+        # 设置时间
         period = conds.get('year')
         if period is None:
-            variables = conds.get('variable')
-            if variables is None:
-                variables = self.variables()
+            variables = conds.get('variable',self.variables())
+            period = self.period(variables)
+        else:
+            period = period
+            conds.pop('year')
+
+        result = []
+        conditions = dict()
+        for key in conds:
+            if re.match('region',key) is not None:
+                continue
+            if isinstance(conds[key],list):
+                conditions[key] = {'$in':conds[key]}
             else:
-                conds.pop('variable')
+                conditions[key] = conds[key]
+
+        # 重点是设置区域
+        if 'region' in conds:
+            for year in period:
+                conditions['year'] = year
+                self.AD.setYear(year)
+                conditions['acode'] = {'$in':[region['acode'] for item in conds['region'] for region in self.AD[tuple(item)]]}
+                result.extend(list(self.conn.find(conditions,projection).sort(sorts)))
+            mresult = pd.DataFrame(result)
+        else:
+            if isinstance(period,list):
+                conditions['year'] = {'$in':period}
+            else:
+                conditions['year'] = period
+            mresult = pd.DataFrame(list(self.conn.find(conditions,projection).sort(sorts)))
+
+        return mresult
+
+    # 从数据库中获取区域数据
+    def fastQuery(self,**conds)->pd.DataFrame:
+        # 设置projection
+        projection = conds.get('projection')
+        if projection is None:
+            projection = {'region':1,'year':1,'value':1,'acode':1,'_id':0,'variable':1}
+        else:
+            conds.pop('projection')
+        # 设置sorts
+        sorts = conds.get('sorts')
+        if sorts is None:
+            sorts= [('year',ASCENDING),('acode',ASCENDING)]
+        else:
+            conds.pop('sorts')
+
+        # 设置时间
+        period = conds.get('year')
+        if period is None:
+            variables = conds.get('variable',self.variables())
             period = self.period(variables)
         else:
             conds.pop('year')
 
         result = []
-        for year in period:
-            conditions = {'year':year}
-            for key in conds:
-                if isinstance(conds[key],list):
-                    conditions[key] = {'$in':conds[key]}
-                else:
-                    conditions[key] = conds[key]
-            result.extend(list(self.conn.find(conditions,projection).sort(sorts)))
-        mresult = pd.DataFrame(result)
+        conditions = dict()
+        for key in conds:
+            if re.match('region',key) is not None:
+                continue
+            if isinstance(conds[key],list):
+                conditions[key] = {'$in':conds[key]}
+            else:
+                conditions[key] = conds[key]
+
+        # 重点是设置区域
+        if 'region' in conds:
+            acode = set()
+            for year in period:
+                conditions['year'] = year
+                self.AD.setYear(year)
+                acode.update([region['acode'] for item in conds['region'] for region in self.AD[tuple(item)]])
+            conditions['acode'] = {'$in':list(acode)}
+            mresult = pd.DataFrame(list(self.conn.find(conditions,projection).sort(sorts)))
+        else:
+            if isinstance(period,list):
+                conditions['year'] = {'$in':period}
+            else:
+                conditions['year'] = period
+            mresult = pd.DataFrame(list(self.conn.find(conditions,projection).sort(sorts)))
+
         return mresult
 
 if __name__ == '__main__':
+    start = time.time()
     ad = AdministrativeCode()
     rdata = RegionData()
-    print(rdata.variables())
-    print(rdata.period([u'职工平均工资',u'人均地区生产总值']))
-    mdata = rdata.query(acode=[region['acode'] for region in ad[u'安徽',u'f']],year=[2006,2007,2010],variable=[u'职工平均工资',u'人均地区生产总值'])
-    #mdata = rdata.query(region=[ad[u'浙江',u'杭州']],variable=[u'财政支出'])
+    #print(rdata.variables())
+    #print(rdata.period([u'职工平均工资',u'人均地区生产总值']))
+    #mdata = rdata.query(acode=[region['acode'] for region in ad[u'安徽',u'f']],year=[2006,2007,2010],variable=[u'职工平均工资',u'人均地区生产总值'])
+    projection = {'region':1,'year':1,'value':1,'acode':1,'_id':0,'variable':1,'scale':1}
+    mdata = rdata.query(region=[[u't']],year=[2009,2010],variable=[u'人均地区生产总值',u'职工平均工资'],projection=projection)
     #mdata = rdata.query(region=ad[u'浙江',u'f'],variable=u'财政支出',year=2012)
     #mdata = rdata.query(region=ad[u'浙江',u'杭州'],variable=u'财政支出',year=2012)
     print(mdata)
+    #print('scale' in mdata.columns)
+    #g = mdata.groupby(['acode','year','variable','scale'],sort=True)
+    #print(g.groups)
+    over = time.time()
+    print(over-start)

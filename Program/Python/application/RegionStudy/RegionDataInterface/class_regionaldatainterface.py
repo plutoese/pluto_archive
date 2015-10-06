@@ -1,7 +1,6 @@
 # coding=UTF-8
 
-from library.datastruct.class_SeriesData import *
-from library.datalayout.class_Layout import *
+from library.datalayout.class_Format import *
 
 # 类RegionDataInterface提供了区域数据的接口
 class RegionDataInterface:
@@ -17,9 +16,9 @@ class RegionDataInterface:
     query(self,query:dict=None)：查询接口
     '''
     # 构造函数
-    def __init__(self,collection:str='CEIC'):
+    def __init__(self,collection:str='CityStatistics'):
         # RegionalData的一个对象
-        self.regionData = RegionalData(collection)
+        self.regionData = RegionData(collection)
 
     # 查询返回结果
     def query(self,query:dict=None):
@@ -28,12 +27,9 @@ class RegionDataInterface:
         # 重新转换格式
         if result.size < 1:
             return None
-        layout = Layout(result)
-        data = layout.stackToNormal()
-        # 记录数据集的信息
-        tags = layout.tags
-        qresult = {'data':data,'tags':tags}
-        return qresult
+        rdata = Foramt(result)
+        mdata = rdata.transform()
+        return mdata
 
     # 返回该数据集合的变量
     @property
@@ -41,16 +37,14 @@ class RegionDataInterface:
         return self.regionData.variables()
 
 if __name__ == '__main__':
-    dinterface = RegionDataInterface(collection='cCity')
-    #dinterface = RegionDataInterface()
+    dinterface = RegionDataInterface()
     print(dinterface.variable)
-    ad = AdminCode()
-    querydict = {'variable':[u'年末总人口',u'固定资产投资'],'scale':'全市','year':range(2001,2003)}
+    projection = {'region':1,'year':1,'value':1,'acode':1,'_id':0,'variable':1,'scale':1}
+    querydict = {'region':[[u'浙江',u'f']],'variable':[u'人均地区生产总值',u'职工平均工资'],'year':[2009,2010],'projection':projection}
     #querydict = {'region':ad[u'浙江',u'f'],'variable':[u'人均地区生产总值'],'scale':'全市','year':[2012]}
     #querydict = {'region':ad[u'浙江',u'f'],'variable':[u'财政支出'],'year':[2012]}
     result = dinterface.query(querydict)
-    mdata = result['data']
-    mdata = mdata.swapaxes(0,2)
-    mdata = mdata.to_frame()
-    file = 'c:/down/mresult.xls'
-    mdata.to_excel(file)
+    mdata = result['pdata']
+    print(mdata.isnull())
+    #file = 'c:/down/mresult.xls'
+    #mdata.to_excel(file)

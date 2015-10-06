@@ -60,7 +60,21 @@ class AdministrativeCode:
     # b to get all first and second level
     def __getitem__(self, key):
         if isinstance(key,str):
+            if re.match('^s$',key):
+                return self.Province
+            if re.match('^t$',key):
+                return self.Prefecture
+            if re.match('^f$',key):
+                return self.County
             return self._getProvince(key)
+        if isinstance(key,tuple) and len(key) < 2:
+            if re.match('^s$',key[0]):
+                return self.Province
+            if re.match('^t$',key[0]):
+                return self.Prefecture
+            if re.match('^f$',key[0]):
+                return self.County
+            return self._getProvince(key[0])
         if isinstance(key,tuple):
             if len(key) < 3:
                 if re.match(key[1],u'f') is not None:
@@ -100,7 +114,7 @@ class AdministrativeCode:
         if len(result) < 1:
             return None
         else:
-            return  result[0]
+            return  result
 
     # 获得一个地级单位
     def _getPrefecture(self,province,prefecture):
@@ -109,8 +123,7 @@ class AdministrativeCode:
         if len(result) < 1:
             return None
         else:
-            result = result[0]
-        return result
+            return result
 
     # 获得一个县级单位
     def _getCounty(self,province,prefecture,county):
@@ -143,6 +156,11 @@ class AdministrativeCode:
     # 通过Acode获得区域
     def getByAcode(self,acode):
         result = self.Collection.find_one({'acode':acode,'version':self.version})
+        return result
+
+    def getByAcodeAndYear(self,acode,year):
+        version = self.yearToVersion(year)
+        result = self.Collection.find_one({'acode':acode,'version':version})
         return result
 
     # 通过ID获得区域
@@ -178,10 +196,18 @@ class AdministrativeCode:
         self.version = version
         self.year = re.split('_',self.version)[0]
 
+        self.Province = self._sorted(list(self.Collection.find({'adminlevel':2,'version':self.version})))
+        self.Prefecture = self._sorted(list(self.Collection.find({'adminlevel':3,'version':self.version})))
+        self.County = self._sorted(list(self.Collection.find({'adminlevel':4,'version':self.version})))
+
     # 设置年份
     def setYear(self,year):
-        self.year = year
+        self.year = str(year)
         self.version = self.yearToVersion(self.year)
+
+        self.Province = self._sorted(list(self.Collection.find({'adminlevel':2,'version':self.version})))
+        self.Prefecture = self._sorted(list(self.Collection.find({'adminlevel':3,'version':self.version})))
+        self.County = self._sorted(list(self.Collection.find({'adminlevel':4,'version':self.version})))
 
     # 把year转化为version
     def yearToVersion(self,year=None,latest=True):
@@ -232,3 +258,7 @@ if __name__ == '__main__':
     print(ad[u'浙江',u'嘉兴',u'f'])
     print(ad[u'浙江',u'嘉兴',u'海宁'])
     print(ad[u'山东省',u'荷泽市'])
+    print(ad[tuple([u'浙江',u'f'])])
+    ad.setYear(2010)
+    print(ad[tuple([u'浙江',u'f'])])
+    print(ad[tuple([u'北京'])])

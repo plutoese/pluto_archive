@@ -1,7 +1,7 @@
 # coding=UTF-8
 
 from library.imexport.class_MongoDB import *
-from library.region.class_AdminCode import *
+from library.region.AdminCode.class_AdministrativeCode import *
 import pandas as pd
 
 # 类RegionalData用来从数据库MongoDB中导出区域数据

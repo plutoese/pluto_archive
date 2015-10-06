@@ -69,6 +69,7 @@ if __name__ == '__main__':
     #mdata = pd.DataFrame(list(db.find({'year':{'$gt':2000,'$lt':2012},'variable':{'$in':[u'财政支出',u'从业人数']}},{'region':1,'year':1,'value':1,'acode':1,'_id':0,'variable':1,'year':1}))[0:20])
     mdata = pd.DataFrame(list(db.find({'year':{'$gt':2000,'$lt':2012},'variable':{'$in':[u'财政支出',u'从业人数_在岗职工']},'acode':{'$in':regions}},{'region':1,'year':1,'value':1,'acode':1,'_id':0,'variable':1,'year':1})))
     print(mdata)
+
     g = mdata.groupby(['variable','year'], sort=True)
 
     for name, group in g:
