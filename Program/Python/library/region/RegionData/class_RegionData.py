@@ -50,38 +50,59 @@ class RegionData:
 
     # 获得变量所有的时期
     def period(self,variable):
-        posts = self.conn.find({'variable':{'$in':variable}})
-        return sorted(posts.distinct('year'))
-
-    # 获得变量，时期的区域
-    def region(self,variable,year):
-        print(variable,year)
-        posts = self.conn.find({'year':{'$gte':year[0],'$lte':year[len(year)-1]},'variable':{'$in':variable}})
-        return [(code,self.AD.getByAcode(code)['region']) for code in sorted(posts.distinct('acode'))]
+        if isinstance(variable,str):
+            posts = self.conn.find({'variable':variable}).distinct('year')
+        else:
+            posts = set()
+            for var in variable:
+                periods = self.conn.find({'variable':var}).distinct('year')
+                posts.update(periods)
+            posts = list(posts)
+        return sorted(posts)
 
     # 从数据库中获取区域数据
     def query(self,**conds)->pd.DataFrame:
-        projection = {'region':1,'year':1,'value':1,'acode':1,'_id':0,'variable':1}
-        sorts= [('year',ASCENDING),('acode',ASCENDING)]
-        conditions = dict()
-        for key in conds:
-            if re.match('projection',key):
-                projection = conds[key]
-                continue
-            if re.match('sorts',key):
-                sorts = conds[key]
-                continue
-            if isinstance(conds[key],list):
-                conditions[key] = {'$in':conds[key]}
+        # 设置projection
+        projection = conds.get('projection')
+        if projection is None:
+            projection = {'region':1,'year':1,'value':1,'acode':1,'_id':0,'variable':1}
+        else:
+            conds.pop('projection')
+        # 设置sorts
+        sorts = conds.get('sorts')
+        if sorts is None:
+            sorts= [('year',ASCENDING),('acode',ASCENDING)]
+        else:
+            conds.pop('sorts')
+
+        period = conds.get('year')
+        if period is None:
+            variables = conds.get('variable')
+            if variables is None:
+                variables = self.variables()
             else:
-                conditions[key] = conds[key]
-        result = pd.DataFrame(list(self.conn.find(conditions,projection).sort(sorts)))
-        return result
+                conds.pop('variable')
+            period = self.period(variables)
+        else:
+            conds.pop('year')
+
+        result = []
+        for year in period:
+            conditions = {'year':year}
+            for key in conds:
+                if isinstance(conds[key],list):
+                    conditions[key] = {'$in':conds[key]}
+                else:
+                    conditions[key] = conds[key]
+            result.extend(list(self.conn.find(conditions,projection).sort(sorts)))
+        mresult = pd.DataFrame(result)
+        return mresult
 
 if __name__ == '__main__':
     ad = AdministrativeCode()
     rdata = RegionData()
     print(rdata.variables())
+    print(rdata.period([u'职工平均工资',u'人均地区生产总值']))
     mdata = rdata.query(acode=[region['acode'] for region in ad[u'安徽',u'f']],year=[2006,2007,2010],variable=[u'职工平均工资',u'人均地区生产总值'])
     #mdata = rdata.query(region=[ad[u'浙江',u'杭州']],variable=[u'财政支出'])
     #mdata = rdata.query(region=ad[u'浙江',u'f'],variable=u'财政支出',year=2012)
