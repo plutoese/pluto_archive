@@ -61,7 +61,11 @@ class Foramt:
             mdata = result.swapaxes('items','minor')
             mdata = mdata.swapaxes('major','minor')
             mdata = mdata.to_frame(False)
-            return {'data':mdata,'pdata':result}
+            result2 = result.dropna(axis=1)
+            mdata2 = result2.swapaxes('items','minor')
+            mdata2 = mdata2.swapaxes('major','minor')
+            mdata2 = mdata2.to_frame(False)
+            return {'data':mdata,'pdata':result,'balanceddata':mdata2}
         # 如果没有scale，或者scale为1
         else:
             if (self.ndim['variable'] == 1) and (self.ndim['region'] == 1):
@@ -113,11 +117,15 @@ class Foramt:
             mdata = result.swapaxes('items','minor')
             mdata = mdata.swapaxes('major','minor')
             mdata = mdata.to_frame(False)
+            result2 = result.dropna(axis=1)
+            mdata2 = result2.swapaxes('items','minor')
+            mdata2 = mdata2.swapaxes('major','minor')
+            mdata2 = mdata2.to_frame(False)
             if scale is not None:
                 tags = {'scale':self.scale}
-                return {'tags':tags,'data':mdata,'pdata':result}
+                return {'tags':tags,'data':mdata,'pdata':result,'balanceddata':mdata2}
             else:
-                return {'data':mdata,'pdata':result}
+                return {'data':mdata,'pdata':result,'balanceddata':mdata2}
 
     # 辅助函数，返回数据结构
     def _type(self)->dict:

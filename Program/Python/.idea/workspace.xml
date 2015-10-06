@@ -37,9 +37,10 @@
     <SUITE FILE_PATH="coverage/Python$class_DataVisualization.coverage" NAME="class_DataVisualization Coverage Results" MODIFIED="1442316438063" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/dataanalysis" />
     <SUITE FILE_PATH="coverage/Python$demo_dataentry.coverage" NAME="demo_dataentry Coverage Results" MODIFIED="1443344898428" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/FlaskWeb/practise" />
     <SUITE FILE_PATH="coverage/Python$class_Layout.coverage" NAME="class_Layout Coverage Results" MODIFIED="1444107650615" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/datalayout" />
-    <SUITE FILE_PATH="coverage/Python$class_regionaldatainterface.coverage" NAME="class_regionaldatainterface Coverage Results" MODIFIED="1444125056660" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/RegionStudy/RegionDataInterface" />
+    <SUITE FILE_PATH="coverage/Python$class_regionaldatainterface.coverage" NAME="class_regionaldatainterface Coverage Results" MODIFIED="1444141757394" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/RegionStudy/RegionDataInterface" />
     <SUITE FILE_PATH="coverage/Python$demo_provincedata.coverage" NAME="demo_provincedata Coverage Results" MODIFIED="1443407912558" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/RegionStudy/RegionDataExport" />
     <SUITE FILE_PATH="coverage/Python$class_CityStatisticsDataSheet.coverage" NAME="class_CityStatisticsDataSheet Coverage Results" MODIFIED="1443606991335" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/DBConstructor/CityStatistics" />
+    <SUITE FILE_PATH="coverage/Python$demo_aboutNA.coverage" NAME="demo_aboutNA Coverage Results" MODIFIED="1444141492191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/temp" />
     <SUITE FILE_PATH="coverage/Python$demo_dataexplore.coverage" NAME="demo_dataexplore Coverage Results" MODIFIED="1442407328414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/dataanalysis" />
     <SUITE FILE_PATH="coverage/Python$demo_match_next2version.coverage" NAME="demo_match_next2version Coverage Results" MODIFIED="1442027194061" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/MatchTheory" />
     <SUITE FILE_PATH="coverage/Python$class_DataSheet.coverage" NAME="class_DataSheet Coverage Results" MODIFIED="1442655773332" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/library/datapretreatment" />
@@ -91,11 +92,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="class_Format.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="class_Format.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/library/datalayout/class_Format.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4431487" vertical-offset="2774" max-vertical-offset="3306">
-              <caret line="154" column="0" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2165" max-vertical-offset="3458">
+              <caret line="123" column="0" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
               <folding>
                 <element signature="e#16#35#0" expanded="true" />
               </folding>
@@ -103,11 +104,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="class_regionaldatainterface.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="demo_aboutNA.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/temp/demo_aboutNA.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="233" max-vertical-offset="627">
+              <caret line="24" column="28" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="28" />
+              <folding>
+                <element signature="e#16#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="class_regionaldatainterface.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/RegionStudy/RegionDataInterface/class_regionaldatainterface.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="689" max-vertical-offset="1045">
-              <caret line="49" column="5" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.8398876" vertical-offset="575" max-vertical-offset="1083">
+              <caret line="46" column="20" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -118,7 +131,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/Graphs/demo_001.py" />
         <option value="$PROJECT_DIR$/application/MatchTheory/class_Match.py" />
         <option value="$PROJECT_DIR$/application/MatchTheory/demo_main.py" />
         <option value="$PROJECT_DIR$/application/MatchTheory/class_PersonGenerator.py" />
@@ -167,8 +179,9 @@
         <option value="$PROJECT_DIR$/library/datalayout/class_Layout.py" />
         <option value="$PROJECT_DIR$/library/region/AdminCode/class_AdministrativeCode.py" />
         <option value="$PROJECT_DIR$/library/region/RegionData/class_RegionData.py" />
-        <option value="$PROJECT_DIR$/application/RegionStudy/RegionDataInterface/class_regionaldatainterface.py" />
+        <option value="$PROJECT_DIR$/temp/demo_aboutNA.py" />
         <option value="$PROJECT_DIR$/library/datalayout/class_Format.py" />
+        <option value="$PROJECT_DIR$/application/RegionStudy/RegionDataInterface/class_regionaldatainterface.py" />
       </list>
     </option>
   </component>
@@ -220,6 +233,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Python" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="temp" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -555,27 +572,7 @@
       <recent name="C:\Room\Warehouse\GitWork\Program\Python\library\datalayout" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.class_Format">
-    <configuration default="false" name="class_MongoDB" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/library/imexport" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Python" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/library/imexport/class_MongoDB.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.class_regionaldatainterface">
     <configuration default="false" name="class_RegionData" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -654,6 +651,26 @@
       <module name="Python" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/application/RegionStudy/RegionDataInterface/class_regionaldatainterface.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="demo_aboutNA" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/temp" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Python" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/temp/demo_aboutNA.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <RunnerSettings RunnerId="PythonRunner" />
@@ -849,19 +866,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.class_MongoDB" />
-      <item index="1" class="java.lang.String" itemvalue="Python.class_RegionData" />
-      <item index="2" class="java.lang.String" itemvalue="Python.class_Layout" />
-      <item index="3" class="java.lang.String" itemvalue="Python.class_Format" />
-      <item index="4" class="java.lang.String" itemvalue="Python.class_regionaldatainterface" />
+      <item index="0" class="java.lang.String" itemvalue="Python.class_RegionData" />
+      <item index="1" class="java.lang.String" itemvalue="Python.class_Layout" />
+      <item index="2" class="java.lang.String" itemvalue="Python.class_Format" />
+      <item index="3" class="java.lang.String" itemvalue="Python.class_regionaldatainterface" />
+      <item index="4" class="java.lang.String" itemvalue="Python.demo_aboutNA" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.class_Format" />
-        <item index="1" class="java.lang.String" itemvalue="Python.class_regionaldatainterface" />
-        <item index="2" class="java.lang.String" itemvalue="Python.class_RegionData" />
-        <item index="3" class="java.lang.String" itemvalue="Python.class_Layout" />
-        <item index="4" class="java.lang.String" itemvalue="Python.class_MongoDB" />
+        <item index="0" class="java.lang.String" itemvalue="Python.class_regionaldatainterface" />
+        <item index="1" class="java.lang.String" itemvalue="Python.demo_aboutNA" />
+        <item index="2" class="java.lang.String" itemvalue="Python.class_Format" />
+        <item index="3" class="java.lang.String" itemvalue="Python.class_RegionData" />
+        <item index="4" class="java.lang.String" itemvalue="Python.class_Layout" />
       </list>
     </recent_temporary>
   </component>
@@ -890,7 +907,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35402685" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28214827" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28668684" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -941,13 +958,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/DBConstructor/AdminCode/main_createAdminCode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="41" max-vertical-offset="988">
-          <caret line="30" column="1" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/library/datapretreatment/class_DataSheet.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="171" max-vertical-offset="551">
@@ -1085,13 +1095,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1007">
           <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scratch/cookbook/tip001.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4920635" vertical-offset="1583" max-vertical-offset="2489">
-          <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1253,9 +1256,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7842566" vertical-offset="1080" max-vertical-offset="1634">
           <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
-          <folding>
-            <element signature="e#16#37#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1263,7 +1263,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.4956268" vertical-offset="570" max-vertical-offset="2508">
           <caret line="3" column="63" selection-start-line="3" selection-start-column="63" selection-end-line="3" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1271,9 +1270,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.8005618" vertical-offset="2204" max-vertical-offset="3363">
           <caret line="101" column="22" selection-start-line="101" selection-start-column="22" selection-end-line="101" selection-end-column="22" />
-          <folding>
-            <element signature="e#16#35#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1281,20 +1277,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.2507288" vertical-offset="3110" max-vertical-offset="3515">
           <caret line="162" column="67" selection-start-line="162" selection-start-column="67" selection-end-line="162" selection-end-column="67" />
-          <folding>
-            <element signature="e#139#183#0" expanded="true" />
-            <element signature="e#2215#4208#0" expanded="false" />
-            <element signature="e#5471#5780#0" expanded="false" />
-            <element signature="e#5866#6239#0" expanded="false" />
-            <element signature="e#6632#6722#0" expanded="false" />
-            <element signature="e#6796#7009#0" expanded="false" />
-            <element signature="e#7092#7485#0" expanded="false" />
-            <element signature="e#8456#8574#0" expanded="false" />
-            <element signature="e#8636#8684#0" expanded="false" />
-            <element signature="e#8747#8804#0" expanded="false" />
-            <element signature="e#8862#8916#0" expanded="false" />
-            <element signature="e#8981#9281#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1309,21 +1291,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/RegionStudy/RegionDataInterface/class_regionaldatainterface.py">
+    <entry file="file://$PROJECT_DIR$/scratch/cookbook/tip001.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="689" max-vertical-offset="1045">
-          <caret line="49" column="5" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2489">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="14" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/temp/demo_aboutNA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="233" max-vertical-offset="627">
+          <caret line="24" column="28" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="28" />
+          <folding>
+            <element signature="e#16#34#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/library/datalayout/class_Format.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4431487" vertical-offset="2774" max-vertical-offset="3306">
-          <caret line="154" column="0" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2165" max-vertical-offset="3458">
+          <caret line="123" column="0" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
           <folding>
             <element signature="e#16#35#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/RegionStudy/RegionDataInterface/class_regionaldatainterface.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8398876" vertical-offset="575" max-vertical-offset="1083">
+          <caret line="46" column="20" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
