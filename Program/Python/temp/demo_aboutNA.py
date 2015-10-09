@@ -26,3 +26,5 @@ pdata = pdata.dropna(axis=1)
 print(pdata['Item1'])
 print(pdata['Item2'])
 print(pdata.major_axis)
+
+print('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^')
