@@ -44,6 +44,7 @@ if __name__ == '__main__':
     #querydict = {'region':ad[u'浙江',u'f'],'variable':[u'人均地区生产总值'],'scale':'全市','year':[2012]}
     #querydict = {'region':ad[u'浙江',u'f'],'variable':[u'财政支出'],'year':[2012]}
     result = dinterface.query(querydict)
+    print(result)
     mdata = result['data']
     mdata2 = result['balanceddata']
     print(mdata)
