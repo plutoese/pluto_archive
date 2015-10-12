@@ -32,7 +32,7 @@ if __name__ == '__main__':
     doc.append(r'\maketitle')
 
     fill_document(doc)
-    doc.generate_pdf('c:\\down\\basic_maketitle')
+    doc.generate_pdf('d:\\down\\basic_maketitle')
 
 
 
