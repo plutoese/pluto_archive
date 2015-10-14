@@ -18,7 +18,9 @@ from pylatex import Document, Section, Subsection, Subsubsection, Package
 from pylatex.graphics import Figure
 from pylatex.lists import Itemize, Enumerate, Description
 from pylatex.table import Tabular, MultiColumn
+from pylatex.utils import escape_latex
 from datetime import datetime
+from collections import deque
 import matplotlib.pyplot as plt
 
 # 类Report是用来生成报告
@@ -42,27 +44,54 @@ class Report:
         self.doc.append(r'\maketitle')
 
         # 设置现在的章节
-        self.presentSection = {}
+        self.presentSection = deque()
 
         # 初始化章节内容
         self.content = []
 
+    def flush(self,level=0):
+        if len(self.content) < 1:
+            return
+        if len(self.presentSection) < 1:
+            if len(self.content) > 0:
+                for item in self.content:
+                    self.doc.append(item)
+        else:
+            last = self.presentSection.pop()
+            if len(self.content) > 0:
+                for item in self.content:
+                    last.append(item)
+                self.content = []
+
+            if len(self.presentSection) > level:
+                for item in range(level,len(self.presentSection)):
+                    current = self.presentSection.pop()
+                    current.append(last)
+                    last = current
+
+            if level == 0:
+                self.doc.append(last)
+            else:
+                self.presentSection[level-1].append(last)
+
+
     # 设置章节
     def createSection(self,title):
+        self.flush(0)
         self.section = Section(title)
-        self.presentSection = {'section':self.section}
+        self.presentSection.append(self.section)
 
     # 设置分支章节
     def createSubSection(self,title):
+        self.flush(1)
         self.subsection = Subsection(title)
-        if len(self.presentSection) > 2:
-            del self.presentSection['subsubsection']
-        self.presentSection['subsection'] = self.subsection
+        self.presentSection.append(self.subsection)
 
     # 设置分支分支章节
     def createSubSubSection(self,title):
+        self.flush(2)
         self.subsubsection = Subsubsection(title)
-        self.presentSection['subsubsection'] = self.subsubsection
+        self.presentSection.append(self.subsubsection)
 
     # 添加文本内容
     def addText(self,text):
@@ -82,16 +111,16 @@ class Report:
         self.content.append(items)
 
     # 添加表格
-    def addTable(self, nrow=0,ncol=0,data=None):
+    def addTable(self, data=None,nrow=None,ncol=None):
         # 初始化参数
         tabsize = '|' + '|'.join(['c']*ncol) + '|'
         mtable = Tabular(tabsize)
         for i in range(nrow):
             mtable.add_hline()
-            mtable.add_row(tuple(data[i]))
+            mtable.add_row(tuple([escape_latex(str(item)) for item in data[i]]))
         mtable.add_hline()
         self.content.append(Command('begin',arguments='center'))
-        self.content.append('这是我们写的歌\par')
+        #self.content.append('这是我们写的歌\par')
         self.content.append(mtable)
         self.content.append(Command('end',arguments='center'))
 
@@ -111,7 +140,7 @@ class Report:
         self.addFigure(filename,caption)
 
     # 添加内容到报告
-    def flush(self):
+    def _flush(self):
         if len(self.presentSection) > 2:
             for item in self.content:
                 self.presentSection['subsubsection'].append(item)
@@ -147,13 +176,16 @@ if __name__ == '__main__':
     report.createSection('地球和月球')
     report.createSubSection('地球往事')
     report.addText('这是为你写的歌。')
-    report.addMatplot(plt,caption='有趣的图形')
-    report.flush()
+    report.createSubSection('地球往事2')
+    report.addMatplot(plt,caption='有趣的图形2')
     report.createSection('冥王星')
     report.addText('欢迎来到地球。')
     report.addFigure('D:/Temp/glen.jpg')
     report.addList(['你们','我们'])
-    report.addTable(2,4,[[1,2,3,4],[5,6,7,8]])
+    tdata = [[1,2,3,4],[5,6,7,8]]
+    report.addTable([['变量', '第一产业占GDP的比重\_全市', '第一产业占GDP的比重\_市辖区','我错了'],[1,2,3,4],[5,6,7,8]],3,4)
+    tdata = {'data': [['变量', '第二产业占GDP的比重全市', '第二产业占GDP的比重市辖区'], ['count', '284.00', '284.00'], ['mean', '50.94', '51.15'], ['std', '9.90', '11.69'], ['min', '17.48', '15.72'], ['25%', '45.27', '44.12'], ['50\%', '51.44', '51.05'], ['75\%', '56.61', '58.94'], ['max', '79.36', '82.23']], 'nrow': 9, 'ncol': 3}
+    report.addTable(tdata['data'],tdata['nrow'],tdata['ncol'])
     report.flush()
     report.generate_pdf('e:/Report/first_report.pdf')
 

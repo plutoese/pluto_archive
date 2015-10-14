@@ -35,9 +35,11 @@ class RegionData:
 
 if __name__ == '__main__':
     rdata = RegionData()
-    mdata = rdata.query(region=[[u'上海'],[u'浙江',u'杭州市']],year=[2009,2010],variable=[u'人均地区生产总值',u'职工平均工资'],scale=u'全市')
+    mdata = rdata.query(region=['t'],year=[2010])
     print(mdata.keys())
     print(mdata['data'])
+    file = 'd:/down/citydata.xls'
+    mdata['data'].to_excel(file)
 
 
 
