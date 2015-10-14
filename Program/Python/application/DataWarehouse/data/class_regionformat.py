@@ -38,6 +38,7 @@ class RegionFormat(Format):
             # 构建横截面数据(地区|变量)
             if self.ndim['year'] == 1:
                 g1 = [group for name,group in self._data.groupby(['year'], sort=True)][0]
+                regionpair = dict(zip(g1['acode'],g1['region']))
                 g2 = g1.groupby(['variable','scale'], sort=True)
                 i = 0
                 mdata = []
@@ -49,7 +50,7 @@ class RegionFormat(Format):
                         mdata = pd.merge(mdata,rdata,left_index=True,right_index=True,how=connect)
                     i = i + 1
                 tags = {'year',self.year[0]}
-                mdata.insert(0, 'region', [self.ad.getByAcode(acode=item,year=self.year[0])[0]['region'] for item in mdata.index])
+                mdata.insert(0, 'region', [regionpair[i] for i in mdata.index])
                 return {'tags':tags,'data':mdata}
 
             # panel data
@@ -57,6 +58,7 @@ class RegionFormat(Format):
             year = []
             pdata =[]
             for y,g1 in g:
+                regionpair = dict(zip(g1['acode'],g1['region']))
                 g2 = g1.groupby(['variable','scale'], sort=True)
                 i = 0
                 mdata = []
@@ -67,7 +69,7 @@ class RegionFormat(Format):
                     else:
                         mdata = pd.merge(mdata,rdata,left_index=True,right_index=True,how='outer')
                     i = i + 1
-                mdata.insert(0, 'region', [self.ad.getByAcode(acode=item,year=self.year[0])[0]['region'] for item in mdata.index])
+                mdata.insert(0, 'region', [regionpair[i] for i in mdata.index])
                 year.append(str(y))
                 pdata.append(mdata)
             result = pd.Panel(dict(zip(year,pdata)))
@@ -92,6 +94,7 @@ class RegionFormat(Format):
             # 构建横截面数据(地区|变量)
             if self.ndim['year'] == 1:
                 g1 = [group for name,group in self._data.groupby(['year'], sort=True)][0]
+                regionpair = dict(zip(g1['acode'],g1['region']))
                 g2 = g1.groupby(['variable'], sort=True)
                 i = 0
                 mdata = []
@@ -102,7 +105,7 @@ class RegionFormat(Format):
                     else:
                         mdata = pd.merge(mdata,rdata,left_index=True,right_index=True,how='outer')
                     i = i + 1
-                mdata.insert(0, 'region', [self.ad.getByAcode(acode=item,year=self.year[0])[0]['region'] for item in mdata.index])
+                mdata.insert(0, 'region', [regionpair[i] for i in mdata.index])
                 tags = {'year':self.year[0]}
                 if scale is not None:
                     tags['scale'] = self.scale[0]
@@ -113,6 +116,7 @@ class RegionFormat(Format):
             year = []
             pdata =[]
             for y,g1 in g:
+                regionpair = dict(zip(g1['acode'],g1['region']))
                 g2 = g1.groupby(['variable'], sort=True)
                 i = 0
                 mdata = []
@@ -123,7 +127,7 @@ class RegionFormat(Format):
                     else:
                         mdata = pd.merge(mdata,rdata,left_index=True,right_index=True,how='outer')
                     i = i + 1
-                mdata.insert(0, 'region', [self.ad.getByAcode(acode=item,year=self.year[0])[0]['region'] for item in mdata.index])
+                mdata.insert(0, 'region', [regionpair[i] for i in mdata.index])
                 year.append(str(y))
                 pdata.append(mdata)
             result = pd.Panel(dict(zip(year,pdata)))

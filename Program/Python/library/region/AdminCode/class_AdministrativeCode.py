@@ -262,3 +262,4 @@ if __name__ == '__main__':
     ad.setYear(2010)
     print(ad[tuple([u'浙江',u'f'])])
     print(ad[tuple([u'北京'])])
+    print(ad.getByAcode('2342'))

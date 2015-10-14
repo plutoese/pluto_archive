@@ -36,7 +36,8 @@ class RegionData:
 if __name__ == '__main__':
     rdata = RegionData()
     vars = ['年末总人口', '第一产业年末单位从业人员']
-    mdata = rdata.query(region=['t'],year=[2010])
+    #mdata = rdata.query(region=['t'],year=[2010])
+    mdata = rdata.query(region=['北京'],vars=vars[0])
     print(mdata.keys())
     print(mdata['data'])
     file = 'd:/down/citydata.xls'

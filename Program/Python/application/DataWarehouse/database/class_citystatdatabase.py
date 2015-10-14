@@ -84,7 +84,6 @@ class CityStatDatabase(Database):
             mresult = pd.DataFrame(list(self.collection.find(conditions,projection).sort(sorts)))
 
         mresult = mresult.drop_duplicates(take_last=True)
-        print(len(mresult))
 
         if toStandardForm:
             rformat = RegionFormat(mresult)
@@ -115,8 +114,10 @@ if __name__ == '__main__':
     print(db.collection)
     projection = {'region':1,'year':1,'value':1,'acode':1,'_id':0,'variable':1,'scale':1}
     conds = {'region':[[u'上海'],[u'浙江',u'杭州市']],'year':[2010],'variable':[u'人均地区生产总值',u'职工平均工资'],'scale':u'全市','projection':projection}
+    conds = {'region':[u't'],'year':[2012],'variable':[u'人均地区生产总值',u'职工平均工资'],'projection':projection}
     mdata = db.find(conds)
-    print(mdata['data'])
+    print('-----------------------------')
+    print(mdata)
 
 
 
