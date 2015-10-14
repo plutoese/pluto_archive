@@ -9,7 +9,7 @@
 # @method:
 # -----------------------------------------------------------------------------------------
 
-import re
+import pandas as pd
 from application.DataWarehouse.data.class_data import Data
 from application.DataWarehouse.database.class_citystatdatabase import CityStatDatabase
 
@@ -35,11 +35,13 @@ class RegionData:
 
 if __name__ == '__main__':
     rdata = RegionData()
+    vars = ['年末总人口', '第一产业年末单位从业人员']
     mdata = rdata.query(region=['t'],year=[2010])
     print(mdata.keys())
     print(mdata['data'])
     file = 'd:/down/citydata.xls'
     mdata['data'].to_excel(file)
+
 
 
 
