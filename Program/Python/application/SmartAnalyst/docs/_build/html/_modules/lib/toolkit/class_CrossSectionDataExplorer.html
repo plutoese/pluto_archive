@@ -1,0 +1,334 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>lib.toolkit.class_CrossSectionDataExplorer &mdash; lib  documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="lib  documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for lib.toolkit.class_CrossSectionDataExplorer</h1><div class="highlight"><pre>
+<span class="c"># coding=UTF-8</span>
+
+<span class="c">#-----------------------------------------------------------------------------------------------------</span>
+<span class="c"># class_CrossSectionDataExplorer文件</span>
+<span class="c"># @class: CrossSectionDataExplorer类</span>
+<span class="c"># @introduction: CrossSectionDataExplorer类用来进行横截面数据分析</span>
+<span class="c"># @dependency: seaborn包，pandas包，numpy包，statsmodels包，matplotlib包，datetime包，RegionData类</span>
+<span class="c"># @author: plutoese</span>
+<span class="c"># @date: 2015.10.18</span>
+<span class="c">#-----------------------------------------------------------------------------------------------------</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">.. code-block:: python</span>
+
+<span class="sd">    rdata = RegionData()</span>
+<span class="sd">    mdata = rdata.find(region=[&#39;t&#39;],year=[2010],variable=[u&#39;地区生产总值&#39;,u&#39;年末总人口&#39;],scale=u&#39;全市&#39;)</span>
+<span class="sd">    mdata = mdata[&#39;data&#39;]</span>
+<span class="sd">    csdexplorer = CrossSectionRegionDataExplorer(mdata)</span>
+<span class="sd">    dframe = csdexplorer.per_variable(pop=mdata[u&#39;年末总人口&#39;],var=[u&#39;地区生产总值&#39;,u&#39;年末总人口&#39;])</span>
+<span class="sd">    print(dframe)</span>
+<span class="sd">    dframe = csdexplorer.log_variable(u&#39;地区生产总值&#39;)</span>
+<span class="sd">    dframe2 = csdexplorer.describe().applymap(lambda x:&#39;{0:.2f}&#39;.format(x))</span>
+<span class="sd">    print(dframe2)</span>
+<span class="sd">    csdexplorer.hist(var=u&#39;地区生产总值&#39;,save=True)</span>
+<span class="sd">    csdexplorer.scatter(y=u&#39;地区生产总值&#39;,x=u&#39;年末总人口&#39;,kind=&#39;kde&#39;)</span>
+<span class="sd">    csdexplorer.pair(vars=[u&#39;地区生产总值&#39;,u&#39;年末总人口&#39;])</span>
+
+<span class="sd">    csdexplorer.ols(y=u&#39;地区生产总值&#39;,x=u&#39;年末总人口&#39;)</span>
+<span class="sd">    print(csdexplorer.corr())</span>
+
+<span class="sd">    pdata = {&#39;region&#39;:[&#39;1&#39;,&#39;2&#39;,&#39;3&#39;],&#39;x&#39;:[1,2,-3],&#39;y&#39;:[4,5,6]}</span>
+<span class="sd">    pdata = pd.DataFrame(pdata)</span>
+<span class="sd">    cs2 = CrossSectionRegionDataExplorer(pdata)</span>
+<span class="sd">    print(cs2.is_positive(var=[&#39;y&#39;]))</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="kn">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">lib.data.class_RegionData</span> <span class="kn">import</span> <span class="n">RegionData</span>
+
+<div class="viewcode-block" id="CrossSectionDataExplorer"><a class="viewcode-back" href="../../../lib.toolkit.html#lib.toolkit.class_CrossSectionDataExplorer.CrossSectionDataExplorer">[docs]</a><span class="k">class</span> <span class="nc">CrossSectionDataExplorer</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39;类CrossSectionDataExplorer用来进行横截面数据分析</span>
+
+<span class="sd">    :param pandas.DataFrame data: 数据</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">index</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">columns</span>
+
+</div>
+<div class="viewcode-block" id="CrossSectionRegionDataExplorer"><a class="viewcode-back" href="../../../lib.toolkit.html#lib.toolkit.class_CrossSectionDataExplorer.CrossSectionRegionDataExplorer">[docs]</a><span class="k">class</span> <span class="nc">CrossSectionRegionDataExplorer</span><span class="p">(</span><span class="n">CrossSectionDataExplorer</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;类CrossSectionRegionDataExplorer用来对横截面区域数据进行分析处理</span>
+
+<span class="sd">    :param pandas.DataFrame data: 区域数据</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">CrossSectionDataExplorer</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">region</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s">&#39;region&#39;</span><span class="p">]</span>
+
+        <span class="c"># 初始化图形接口</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s">&quot;muted&quot;</span><span class="p">,</span> <span class="n">color_codes</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="c"># 设置中文字体</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s">&#39;white&#39;</span><span class="p">,{</span><span class="s">&quot;font.sans-serif&quot;</span><span class="p">:</span>  <span class="p">[</span><span class="s">&#39;Microsoft YaHei&#39;</span><span class="p">,</span><span class="s">&#39;Arial&#39;</span><span class="p">,</span> <span class="s">&#39;Liberation Sans&#39;</span><span class="p">,</span> <span class="s">&#39;Bitstream Vera Sans&#39;</span><span class="p">,</span> <span class="s">&#39;sans-serif&#39;</span><span class="p">]})</span>
+
+<div class="viewcode-block" id="CrossSectionRegionDataExplorer.describe"><a class="viewcode-back" href="../../../lib.toolkit.html#lib.toolkit.class_CrossSectionDataExplorer.CrossSectionRegionDataExplorer.describe">[docs]</a>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;数据的概要统计分析</span>
+
+<span class="sd">        :return: 概要统计分析</span>
+<span class="sd">        :rtype: pandas.DataFrame</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="CrossSectionRegionDataExplorer.ols"><a class="viewcode-back" href="../../../lib.toolkit.html#lib.toolkit.class_CrossSectionDataExplorer.CrossSectionRegionDataExplorer.ols">[docs]</a>    <span class="k">def</span> <span class="nf">ols</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;最小二乘法</span>
+
+<span class="sd">        :param str y: 被解释变量</span>
+<span class="sd">        :param str,list x: 解释变量</span>
+<span class="sd">        :return: 回归结果</span>
+<span class="sd">        :rtype: statsmodels.RegressionResults对象</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">y</span><span class="p">]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="s">&#39;constant&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">mod</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">res</span>
+</div>
+<div class="viewcode-block" id="CrossSectionRegionDataExplorer.corr"><a class="viewcode-back" href="../../../lib.toolkit.html#lib.toolkit.class_CrossSectionDataExplorer.CrossSectionRegionDataExplorer.corr">[docs]</a>    <span class="k">def</span> <span class="nf">corr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="nb">vars</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;相关系数</span>
+
+<span class="sd">        :param list vars: 变量</span>
+<span class="sd">        :return: 相关系数</span>
+<span class="sd">        :rtype: pandas.DataFrame</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">vars</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="nb">vars</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="CrossSectionRegionDataExplorer.ratio_variable"><a class="viewcode-back" href="../../../lib.toolkit.html#lib.toolkit.class_CrossSectionDataExplorer.CrossSectionRegionDataExplorer.ratio_variable">[docs]</a>    <span class="k">def</span> <span class="nf">ratio_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">total</span><span class="p">,</span><span class="n">var</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;计算占比变量</span>
+
+<span class="sd">        :param str total: 总体变量</span>
+<span class="sd">        :param str,list var: 局部变量</span>
+<span class="sd">        :return: 占比变量</span>
+<span class="sd">        :rtype: pandas.DataFrame</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">per_variable</span><span class="p">(</span><span class="n">pop</span><span class="o">=</span><span class="n">total</span><span class="p">,</span><span class="n">var</span><span class="o">=</span><span class="n">var</span><span class="p">,</span><span class="n">weight</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">prefix</span><span class="o">=</span><span class="s">u&#39;占比&#39;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="CrossSectionRegionDataExplorer.per_variable"><a class="viewcode-back" href="../../../lib.toolkit.html#lib.toolkit.class_CrossSectionDataExplorer.CrossSectionRegionDataExplorer.per_variable">[docs]</a>    <span class="k">def</span> <span class="nf">per_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">pop</span><span class="p">,</span><span class="n">var</span><span class="p">,</span><span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">prefix</span><span class="o">=</span><span class="s">u&#39;人均&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;计算人均变量</span>
+
+<span class="sd">        :param str,list pop: 总体变量</span>
+<span class="sd">        :param str,list var: 局部变量</span>
+<span class="sd">        :param int weight: 权重</span>
+<span class="sd">        :param str prefix: 变量前缀</span>
+<span class="sd">        :return: 人均变量</span>
+<span class="sd">        :rtype: pandas.DataFrame</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pop</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span>
+            <span class="n">pop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">pop</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span>
+            <span class="n">var</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span><span class="p">]</span>
+        <span class="n">ndata</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">var</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">weight</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">ndata</span><span class="p">[</span><span class="s">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">prefix</span><span class="p">,</span><span class="n">v</span><span class="p">])]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">/</span><span class="n">pop</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ndata</span><span class="p">[</span><span class="s">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">prefix</span><span class="p">,</span><span class="n">v</span><span class="p">])]</span> <span class="o">=</span> <span class="n">weight</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">/</span><span class="n">pop</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ndata</span><span class="p">)</span>
+        <span class="n">frame</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span>
+        <span class="n">frame</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">&#39;region&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s">&#39;region&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">frame</span>
+</div>
+<div class="viewcode-block" id="CrossSectionRegionDataExplorer.log_variable"><a class="viewcode-back" href="../../../lib.toolkit.html#lib.toolkit.class_CrossSectionDataExplorer.CrossSectionRegionDataExplorer.log_variable">[docs]</a>    <span class="k">def</span> <span class="nf">log_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">var</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;计算对数变量</span>
+
+<span class="sd">        :param str,list var: 变量</span>
+<span class="sd">        :return: 对数变量</span>
+<span class="sd">        :rtype: pandas.DataFrame</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span>
+            <span class="n">var</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span><span class="p">]</span>
+        <span class="n">ndata</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">var</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_positive</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+                <span class="n">ndata</span><span class="p">[</span><span class="s">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">v</span><span class="p">,</span><span class="s">u&#39;对数&#39;</span><span class="p">])]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="s">&#39; is not all positive.&#39;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ndata</span><span class="p">)</span>
+        <span class="n">frame</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span>
+        <span class="n">frame</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">&#39;region&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s">&#39;region&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">frame</span>
+</div>
+<div class="viewcode-block" id="CrossSectionRegionDataExplorer.hist"><a class="viewcode-back" href="../../../lib.toolkit.html#lib.toolkit.class_CrossSectionDataExplorer.CrossSectionRegionDataExplorer.hist">[docs]</a>    <span class="k">def</span> <span class="nf">hist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">var</span><span class="p">,</span><span class="n">save</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;直方图</span>
+
+<span class="sd">        :param str,list var: 变量</span>
+<span class="sd">        :param bool save: 指示变量，表示是否存储图片</span>
+<span class="sd">        :return: 对数变量</span>
+<span class="sd">        :rtype: pandas.DataFrame</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">var</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">save</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_save</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="CrossSectionRegionDataExplorer.scatter"><a class="viewcode-back" href="../../../lib.toolkit.html#lib.toolkit.class_CrossSectionDataExplorer.CrossSectionRegionDataExplorer.scatter">[docs]</a>    <span class="k">def</span> <span class="nf">scatter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">kind</span><span class="o">=</span><span class="s">&#39;reg&#39;</span><span class="p">,</span><span class="n">save</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;散点图</span>
+
+<span class="sd">        :param str y: 被解释变量</span>
+<span class="sd">        :param str x: 解释变量</span>
+<span class="sd">        :param str kind: 添加的拟合线，可以使&#39;reg&#39;或&#39;kde&#39;</span>
+<span class="sd">        :param bool save: 指示变量，表示是否存储图片</span>
+<span class="sd">        :return: 无返回值</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="n">kind</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">save</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_save</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="CrossSectionRegionDataExplorer.pair"><a class="viewcode-back" href="../../../lib.toolkit.html#lib.toolkit.class_CrossSectionDataExplorer.CrossSectionRegionDataExplorer.pair">[docs]</a>    <span class="k">def</span> <span class="nf">pair</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="nb">vars</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">save</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;散点图矩阵</span>
+
+<span class="sd">        :param str vars: 变量</span>
+<span class="sd">        :param bool save: 指示变量，表示是否存储图片</span>
+<span class="sd">        :return: 无返回值</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="nb">vars</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">save</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_save</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="CrossSectionRegionDataExplorer.is_positive"><a class="viewcode-back" href="../../../lib.toolkit.html#lib.toolkit.class_CrossSectionDataExplorer.CrossSectionRegionDataExplorer.is_positive">[docs]</a>    <span class="k">def</span> <span class="nf">is_positive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">var</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;检验变量是否为正</span>
+
+<span class="sd">        :param str,list vars: 变量</span>
+<span class="sd">        :return: 某个变量是否为正</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span>
+            <span class="n">var</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">var</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+                <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span>
+
+    <span class="c"># 储存图像</span></div>
+    <span class="k">def</span> <span class="nf">_save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">savepath</span><span class="o">=</span><span class="s">&#39;E:/Report/&#39;</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">))</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">savepath</span> <span class="o">+</span> <span class="s">&#39;graph/&#39;</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="s">&#39;.pdf&#39;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+</div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">rdata</span> <span class="o">=</span> <span class="n">RegionData</span><span class="p">()</span>
+    <span class="n">mdata</span> <span class="o">=</span> <span class="n">rdata</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">region</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;t&#39;</span><span class="p">],</span><span class="n">year</span><span class="o">=</span><span class="p">[</span><span class="mi">2010</span><span class="p">],</span><span class="n">variable</span><span class="o">=</span><span class="p">[</span><span class="s">u&#39;地区生产总值&#39;</span><span class="p">,</span><span class="s">u&#39;年末总人口&#39;</span><span class="p">],</span><span class="n">scale</span><span class="o">=</span><span class="s">u&#39;全市&#39;</span><span class="p">)</span>
+    <span class="n">mdata</span> <span class="o">=</span> <span class="n">mdata</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]</span>
+    <span class="n">csdexplorer</span> <span class="o">=</span> <span class="n">CrossSectionRegionDataExplorer</span><span class="p">(</span><span class="n">mdata</span><span class="p">)</span>
+    <span class="n">dframe</span> <span class="o">=</span> <span class="n">csdexplorer</span><span class="o">.</span><span class="n">per_variable</span><span class="p">(</span><span class="n">pop</span><span class="o">=</span><span class="n">mdata</span><span class="p">[</span><span class="s">u&#39;年末总人口&#39;</span><span class="p">],</span><span class="n">var</span><span class="o">=</span><span class="p">[</span><span class="s">u&#39;地区生产总值&#39;</span><span class="p">,</span><span class="s">u&#39;年末总人口&#39;</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">dframe</span><span class="p">)</span>
+    <span class="n">dframe</span> <span class="o">=</span> <span class="n">csdexplorer</span><span class="o">.</span><span class="n">log_variable</span><span class="p">(</span><span class="s">u&#39;地区生产总值&#39;</span><span class="p">)</span>
+    <span class="n">dframe2</span> <span class="o">=</span> <span class="n">csdexplorer</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="s">&#39;{0:.2f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">dframe2</span><span class="p">)</span>
+    <span class="n">csdexplorer</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">var</span><span class="o">=</span><span class="s">u&#39;地区生产总值&#39;</span><span class="p">,</span><span class="n">save</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">csdexplorer</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s">u&#39;地区生产总值&#39;</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="s">u&#39;年末总人口&#39;</span><span class="p">,</span><span class="n">kind</span><span class="o">=</span><span class="s">&#39;kde&#39;</span><span class="p">)</span>
+    <span class="n">csdexplorer</span><span class="o">.</span><span class="n">pair</span><span class="p">(</span><span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="s">u&#39;地区生产总值&#39;</span><span class="p">,</span><span class="s">u&#39;年末总人口&#39;</span><span class="p">])</span>
+
+    <span class="n">csdexplorer</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s">u&#39;地区生产总值&#39;</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="s">u&#39;年末总人口&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">csdexplorer</span><span class="o">.</span><span class="n">corr</span><span class="p">())</span>
+
+    <span class="n">pdata</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;region&#39;</span><span class="p">:[</span><span class="s">&#39;1&#39;</span><span class="p">,</span><span class="s">&#39;2&#39;</span><span class="p">,</span><span class="s">&#39;3&#39;</span><span class="p">],</span><span class="s">&#39;x&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">],</span><span class="s">&#39;y&#39;</span><span class="p">:[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]}</span>
+    <span class="n">pdata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pdata</span><span class="p">)</span>
+    <span class="n">cs2</span> <span class="o">=</span> <span class="n">CrossSectionRegionDataExplorer</span><span class="p">(</span><span class="n">pdata</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">cs2</span><span class="o">.</span><span class="n">is_positive</span><span class="p">(</span><span class="n">var</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;y&#39;</span><span class="p">]))</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

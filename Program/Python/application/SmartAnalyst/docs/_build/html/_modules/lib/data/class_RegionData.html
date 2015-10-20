@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>lib.data.class_RegionData &mdash; lib  documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="lib  documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for lib.data.class_RegionData</h1><div class="highlight"><pre>
+<span class="c"># coding=UTF-8</span>
+
+<span class="c">#--------------------------------------------------------------</span>
+<span class="c"># class_RegionData文件</span>
+<span class="c"># @class: RegionData类</span>
+<span class="c"># @introduction: RegionData类表示区域数据</span>
+<span class="c"># @dependency: pandas包，Data类，CityStatDatabase类</span>
+<span class="c"># @author: plutoese</span>
+<span class="c"># @date: 2015.10.18</span>
+<span class="c">#--------------------------------------------------------------</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">.. code-block:: python</span>
+
+<span class="sd">    rdata = RegionData()</span>
+<span class="sd">    vars = [&#39;年末总人口&#39;, &#39;第一产业年末单位从业人员&#39;]</span>
+<span class="sd">    mdata = rdata.find(region=[&#39;t&#39;],year=[2010])</span>
+<span class="sd">    mdata = rdata.find(region=[[u&#39;北京&#39;],[u&#39;上海&#39;]],variable=vars)</span>
+<span class="sd">    print(mdata.keys())</span>
+<span class="sd">    print(mdata[&#39;data&#39;])</span>
+<span class="sd">    file = &#39;d:/down/citydata.xls&#39;</span>
+<span class="sd">    mdata[&#39;data&#39;].to_excel(file)</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">lib.data.class_Data</span> <span class="kn">import</span> <span class="n">Data</span>
+<span class="kn">from</span> <span class="nn">lib.database.class_CityStatDatabase</span> <span class="kn">import</span> <span class="n">CityStatDatabase</span>
+
+<div class="viewcode-block" id="RegionData"><a class="viewcode-back" href="../../../lib.data.html#lib.data.class_RegionData.RegionData">[docs]</a><span class="k">class</span> <span class="nc">RegionData</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39;RegionData类表示区域数据</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c"># 设置数据库集合</span>
+    <span class="n">databases</span> <span class="o">=</span> <span class="p">[</span><span class="n">CityStatDatabase</span><span class="p">()]</span>
+
+    <span class="c"># 构造函数</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">Data</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<div class="viewcode-block" id="RegionData.find"><a class="viewcode-back" href="../../../lib.data.html#lib.data.class_RegionData.RegionData.find">[docs]</a>    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">conds</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;查询多个数据库得到结果</span>
+
+<span class="sd">        :param dict conds: 查询条件</span>
+<span class="sd">        :return: 查询得到的区域数据</span>
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">merge_type</span> <span class="o">=</span> <span class="n">conds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;merge_type&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">merge_type</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">merge_type</span> <span class="o">=</span> <span class="s">&#39;outer&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">conds</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;merge_type&#39;</span><span class="p">)</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">databases</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">conds</span><span class="p">)</span>
+
+        <span class="c"># 连接多个数据库查询的结果</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">databases</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+            <span class="n">result_found</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">databases</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">conds</span><span class="p">)</span>
+            <span class="n">result</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">],</span> <span class="n">result_found</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">],</span> <span class="n">left_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="n">merge_type</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+</div></div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">rdata</span> <span class="o">=</span> <span class="n">RegionData</span><span class="p">()</span>
+    <span class="nb">vars</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;年末总人口&#39;</span><span class="p">,</span> <span class="s">&#39;第一产业年末单位从业人员&#39;</span><span class="p">]</span>
+    <span class="n">mdata</span> <span class="o">=</span> <span class="n">rdata</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">region</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;t&#39;</span><span class="p">],</span><span class="n">year</span><span class="o">=</span><span class="p">[</span><span class="mi">2010</span><span class="p">])</span>
+    <span class="c">#mdata = rdata.find(region=[[u&#39;北京&#39;],[u&#39;上海&#39;]],variable=vars)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">mdata</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">mdata</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">])</span>
+    <span class="nb">file</span> <span class="o">=</span> <span class="s">&#39;d:/down/citydata.xls&#39;</span>
+    <span class="n">mdata</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>lib.data.class_AdminData &mdash; lib  documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="lib  documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for lib.data.class_AdminData</h1><div class="highlight"><pre>
+<span class="c"># coding=UTF-8</span>
+
+<span class="c">#--------------------------------------------------------------</span>
+<span class="c"># class_AdminData文件</span>
+<span class="c"># @class: AdminData类</span>
+<span class="c"># @introduction: AdminData类表示行政区划数据</span>
+<span class="c"># @dependency: re包，pymongo包，Data类，AdminDatabase类</span>
+<span class="c"># @author: plutoese</span>
+<span class="c"># @date: 2015.10.18</span>
+<span class="c">#--------------------------------------------------------------</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">.. code-block:: python</span>
+
+<span class="sd">    adata = AdminData(year=2004)</span>
+<span class="sd">    print(adata.version)</span>
+<span class="sd">    print(adata.Province)</span>
+<span class="sd">    print(adata.get_province_by_name(u&#39;浙江&#39;))</span>
+<span class="sd">    print(adata.get_prefecture_children(u&#39;浙江&#39;))</span>
+<span class="sd">    print(adata.get_prefecture_by_name(province=u&#39;浙江&#39;,prefecture=u&#39;嘉兴市&#39;))</span>
+<span class="sd">    print(adata.get_county_children(province=u&#39;浙江&#39;,prefecture=u&#39;嘉兴市&#39;))</span>
+<span class="sd">    print(adata.get_county_by_name(province=u&#39;浙江&#39;,prefecture=u&#39;嘉兴市&#39;,county=u&#39;平湖市&#39;))</span>
+
+<span class="sd">    print(adata.get_by_acode(&#39;220000&#39;))</span>
+<span class="sd">    print(adata.ProvincePrefecture)</span>
+
+<span class="sd">    print(adata[u&#39;浙江&#39;,&#39;b&#39;])</span>
+<span class="sd">    print(adata[u&#39;浙江&#39;,u&#39;嘉兴&#39;,u&#39;孩孩&#39;])</span>
+
+<span class="sd">    adata.set_year(2010)</span>
+<span class="sd">    print(adata[tuple([u&#39;浙江&#39;,u&#39;f&#39;])])</span>
+<span class="sd">    print(adata[tuple([u&#39;北京&#39;])])</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">lib.data.class_Data</span> <span class="kn">import</span> <span class="n">Data</span>
+<span class="kn">from</span> <span class="nn">lib.database.class_AdminDatabase</span> <span class="kn">import</span> <span class="n">AdminDatabase</span>
+<span class="kn">from</span> <span class="nn">pymongo</span> <span class="kn">import</span> <span class="n">ASCENDING</span>
+
+<div class="viewcode-block" id="AdminData"><a class="viewcode-back" href="../../../lib.data.html#lib.data.class_AdminData.AdminData">[docs]</a><span class="k">class</span> <span class="nc">AdminData</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39;AdminData类表示行政区域数据</span>
+
+<span class="sd">    :param str version: 颁布的行政区划的版本号</span>
+<span class="sd">    :param int,str year: 颁布的行政区划的年份</span>
+<span class="sd">    :var AdminDatabase database: 行政区划数据库</span>
+<span class="sd">    :var str latestversion: 最新颁布的行政区划版本号</span>
+<span class="sd">    :var str year: 年份</span>
+<span class="sd">    :var str version: 版本号</span>
+<span class="sd">    :var list Province: 某个版本的所有省级行政区划</span>
+<span class="sd">    :var list Prefecture: 某个版本的所有地级行政区划</span>
+<span class="sd">    :var list County: 某个版本的所有县级行政区划</span>
+<span class="sd">    :var list ProvincePrefecture: 某个版本的所有省级和地级行政区划</span>
+<span class="sd">    :var list ProvincePrefectureCounty: 某个版本的所有省级地级县级区划</span>
+
+<span class="sd">    通用接口__getitem__</span>
+
+<span class="sd">    :param str,list key: 查询条件。其中的key表示表示区域名称，方法如下：</span>
+<span class="sd">    （1）省级区域，用名字直接表示，例如ad[u&#39;北京&#39;]；</span>
+<span class="sd">    （2）地级区域，用省级、地级名称表示，例如ad[u&#39;浙江&#39;,u&#39;嘉兴&#39;]；（3）县级区域，用省级、地级、县级名称表示，例如ad[u&#39;湖北&#39;, u&#39;恩施&#39;,u&#39;来凤&#39;]；</span>
+<span class="sd">    （4）如果是本级行政区域加上下级行政区域，下级行政区域用f（first）表示，例如表示浙江省及其所有地级行政区域，用ad[u&#39;浙江&#39;,u&#39;f&#39;]；</span>
+<span class="sd">    （5）如果是本级行政区域加上下下级行政区域，下下级行政区域用s（second）表示，例如表示浙江省及其所有县级行政区域，用ad[u&#39;浙江&#39;,u&#39;s&#39;]；</span>
+<span class="sd">    （6）如果是本级行政区域加上下级及下下级行政区域，下级及下下级行政区域用b（both）表示，例如表示浙江省及其所有地县级行政区域，用ad[u&#39;浙江&#39;,u&#39;b&#39;]。返回值是数据库中查询得到的行政区划的列表。</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">version</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">year</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">Data</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="c"># 设置数据库</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">database</span> <span class="o">=</span> <span class="n">AdminDatabase</span><span class="p">()</span>
+
+        <span class="c"># 设置最新版本</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">latestversion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">version</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c"># 设置版本和年份</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">version</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">year</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">latestversion</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;_&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">version</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">version</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;_&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">version</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c"># 通用行政区划查询接口</span>
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;通用行政区划查询接口</span>
+
+<span class="sd">        :param key:</span>
+<span class="sd">        :return: 查询结果</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c"># f to get all first level</span>
+        <span class="c"># s to get all second level</span>
+        <span class="c"># b to get all first and second level</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&#39;^s$&#39;</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Province</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&#39;^t$&#39;</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Prefecture</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&#39;^f$&#39;</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">County</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_province_by_name</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&#39;^s$&#39;</span><span class="p">,</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Province</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&#39;^t$&#39;</span><span class="p">,</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Prefecture</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&#39;^f$&#39;</span><span class="p">,</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">County</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_province_by_name</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="nb">tuple</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="s">u&#39;f&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_prefecture_children</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sorted</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="s">u&#39;s&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">prefectures</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_prefecture_children</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">prefectures</span><span class="p">:</span>
+                        <span class="n">result</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_county_children</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="s">&#39;region&#39;</span><span class="p">]))</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sorted</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="s">u&#39;b&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">prefectures</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_prefecture_children</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">prefectures</span><span class="p">:</span>
+                        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+                        <span class="n">result</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_county_children</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="s">&#39;region&#39;</span><span class="p">]))</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sorted</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_prefecture_by_name</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="s">u&#39;f&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_county_children</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sorted</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_county_by_name</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">key</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+<div class="viewcode-block" id="AdminData.get_by_acode"><a class="viewcode-back" href="../../../lib.data.html#lib.data.class_AdminData.AdminData.get_by_acode">[docs]</a>    <span class="k">def</span> <span class="nf">get_by_acode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">acode</span><span class="p">,</span><span class="n">year</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;通过行政区划代码（acode)查询行政区划</span>
+
+<span class="sd">        :param str acode: 行政区划代码</span>
+<span class="sd">        :param int,str year: 年份</span>
+<span class="sd">        :return: 查询结果</span>
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">year</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">acode</span><span class="o">=</span><span class="n">acode</span><span class="p">,</span><span class="n">version</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">version</span><span class="p">(</span><span class="n">year</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">acode</span><span class="o">=</span><span class="n">acode</span><span class="p">,</span><span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="AdminData.get_province_by_name"><a class="viewcode-back" href="../../../lib.data.html#lib.data.class_AdminData.AdminData.get_province_by_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_province_by_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">province</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;通过省级名称查询行政区划</span>
+
+<span class="sd">        :param str province: 省级行政区划名称</span>
+<span class="sd">        :return: 省级行政区划单位</span>
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">province_pattern</span> <span class="o">=</span> <span class="s">u&#39;省|市|自治区|维吾尔自治区|回族自治区|壮族自治区&#39;</span>
+        <span class="n">province</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">province_pattern</span><span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">&#39;\s+&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="n">province</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">mprovince</span> <span class="o">=</span> <span class="s">&#39;^&#39;</span> <span class="o">+</span> <span class="n">province</span> <span class="o">+</span><span class="s">&#39;$&#39;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">Province</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">mprovince</span><span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">province_pattern</span><span class="p">,</span><span class="n">item</span><span class="p">[</span><span class="s">&#39;region&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="k">return</span>  <span class="n">result</span>
+</div>
+<div class="viewcode-block" id="AdminData.get_prefecture_by_name"><a class="viewcode-back" href="../../../lib.data.html#lib.data.class_AdminData.AdminData.get_prefecture_by_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_prefecture_by_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">province</span><span class="p">,</span><span class="n">prefecture</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;通过省级地级名称查询行政区划</span>
+
+<span class="sd">        :param str province: 省级行政区划名称</span>
+<span class="sd">        :param str prefecture: 地级行政区划名称</span>
+<span class="sd">        :return: 地级行政区划单位</span>
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">prefectures</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">get_prefecture_children</span><span class="p">(</span><span class="n">province</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">prefectures</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">prefecture</span><span class="p">,</span><span class="n">item</span><span class="p">[</span><span class="s">&#39;region&#39;</span><span class="p">])</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="c"># 获得一个县级单位</span></div>
+<div class="viewcode-block" id="AdminData.get_county_by_name"><a class="viewcode-back" href="../../../lib.data.html#lib.data.class_AdminData.AdminData.get_county_by_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_county_by_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">province</span><span class="p">,</span><span class="n">prefecture</span><span class="p">,</span><span class="n">county</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;通过省级地级县级名称查询行政区划</span>
+
+<span class="sd">        :param str province: 省级行政区划名称</span>
+<span class="sd">        :param str prefecture: 地级行政区划名称</span>
+<span class="sd">        :param str county: 县级行政区划名称</span>
+<span class="sd">        :return: 县级行政区划单位</span>
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">counties</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">get_county_children</span><span class="p">(</span><span class="n">province</span><span class="p">,</span><span class="n">prefecture</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">counties</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">county</span><span class="p">,</span><span class="n">item</span><span class="p">[</span><span class="s">&#39;region&#39;</span><span class="p">])</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="n">result</span>
+</div>
+<div class="viewcode-block" id="AdminData.get_prefecture_children"><a class="viewcode-back" href="../../../lib.data.html#lib.data.class_AdminData.AdminData.get_prefecture_children">[docs]</a>    <span class="k">def</span> <span class="nf">get_prefecture_children</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">province</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;通过省级名称获得其辖区下的所有地级行政区划</span>
+
+<span class="sd">        :param str province: 省级行政区划的名称</span>
+<span class="sd">        :return: 某省级单位辖区下的所有地级区划单位</span>
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">province_found</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_province_by_name</span><span class="p">(</span><span class="n">province</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">province_found</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&#39;Can not find &#39;</span><span class="p">,</span><span class="n">province</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">NameError</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">province_found</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&#39;Tow much: &#39;</span><span class="p">,</span><span class="n">province</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">NameError</span>
+        <span class="n">prefecture</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">province_found</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">&#39;_id&#39;</span><span class="p">],</span><span class="n">version</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">,</span><span class="n">sorts</span><span class="o">=</span><span class="p">[(</span><span class="s">&#39;acode&#39;</span><span class="p">,</span><span class="n">ASCENDING</span><span class="p">)])</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">prefecture</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="AdminData.get_county_children"><a class="viewcode-back" href="../../../lib.data.html#lib.data.class_AdminData.AdminData.get_county_children">[docs]</a>    <span class="k">def</span> <span class="nf">get_county_children</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">province</span><span class="p">,</span><span class="n">prefecture</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;通过省级和地级区域名称获得其辖区下的所有县级行政区划</span>
+
+<span class="sd">        :param str province: 省级行政区划名称</span>
+<span class="sd">        :param str prefecture: 地级行政区划名称</span>
+<span class="sd">        :return: 某个地级行政单位辖区下的所有县级区划单位</span>
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c"># to find province item</span>
+        <span class="n">prefecture_found</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_prefecture_by_name</span><span class="p">(</span><span class="n">province</span><span class="p">,</span><span class="n">prefecture</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">prefecture_found</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&#39;Can not find &#39;</span><span class="p">,</span><span class="n">province</span><span class="p">,</span><span class="s">&#39;.&#39;</span><span class="p">,</span><span class="n">prefecture</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">NameError</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">prefecture_found</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&#39;Tow much: &#39;</span><span class="p">,</span><span class="n">province</span><span class="p">,</span><span class="s">&#39;.&#39;</span><span class="p">,</span><span class="n">prefecture</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">NameError</span>
+        <span class="n">county</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">prefecture_found</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">&#39;_id&#39;</span><span class="p">],</span><span class="n">version</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">,</span><span class="n">sorts</span><span class="o">=</span><span class="p">[(</span><span class="s">&#39;acode&#39;</span><span class="p">,</span><span class="n">ASCENDING</span><span class="p">)])</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">county</span><span class="p">)</span>
+
+    <span class="c"># 设置版本</span></div>
+<div class="viewcode-block" id="AdminData.set_version"><a class="viewcode-back" href="../../../lib.data.html#lib.data.class_AdminData.AdminData.set_version">[docs]</a>    <span class="k">def</span> <span class="nf">set_version</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">version</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;设置版本号</span>
+
+<span class="sd">        :param str version: 颁布的行政区划版本号</span>
+<span class="sd">        :return: 无返回值</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">version</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;_&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c"># 设置年份</span></div>
+<div class="viewcode-block" id="AdminData.set_year"><a class="viewcode-back" href="../../../lib.data.html#lib.data.class_AdminData.AdminData.set_year">[docs]</a>    <span class="k">def</span> <span class="nf">set_year</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">year</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;设置年份</span>
+
+<span class="sd">        :param str year: 年份</span>
+<span class="sd">        :return: 无返回值</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">version</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c"># 所有的省级单位</span></div>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Province</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">adminlevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">version</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">)))</span>
+
+    <span class="c"># 所有的省级单位</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Prefecture</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">adminlevel</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">version</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">)))</span>
+
+    <span class="c"># 所有的省级单位</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">County</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">adminlevel</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">version</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">)))</span>
+
+    <span class="c"># 获得省级和地级单位</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ProvincePrefecture</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">provinces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Province</span>
+        <span class="k">for</span> <span class="n">province</span> <span class="ow">in</span> <span class="n">provinces</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">province</span><span class="p">)</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_prefecture_children</span><span class="p">(</span><span class="n">province</span><span class="p">[</span><span class="s">&#39;region&#39;</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="c"># 获得省级、地级和县级单位</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ProvincePrefectureCounty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">provinces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Province</span>
+        <span class="k">for</span> <span class="n">province</span> <span class="ow">in</span> <span class="n">provinces</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">province</span><span class="p">)</span>
+            <span class="n">prefectures</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_prefecture_children</span><span class="p">(</span><span class="n">province</span><span class="p">[</span><span class="s">&#39;region&#39;</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">prefecture</span> <span class="ow">in</span> <span class="n">prefectures</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prefecture</span><span class="p">)</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_county_children</span><span class="p">(</span><span class="n">province</span><span class="p">[</span><span class="s">&#39;region&#39;</span><span class="p">],</span><span class="n">prefecture</span><span class="p">[</span><span class="s">&#39;region&#39;</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="c"># 辅助排序函数</span>
+    <span class="k">def</span> <span class="nf">_sorted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">regions</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">regions</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">regions</span><span class="p">,</span><span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="s">&#39;acode&#39;</span><span class="p">])</span>
+
+</div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">adata</span> <span class="o">=</span> <span class="n">AdminData</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2004</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">Province</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">get_province_by_name</span><span class="p">(</span><span class="s">u&#39;浙江&#39;</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">get_prefecture_children</span><span class="p">(</span><span class="s">u&#39;浙江&#39;</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">get_prefecture_by_name</span><span class="p">(</span><span class="n">province</span><span class="o">=</span><span class="s">u&#39;浙江&#39;</span><span class="p">,</span><span class="n">prefecture</span><span class="o">=</span><span class="s">u&#39;嘉兴市&#39;</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">get_county_children</span><span class="p">(</span><span class="n">province</span><span class="o">=</span><span class="s">u&#39;浙江&#39;</span><span class="p">,</span><span class="n">prefecture</span><span class="o">=</span><span class="s">u&#39;嘉兴市&#39;</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">get_county_by_name</span><span class="p">(</span><span class="n">province</span><span class="o">=</span><span class="s">u&#39;浙江&#39;</span><span class="p">,</span><span class="n">prefecture</span><span class="o">=</span><span class="s">u&#39;嘉兴市&#39;</span><span class="p">,</span><span class="n">county</span><span class="o">=</span><span class="s">u&#39;平湖市&#39;</span><span class="p">))</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">get_by_acode</span><span class="p">(</span><span class="s">&#39;220000&#39;</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">ProvincePrefecture</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="p">[</span><span class="s">u&#39;浙江&#39;</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="p">[</span><span class="s">u&#39;浙江&#39;</span><span class="p">,</span><span class="s">u&#39;嘉兴&#39;</span><span class="p">,</span><span class="s">u&#39;孩孩&#39;</span><span class="p">])</span>
+
+    <span class="n">adata</span><span class="o">.</span><span class="n">set_year</span><span class="p">(</span><span class="mi">2010</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="p">[</span><span class="nb">tuple</span><span class="p">([</span><span class="s">u&#39;浙江&#39;</span><span class="p">,</span><span class="s">u&#39;f&#39;</span><span class="p">])])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="p">[</span><span class="nb">tuple</span><span class="p">([</span><span class="s">u&#39;北京&#39;</span><span class="p">])])</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

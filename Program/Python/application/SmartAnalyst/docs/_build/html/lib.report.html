@@ -1,0 +1,348 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>lib.report package &mdash; lib  documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="lib  documentation" href="index.html" />
+    <link rel="up" title="lib package" href="lib.html" />
+    <link rel="next" title="lib.toolkit package" href="lib.toolkit.html" />
+    <link rel="prev" title="lib.file package" href="lib.file.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="lib-report-package">
+<h1>lib.report package<a class="headerlink" href="#lib-report-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-lib.report.class_Report">
+<span id="lib-report-class-report-module"></span><h2>lib.report.class_Report module<a class="headerlink" href="#module-lib.report.class_Report" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">report</span> <span class="o">=</span> <span class="n">Report</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">&#39;数据分析报表&#39;</span><span class="p">,</span><span class="n">author</span><span class="o">=</span><span class="s">&#39;冥王星人&#39;</span><span class="p">)</span>
+<span class="n">report</span><span class="o">.</span><span class="n">create_section</span><span class="p">(</span><span class="s">&#39;地球和月球&#39;</span><span class="p">)</span>
+<span class="n">report</span><span class="o">.</span><span class="n">create_subsection</span><span class="p">(</span><span class="s">&#39;地球往事&#39;</span><span class="p">)</span>
+<span class="n">report</span><span class="o">.</span><span class="n">create_section</span><span class="p">(</span><span class="s">&#39;地球和月球2&#39;</span><span class="p">)</span>
+<span class="n">report</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span><span class="s">&#39;这是为你写的歌。&#39;</span><span class="p">)</span>
+<span class="n">report</span><span class="o">.</span><span class="n">create_subsection</span><span class="p">(</span><span class="s">&#39;地球往事2&#39;</span><span class="p">)</span>
+<span class="n">report</span><span class="o">.</span><span class="n">add_matplotlib_graph</span><span class="p">(</span><span class="n">plt</span><span class="p">,</span><span class="n">caption</span><span class="o">=</span><span class="s">&#39;有趣的图形2&#39;</span><span class="p">)</span>
+<span class="n">report</span><span class="o">.</span><span class="n">create_section</span><span class="p">(</span><span class="s">&#39;冥王星&#39;</span><span class="p">)</span>
+<span class="n">report</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span><span class="s">&#39;欢迎来到地球。&#39;</span><span class="p">)</span>
+<span class="n">report</span><span class="o">.</span><span class="n">add_figure</span><span class="p">(</span><span class="s">&#39;D:/Temp/glen.jpg&#39;</span><span class="p">)</span>
+<span class="n">report</span><span class="o">.</span><span class="n">add_list</span><span class="p">([</span><span class="s">&#39;你们&#39;</span><span class="p">,</span><span class="s">&#39;我们&#39;</span><span class="p">])</span>
+<span class="n">tdata</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">]]</span>
+<span class="n">report</span><span class="o">.</span><span class="n">add_table</span><span class="p">([[</span><span class="s">&#39;变量&#39;</span><span class="p">,</span> <span class="s">&#39;第一产业占GDP的比重\_全市&#39;</span><span class="p">,</span> <span class="s">&#39;第一产业占GDP的比重\_市辖区&#39;</span><span class="p">,</span><span class="s">&#39;我错了&#39;</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">]],</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">tdata</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;data&#39;</span><span class="p">:</span> <span class="p">[[</span><span class="s">&#39;变量&#39;</span><span class="p">,</span> <span class="s">&#39;第二产业占GDP的比重全市&#39;</span><span class="p">,</span> <span class="s">&#39;第二产业占GDP的比重市辖区&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s">&#39;count&#39;</span><span class="p">,</span> <span class="s">&#39;284.00&#39;</span><span class="p">,</span> <span class="s">&#39;284.00&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s">&#39;mean&#39;</span><span class="p">,</span> <span class="s">&#39;50.94&#39;</span><span class="p">,</span> <span class="s">&#39;51.15&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s">&#39;std&#39;</span><span class="p">,</span> <span class="s">&#39;9.90&#39;</span><span class="p">,</span> <span class="s">&#39;11.69&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s">&#39;min&#39;</span><span class="p">,</span> <span class="s">&#39;17.48&#39;</span><span class="p">,</span> <span class="s">&#39;15.72&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s">&#39;25%&#39;</span><span class="p">,</span> <span class="s">&#39;45.27&#39;</span><span class="p">,</span> <span class="s">&#39;44.12&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s">&#39;50\%&#39;</span><span class="p">,</span> <span class="s">&#39;51.44&#39;</span><span class="p">,</span> <span class="s">&#39;51.05&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s">&#39;75\%&#39;</span><span class="p">,</span> <span class="s">&#39;56.61&#39;</span><span class="p">,</span> <span class="s">&#39;58.94&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s">&#39;max&#39;</span><span class="p">,</span> <span class="s">&#39;79.36&#39;</span><span class="p">,</span> <span class="s">&#39;82.23&#39;</span><span class="p">]],</span> <span class="s">&#39;nrow&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="s">&#39;ncol&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="n">report</span><span class="o">.</span><span class="n">add_table</span><span class="p">(</span><span class="n">tdata</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">],</span><span class="n">tdata</span><span class="p">[</span><span class="s">&#39;nrow&#39;</span><span class="p">],</span><span class="n">tdata</span><span class="p">[</span><span class="s">&#39;ncol&#39;</span><span class="p">])</span>
+<span class="n">report</span><span class="o">.</span><span class="n">create_section</span><span class="p">(</span><span class="s">&#39;结束语&#39;</span><span class="p">)</span>
+<span class="n">report</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+<span class="n">report</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+<span class="n">report</span><span class="o">.</span><span class="n">generate_pdf</span><span class="p">(</span><span class="s">&#39;e:/Report/first_report.pdf&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="lib.report.class_Report.Report">
+<em class="property">class </em><code class="descclassname">lib.report.class_Report.</code><code class="descname">Report</code><span class="sig-paren">(</span><em>title=None</em>, <em>author=None</em>, <em>date=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/report/class_Report.html#Report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.report.class_Report.Report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>类Report是用来处理和生成报告</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>title</strong> (<em>str</em>) &#8211; 标题</li>
+<li><strong>author</strong> (<em>str</em>) &#8211; 作者</li>
+<li><strong>date</strong> (<em>str</em>) &#8211; 日期</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="lib.report.class_Report.Report.add_figure">
+<code class="descname">add_figure</code><span class="sig-paren">(</span><em>file=None</em>, <em>caption=None</em>, <em>width='240px'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/report/class_Report.html#Report.add_figure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.report.class_Report.Report.add_figure" title="Permalink to this definition">¶</a></dt>
+<dd><p>添加图片</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>file</strong> (<em>str</em>) &#8211; 图片文件</li>
+<li><strong>caption</strong> (<em>str</em>) &#8211; 图片标题</li>
+<li><strong>width</strong> (<em>str</em>) &#8211; 图片宽度</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">无返回值</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lib.report.class_Report.Report.add_list">
+<code class="descname">add_list</code><span class="sig-paren">(</span><em>lists</em>, <em>type=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/report/class_Report.html#Report.add_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.report.class_Report.Report.add_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>添加列表</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>lists</strong> (<em>list</em>) &#8211; 列表内容</li>
+<li><strong>type</strong> (<em>int</em>) &#8211; 列表类型，取值分别为1,2,3</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">无返回值</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lib.report.class_Report.Report.add_matplotlib_graph">
+<code class="descname">add_matplotlib_graph</code><span class="sig-paren">(</span><em>plt</em>, <em>filepath='E:/Report/'</em>, <em>caption=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/report/class_Report.html#Report.add_matplotlib_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.report.class_Report.Report.add_matplotlib_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>添加matplotlib图片</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>plt</strong> (<em>matplotlib.pyplot</em>) &#8211; matplotlib.pyplot句柄</li>
+<li><strong>filepath</strong> &#8211; 保存图片的地址</li>
+<li><strong>caption</strong> &#8211; 图片标题</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">无返回值</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lib.report.class_Report.Report.add_table">
+<code class="descname">add_table</code><span class="sig-paren">(</span><em>data=None</em>, <em>nrow=None</em>, <em>ncol=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/report/class_Report.html#Report.add_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.report.class_Report.Report.add_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>添加表格</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> &#8211; 表格数据</li>
+<li><strong>nrow</strong> &#8211; 表格行数</li>
+<li><strong>ncol</strong> &#8211; 表格列数</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">无返回值</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lib.report.class_Report.Report.add_text">
+<code class="descname">add_text</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/report/class_Report.html#Report.add_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.report.class_Report.Report.add_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>添加文本内容</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>text</strong> (<em>str</em>) &#8211; 文本</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">无返回值</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lib.report.class_Report.Report.create_section">
+<code class="descname">create_section</code><span class="sig-paren">(</span><em>title</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/report/class_Report.html#Report.create_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.report.class_Report.Report.create_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>创建一级章节</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>title</strong> (<em>str</em>) &#8211; 章节题目</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">无返回值</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lib.report.class_Report.Report.create_subsection">
+<code class="descname">create_subsection</code><span class="sig-paren">(</span><em>title</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/report/class_Report.html#Report.create_subsection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.report.class_Report.Report.create_subsection" title="Permalink to this definition">¶</a></dt>
+<dd><p>创建二级章节</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>title</strong> (<em>str</em>) &#8211; 章节题目</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">无返回值</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lib.report.class_Report.Report.create_subsubsection">
+<code class="descname">create_subsubsection</code><span class="sig-paren">(</span><em>title</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/report/class_Report.html#Report.create_subsubsection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.report.class_Report.Report.create_subsubsection" title="Permalink to this definition">¶</a></dt>
+<dd><p>创建三级级章节</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>title</strong> (<em>str</em>) &#8211; 章节题目</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">无返回值</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lib.report.class_Report.Report.flush">
+<code class="descname">flush</code><span class="sig-paren">(</span><em>level=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/report/class_Report.html#Report.flush"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.report.class_Report.Report.flush" title="Permalink to this definition">¶</a></dt>
+<dd><p>输出内容和章节</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>level</strong> (<em>int</em>) &#8211; 输出层级</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">无返回值</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lib.report.class_Report.Report.generate_pdf">
+<code class="descname">generate_pdf</code><span class="sig-paren">(</span><em>file=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/report/class_Report.html#Report.generate_pdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.report.class_Report.Report.generate_pdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>生成pdf文件</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file</strong> (<em>str</em>) &#8211; 文件名</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">无返回值</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-lib.report">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-lib.report" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">lib.report package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-lib.report.class_Report">lib.report.class_Report module</a></li>
+<li><a class="reference internal" href="#module-lib.report">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="lib.html">lib package</a><ul>
+      <li>Previous: <a href="lib.file.html" title="previous chapter">lib.file package</a></li>
+      <li>Next: <a href="lib.toolkit.html" title="next chapter">lib.toolkit package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/lib.report.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+      |
+      <a href="_sources/lib.report.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

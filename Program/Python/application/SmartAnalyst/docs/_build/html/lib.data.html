@@ -1,0 +1,497 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>lib.data package &mdash; lib  documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="lib  documentation" href="index.html" />
+    <link rel="up" title="lib package" href="lib.html" />
+    <link rel="next" title="lib.database package" href="lib.database.html" />
+    <link rel="prev" title="lib package" href="lib.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="lib-data-package">
+<h1>lib.data package<a class="headerlink" href="#lib-data-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-lib.data.class_AdminData">
+<span id="lib-data-class-admindata-module"></span><h2>lib.data.class_AdminData module<a class="headerlink" href="#module-lib.data.class_AdminData" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">adata</span> <span class="o">=</span> <span class="n">AdminData</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2004</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">Province</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">get_province_by_name</span><span class="p">(</span><span class="s">u&#39;浙江&#39;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">get_prefecture_children</span><span class="p">(</span><span class="s">u&#39;浙江&#39;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">get_prefecture_by_name</span><span class="p">(</span><span class="n">province</span><span class="o">=</span><span class="s">u&#39;浙江&#39;</span><span class="p">,</span><span class="n">prefecture</span><span class="o">=</span><span class="s">u&#39;嘉兴市&#39;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">get_county_children</span><span class="p">(</span><span class="n">province</span><span class="o">=</span><span class="s">u&#39;浙江&#39;</span><span class="p">,</span><span class="n">prefecture</span><span class="o">=</span><span class="s">u&#39;嘉兴市&#39;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">get_county_by_name</span><span class="p">(</span><span class="n">province</span><span class="o">=</span><span class="s">u&#39;浙江&#39;</span><span class="p">,</span><span class="n">prefecture</span><span class="o">=</span><span class="s">u&#39;嘉兴市&#39;</span><span class="p">,</span><span class="n">county</span><span class="o">=</span><span class="s">u&#39;平湖市&#39;</span><span class="p">))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">get_by_acode</span><span class="p">(</span><span class="s">&#39;220000&#39;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">ProvincePrefecture</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="p">[</span><span class="s">u&#39;浙江&#39;</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="p">[</span><span class="s">u&#39;浙江&#39;</span><span class="p">,</span><span class="s">u&#39;嘉兴&#39;</span><span class="p">,</span><span class="s">u&#39;孩孩&#39;</span><span class="p">])</span>
+
+<span class="n">adata</span><span class="o">.</span><span class="n">set_year</span><span class="p">(</span><span class="mi">2010</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="p">[</span><span class="nb">tuple</span><span class="p">([</span><span class="s">u&#39;浙江&#39;</span><span class="p">,</span><span class="s">u&#39;f&#39;</span><span class="p">])])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">adata</span><span class="p">[</span><span class="nb">tuple</span><span class="p">([</span><span class="s">u&#39;北京&#39;</span><span class="p">])])</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="lib.data.class_AdminData.AdminData">
+<em class="property">class </em><code class="descclassname">lib.data.class_AdminData.</code><code class="descname">AdminData</code><span class="sig-paren">(</span><em>version=None</em>, <em>year=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/data/class_AdminData.html#AdminData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.data.class_AdminData.AdminData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>AdminData类表示行政区域数据</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>version</strong> (<em>str</em>) &#8211; 颁布的行政区划的版本号</li>
+<li><strong>year</strong> (<em>int,str</em>) &#8211; 颁布的行政区划的年份</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="lib.database.html#module-lib.database" title="lib.database"><strong>database</strong></a> (<a class="reference internal" href="lib.database.html#lib.database.class_AdminDatabase.AdminDatabase" title="lib.database.class_AdminDatabase.AdminDatabase"><em>AdminDatabase</em></a>) &#8211; 行政区划数据库</li>
+<li><strong>latestversion</strong> (<em>str</em>) &#8211; 最新颁布的行政区划版本号</li>
+<li><strong>year</strong> (<em>str</em>) &#8211; 年份</li>
+<li><a class="reference internal" href="lib.database.html#lib.database.class_AdminDatabase.AdminDatabase.version" title="lib.database.class_AdminDatabase.AdminDatabase.version"><strong>version</strong></a> (<em>str</em>) &#8211; 版本号</li>
+<li><a class="reference internal" href="#lib.data.class_AdminData.AdminData.Province" title="lib.data.class_AdminData.AdminData.Province"><strong>Province</strong></a> (<em>list</em>) &#8211; 某个版本的所有省级行政区划</li>
+<li><a class="reference internal" href="#lib.data.class_AdminData.AdminData.Prefecture" title="lib.data.class_AdminData.AdminData.Prefecture"><strong>Prefecture</strong></a> (<em>list</em>) &#8211; 某个版本的所有地级行政区划</li>
+<li><a class="reference internal" href="#lib.data.class_AdminData.AdminData.County" title="lib.data.class_AdminData.AdminData.County"><strong>County</strong></a> (<em>list</em>) &#8211; 某个版本的所有县级行政区划</li>
+<li><a class="reference internal" href="#lib.data.class_AdminData.AdminData.ProvincePrefecture" title="lib.data.class_AdminData.AdminData.ProvincePrefecture"><strong>ProvincePrefecture</strong></a> (<em>list</em>) &#8211; 某个版本的所有省级和地级行政区划</li>
+<li><a class="reference internal" href="#lib.data.class_AdminData.AdminData.ProvincePrefectureCounty" title="lib.data.class_AdminData.AdminData.ProvincePrefectureCounty"><strong>ProvincePrefectureCounty</strong></a> (<em>list</em>) &#8211; 某个版本的所有省级地级县级区划</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>通用接口__getitem__</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>key</strong> (<em>str,list</em>) &#8211; 查询条件。其中的key表示表示区域名称，方法如下：</td>
+</tr>
+</tbody>
+</table>
+<p>（1）省级区域，用名字直接表示，例如ad[u&#8217;北京&#8217;]；
+（2）地级区域，用省级、地级名称表示，例如ad[u&#8217;浙江&#8217;,u&#8217;嘉兴&#8217;]；（3）县级区域，用省级、地级、县级名称表示，例如ad[u&#8217;湖北&#8217;, u&#8217;恩施&#8217;,u&#8217;来凤&#8217;]；
+（4）如果是本级行政区域加上下级行政区域，下级行政区域用f（first）表示，例如表示浙江省及其所有地级行政区域，用ad[u&#8217;浙江&#8217;,u&#8217;f&#8217;]；
+（5）如果是本级行政区域加上下下级行政区域，下下级行政区域用s（second）表示，例如表示浙江省及其所有县级行政区域，用ad[u&#8217;浙江&#8217;,u&#8217;s&#8217;]；
+（6）如果是本级行政区域加上下级及下下级行政区域，下级及下下级行政区域用b（both）表示，例如表示浙江省及其所有地县级行政区域，用ad[u&#8217;浙江&#8217;,u&#8217;b&#8217;]。返回值是数据库中查询得到的行政区划的列表。</p>
+<dl class="attribute">
+<dt id="lib.data.class_AdminData.AdminData.County">
+<code class="descname">County</code><a class="headerlink" href="#lib.data.class_AdminData.AdminData.County" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lib.data.class_AdminData.AdminData.Prefecture">
+<code class="descname">Prefecture</code><a class="headerlink" href="#lib.data.class_AdminData.AdminData.Prefecture" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lib.data.class_AdminData.AdminData.Province">
+<code class="descname">Province</code><a class="headerlink" href="#lib.data.class_AdminData.AdminData.Province" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lib.data.class_AdminData.AdminData.ProvincePrefecture">
+<code class="descname">ProvincePrefecture</code><a class="headerlink" href="#lib.data.class_AdminData.AdminData.ProvincePrefecture" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lib.data.class_AdminData.AdminData.ProvincePrefectureCounty">
+<code class="descname">ProvincePrefectureCounty</code><a class="headerlink" href="#lib.data.class_AdminData.AdminData.ProvincePrefectureCounty" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lib.data.class_AdminData.AdminData.get_by_acode">
+<code class="descname">get_by_acode</code><span class="sig-paren">(</span><em>acode</em>, <em>year=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/data/class_AdminData.html#AdminData.get_by_acode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.data.class_AdminData.AdminData.get_by_acode" title="Permalink to this definition">¶</a></dt>
+<dd><p>通过行政区划代码（acode)查询行政区划</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>acode</strong> (<em>str</em>) &#8211; 行政区划代码</li>
+<li><strong>year</strong> (<em>int,str</em>) &#8211; 年份</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">查询结果</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lib.data.class_AdminData.AdminData.get_county_by_name">
+<code class="descname">get_county_by_name</code><span class="sig-paren">(</span><em>province</em>, <em>prefecture</em>, <em>county</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/data/class_AdminData.html#AdminData.get_county_by_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.data.class_AdminData.AdminData.get_county_by_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>通过省级地级县级名称查询行政区划</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>province</strong> (<em>str</em>) &#8211; 省级行政区划名称</li>
+<li><strong>prefecture</strong> (<em>str</em>) &#8211; 地级行政区划名称</li>
+<li><strong>county</strong> (<em>str</em>) &#8211; 县级行政区划名称</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">县级行政区划单位</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lib.data.class_AdminData.AdminData.get_county_children">
+<code class="descname">get_county_children</code><span class="sig-paren">(</span><em>province</em>, <em>prefecture</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/data/class_AdminData.html#AdminData.get_county_children"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.data.class_AdminData.AdminData.get_county_children" title="Permalink to this definition">¶</a></dt>
+<dd><p>通过省级和地级区域名称获得其辖区下的所有县级行政区划</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>province</strong> (<em>str</em>) &#8211; 省级行政区划名称</li>
+<li><strong>prefecture</strong> (<em>str</em>) &#8211; 地级行政区划名称</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">某个地级行政单位辖区下的所有县级区划单位</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lib.data.class_AdminData.AdminData.get_prefecture_by_name">
+<code class="descname">get_prefecture_by_name</code><span class="sig-paren">(</span><em>province</em>, <em>prefecture</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/data/class_AdminData.html#AdminData.get_prefecture_by_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.data.class_AdminData.AdminData.get_prefecture_by_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>通过省级地级名称查询行政区划</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>province</strong> (<em>str</em>) &#8211; 省级行政区划名称</li>
+<li><strong>prefecture</strong> (<em>str</em>) &#8211; 地级行政区划名称</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">地级行政区划单位</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lib.data.class_AdminData.AdminData.get_prefecture_children">
+<code class="descname">get_prefecture_children</code><span class="sig-paren">(</span><em>province</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/data/class_AdminData.html#AdminData.get_prefecture_children"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.data.class_AdminData.AdminData.get_prefecture_children" title="Permalink to this definition">¶</a></dt>
+<dd><p>通过省级名称获得其辖区下的所有地级行政区划</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>province</strong> (<em>str</em>) &#8211; 省级行政区划的名称</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">某省级单位辖区下的所有地级区划单位</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lib.data.class_AdminData.AdminData.get_province_by_name">
+<code class="descname">get_province_by_name</code><span class="sig-paren">(</span><em>province</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/data/class_AdminData.html#AdminData.get_province_by_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.data.class_AdminData.AdminData.get_province_by_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>通过省级名称查询行政区划</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>province</strong> (<em>str</em>) &#8211; 省级行政区划名称</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">省级行政区划单位</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lib.data.class_AdminData.AdminData.set_version">
+<code class="descname">set_version</code><span class="sig-paren">(</span><em>version</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/data/class_AdminData.html#AdminData.set_version"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.data.class_AdminData.AdminData.set_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>设置版本号</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>version</strong> (<em>str</em>) &#8211; 颁布的行政区划版本号</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">无返回值</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lib.data.class_AdminData.AdminData.set_year">
+<code class="descname">set_year</code><span class="sig-paren">(</span><em>year</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/data/class_AdminData.html#AdminData.set_year"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.data.class_AdminData.AdminData.set_year" title="Permalink to this definition">¶</a></dt>
+<dd><p>设置年份</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>year</strong> (<em>str</em>) &#8211; 年份</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">无返回值</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-lib.data.class_Data">
+<span id="lib-data-class-data-module"></span><h2>lib.data.class_Data module<a class="headerlink" href="#module-lib.data.class_Data" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="lib.data.class_Data.Data">
+<em class="property">class </em><code class="descclassname">lib.data.class_Data.</code><code class="descname">Data</code><a class="reference internal" href="_modules/lib/data/class_Data.html#Data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.data.class_Data.Data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Data类是各类数据类的超类</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-lib.data.class_Format">
+<span id="lib-data-class-format-module"></span><h2>lib.data.class_Format module<a class="headerlink" href="#module-lib.data.class_Format" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="lib.data.class_Format.Format">
+<em class="property">class </em><code class="descclassname">lib.data.class_Format.</code><code class="descname">Format</code><span class="sig-paren">(</span><em>data=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/data/class_Format.html#Format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.data.class_Format.Format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Format类是格式转换的超类，用来被继承</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-lib.data.class_RegionData">
+<span id="lib-data-class-regiondata-module"></span><h2>lib.data.class_RegionData module<a class="headerlink" href="#module-lib.data.class_RegionData" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">rdata</span> <span class="o">=</span> <span class="n">RegionData</span><span class="p">()</span>
+<span class="nb">vars</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;年末总人口&#39;</span><span class="p">,</span> <span class="s">&#39;第一产业年末单位从业人员&#39;</span><span class="p">]</span>
+<span class="n">mdata</span> <span class="o">=</span> <span class="n">rdata</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">region</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;t&#39;</span><span class="p">],</span><span class="n">year</span><span class="o">=</span><span class="p">[</span><span class="mi">2010</span><span class="p">])</span>
+<span class="n">mdata</span> <span class="o">=</span> <span class="n">rdata</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">region</span><span class="o">=</span><span class="p">[[</span><span class="s">u&#39;北京&#39;</span><span class="p">],[</span><span class="s">u&#39;上海&#39;</span><span class="p">]],</span><span class="n">variable</span><span class="o">=</span><span class="nb">vars</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mdata</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mdata</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">])</span>
+<span class="nb">file</span> <span class="o">=</span> <span class="s">&#39;d:/down/citydata.xls&#39;</span>
+<span class="n">mdata</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="lib.data.class_RegionData.RegionData">
+<em class="property">class </em><code class="descclassname">lib.data.class_RegionData.</code><code class="descname">RegionData</code><a class="reference internal" href="_modules/lib/data/class_RegionData.html#RegionData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.data.class_RegionData.RegionData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>RegionData类表示区域数据</p>
+<dl class="attribute">
+<dt id="lib.data.class_RegionData.RegionData.databases">
+<code class="descname">databases</code><em class="property"> = [&lt;lib.database.class_CityStatDatabase.CityStatDatabase object at 0x043CEAB0&gt;]</em><a class="headerlink" href="#lib.data.class_RegionData.RegionData.databases" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lib.data.class_RegionData.RegionData.find">
+<code class="descname">find</code><span class="sig-paren">(</span><em>**conds</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/data/class_RegionData.html#RegionData.find"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.data.class_RegionData.RegionData.find" title="Permalink to this definition">¶</a></dt>
+<dd><p>查询多个数据库得到结果</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>conds</strong> (<em>dict</em>) &#8211; 查询条件</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">查询得到的区域数据</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-lib.data.class_RegionFormat">
+<span id="lib-data-class-regionformat-module"></span><h2>lib.data.class_RegionFormat module<a class="headerlink" href="#module-lib.data.class_RegionFormat" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="lib.data.class_RegionFormat.RegionFormat">
+<em class="property">class </em><code class="descclassname">lib.data.class_RegionFormat.</code><code class="descname">RegionFormat</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/data/class_RegionFormat.html#RegionFormat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.data.class_RegionFormat.RegionFormat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#lib.data.class_Format.Format" title="lib.data.class_Format.Format"><code class="xref py py-class docutils literal"><span class="pre">lib.data.class_Format.Format</span></code></a></p>
+<p>RegionFormat类用来进行区域数据格式转换</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>list</em>) &#8211; 区域数据</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="lib.data.class_RegionFormat.RegionFormat.stack_to_normal">
+<code class="descname">stack_to_normal</code><span class="sig-paren">(</span><em>connect</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/data/class_RegionFormat.html#RegionFormat.stack_to_normal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.data.class_RegionFormat.RegionFormat.stack_to_normal" title="Permalink to this definition">¶</a></dt>
+<dd><p>转换区域数据格式，从stack格式到normal格式</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>connect</strong> (<em>str</em>) &#8211; 区域横截面数据连接方式，可以分别是&#8217;inner&#8217;或&#8217;outer&#8217;</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lib.data.class_RegionFormat.RegionFormat.to_set_type">
+<code class="descname">to_set_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/data/class_RegionFormat.html#RegionFormat.to_set_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.data.class_RegionFormat.RegionFormat.to_set_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>辅助函数，用来设置区域数据的参数</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">无返回值</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lib.data.class_RegionFormat.RegionFormat.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>sourcetype='stack'</em>, <em>targettype='normal'</em>, <em>connect='outer'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/data/class_RegionFormat.html#RegionFormat.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.data.class_RegionFormat.RegionFormat.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-lib.data">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-lib.data" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">lib.data package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-lib.data.class_AdminData">lib.data.class_AdminData module</a></li>
+<li><a class="reference internal" href="#module-lib.data.class_Data">lib.data.class_Data module</a></li>
+<li><a class="reference internal" href="#module-lib.data.class_Format">lib.data.class_Format module</a></li>
+<li><a class="reference internal" href="#module-lib.data.class_RegionData">lib.data.class_RegionData module</a></li>
+<li><a class="reference internal" href="#module-lib.data.class_RegionFormat">lib.data.class_RegionFormat module</a></li>
+<li><a class="reference internal" href="#module-lib.data">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="lib.html">lib package</a><ul>
+      <li>Previous: <a href="lib.html" title="previous chapter">lib package</a></li>
+      <li>Next: <a href="lib.database.html" title="next chapter">lib.database package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/lib.data.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+      |
+      <a href="_sources/lib.data.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
