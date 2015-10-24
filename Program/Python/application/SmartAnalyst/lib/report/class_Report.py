@@ -189,6 +189,7 @@ class Report:
         :return: 无返回值
         '''
         graph = Figure(position='h!')
+        #graph = Figure()
         graph.add_image(file, width=width)
         if caption is not None:
             graph.add_caption(caption)
@@ -205,7 +206,7 @@ class Report:
         x = str(int(datetime.now().timestamp()*1000))
         filename = filepath + 'graph/' + x + '.pdf'
         plt.savefig(filename)
-        self.add_figure(filename,caption)
+        self.add_figure(filename)
 
     def generate_pdf(self,file=''):
         '''生成pdf文件

@@ -73,6 +73,7 @@ class CrossSectionRegionDataExplorer(CrossSectionDataExplorer):
         :return: 概要统计分析
         :rtype: pandas.DataFrame
         '''
+        #print(self._data.applymap(type))
         return self._data.describe()
 
     def ols(self,y=None,x=None):
@@ -111,9 +112,9 @@ class CrossSectionRegionDataExplorer(CrossSectionDataExplorer):
         :return: 占比变量
         :rtype: pandas.DataFrame
         '''
-        return self.per_variable(pop=total,var=var,weight=100,prefix=u'占比')
+        return self.per_variable(pop=total,var=var,weight=100)
 
-    def per_variable(self,pop,var,weight=1,prefix=u'人均'):
+    def per_variable(self,pop,var,weight=1):
         '''计算人均变量
 
         :param str,list pop: 总体变量
@@ -124,18 +125,22 @@ class CrossSectionRegionDataExplorer(CrossSectionDataExplorer):
         :rtype: pandas.DataFrame
         '''
         if isinstance(pop,str):
+            popstr = pop
             pop = self._data[pop]
+        if isinstance(pop,dict):
+            popstr = list(pop.keys())[0]
+            pop = pop[popstr]
         if isinstance(var,str):
             var = [var]
         ndata = {}
         for v in var:
             if weight is None:
-                ndata['_'.join([prefix,v])] = self._data[v]/pop
+                ndata['|'.join(v,popstr)] = self._data[v]/pop
             else:
-                ndata['_'.join([prefix,v])] = weight*self._data[v]/pop
+                ndata['|'.join([v,popstr])] = weight*self._data[v]/pop
         frame = pd.DataFrame(ndata)
         frame.index = self.index
-        frame.insert(0, 'region',self._data['region'])
+        #frame.insert(0, 'region',self._data['region'])
         return frame
 
     def log_variable(self,var):
@@ -150,13 +155,15 @@ class CrossSectionRegionDataExplorer(CrossSectionDataExplorer):
         ndata = {}
         for v in var:
             if self.is_positive(v):
-                ndata['_'.join([v,u'对数'])] = np.log(self._data[v])
+                print('itis',type(self._data[v]),(self._data[v]))
+                ndata['|'.join([v,u'对数'])] = np.log(self._data[v])
             else:
                 print(v,' is not all positive.')
-                raise ValueError
+                print(np.min(self._data[v]))
+                return None
         frame = pd.DataFrame(ndata)
         frame.index = self.index
-        frame.insert(0, 'region',self._data['region'])
+        #frame.insert(0, 'region',self._data['region'])
         return frame
 
     def hist(self,var,save=False):
@@ -186,9 +193,10 @@ class CrossSectionRegionDataExplorer(CrossSectionDataExplorer):
         g = sns.jointplot(x=x, y=y, data=self._data, kind=kind)
         if save:
             self._save()
+            return plt
         else:
             plt.show()
-        plt.close()
+        #plt.close()
 
     def pair(self,vars=None,save=False):
         '''散点图矩阵
@@ -214,7 +222,8 @@ class CrossSectionRegionDataExplorer(CrossSectionDataExplorer):
         if isinstance(var,str):
             var = [var]
         for v in var:
-            if not (self._data[v]>0).all():
+            #if not (mdata.dropna()>0).all():
+            if np.min(self._data[v]) < 0:
                 return False
         return True
 
@@ -230,22 +239,28 @@ if __name__ == '__main__':
     mdata = rdata.find(region=['t'],year=[2010],variable=[u'地区生产总值',u'年末总人口'],scale=u'全市')
     mdata = mdata['data']
     csdexplorer = CrossSectionRegionDataExplorer(mdata)
-    dframe = csdexplorer.per_variable(pop=mdata[u'年末总人口'],var=[u'地区生产总值',u'年末总人口'])
+    dframe = csdexplorer.per_variable(pop=u'年末总人口',var=[u'地区生产总值',u'年末总人口'])
+    dframe = csdexplorer.per_variable(pop={u'年末总人口':mdata[u'年末总人口']},var=[u'地区生产总值',u'年末总人口'])
     print(dframe)
     dframe = csdexplorer.log_variable(u'地区生产总值')
     dframe2 = csdexplorer.describe().applymap(lambda x:'{0:.2f}'.format(x))
     print(dframe2)
+
     csdexplorer.hist(var=u'地区生产总值',save=True)
     csdexplorer.scatter(y=u'地区生产总值',x=u'年末总人口',kind='kde')
     csdexplorer.pair(vars=[u'地区生产总值',u'年末总人口'])
 
     csdexplorer.ols(y=u'地区生产总值',x=u'年末总人口')
+    corr = csdexplorer.corr()
+    print(corr.rank(method='max',ascending=False))
     print(csdexplorer.corr())
 
     pdata = {'region':['1','2','3'],'x':[1,2,-3],'y':[4,5,6]}
     pdata = pd.DataFrame(pdata)
     cs2 = CrossSectionRegionDataExplorer(pdata)
     print(cs2.is_positive(var=['y']))
+
+    plt.close()
 
 
 

@@ -50,6 +50,7 @@ class RegionData:
         else:
             conds.pop('merge_type')
 
+        print(conds)
         result = self.databases[0].find(conds)
 
         # 连接多个数据库查询的结果

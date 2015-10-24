@@ -133,6 +133,8 @@ class RegionFormat(Format):
                 mdata.insert(0, 'region', [region_dict[i] for i in mdata.index])
                 year.append(str(y))
                 pdata.append(mdata)
+
+            print(pdata)
             result = pd.Panel(dict(zip(year,pdata)))
             mdata = result.swapaxes('items','minor')
             mdata = mdata.swapaxes('major','minor')
