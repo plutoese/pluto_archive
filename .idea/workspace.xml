@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8929d1a5-131d-4922-a93f-7143468f4b86" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Configuration/first_try" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Configuration/workspace_config.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Note_template(CFZHANG-PC--cfzhang--2015-09-02-13,53,16).log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Note_template(CFZHANG-PC--cfzhang--2015-09-02-13,53,32).pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Note_template(CFZHANG-PC--cfzhang--2015-09-02-14,11,45).aux" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Note_template(CFZHANG-PC--cfzhang--2015-09-02-14,11,45).log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Note_template(CFZHANG-PC--cfzhang--2015-09-02-14,11,45).tex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Note_template(CFZHANG-PC--cfzhang--2015-09-02-14,53,40).aux" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Note_template.aux" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Note_template.bbl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Note_template.blg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Note_template.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Note_template.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Note_template.synctex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Note_template.tex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Python库用户手册.aux" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Python库用户手册.bbl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Python库用户手册.blg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Python库用户手册.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Python库用户手册.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Python库用户手册.synctex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Python库用户手册.tex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Python设计方案.aux" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Python设计方案.bbl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Python设计方案.blg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Python设计方案.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Python设计方案.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Python设计方案.synctex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LaTexNotes/Manuscript/Python设计方案.tex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Notebook/development_economics.tex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Notebook/handbook of Git and GitHub.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/.idea/.name" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/.idea/Python.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/.idea/encodings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/.idea/misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/.idea/modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/.idea/scopes/scope_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/.idea/vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/.idea/workspace(CFZHANG-PC--cfzhang--2015-09-21-14,20,37).xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/.idea/workspace(CFZHANG-PC--cfzhang--2015-09-21-14,22,33).xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/.idea/workspace(CFZHANG-PC--cfzhang--2015-09-21-14,24,46).xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/.idea/workspace(CFZHANG-PC--cfzhang--2015-09-22-15,17,31).xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/.idea/workspace(CFZHANG-PC--cfzhang--2015-10-05-16,08,50).xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/.idea/workspace.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DBConstructor/AdminCode/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DBConstructor/AdminCode/acode.rar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DBConstructor/AdminCode/class_AdminCodeDataSheet.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DBConstructor/AdminCode/demo_toTestNewAdminCode.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DBConstructor/AdminCode/main_createAdminCode.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DBConstructor/CityStatistics/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DBConstructor/CityStatistics/class_CityStatisticsDataSheet.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DBConstructor/CityStatistics/demo_cCityQuery.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DBConstructor/CityStatistics/demo_citystatcreator.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DBConstructor/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DataWarehouse/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DataWarehouse/data/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DataWarehouse/data/class_admindata.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DataWarehouse/data/class_data.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DataWarehouse/data/class_format.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DataWarehouse/data/class_regiondata.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DataWarehouse/data/class_regionformat.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DataWarehouse/database/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DataWarehouse/database/class_admindatabase.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DataWarehouse/database/class_citystatdatabase.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DataWarehouse/database/class_database.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DataWarehouse/toolkit/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DataWarehouse/toolkit/class_crosssectiondataexplorer.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DataWarehouse/toolkit/class_reportgenerator.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DataWarehouse/toolkit/demo_matplotpractice.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DataWarehouse/toolkit/demo_statsmodelpractice.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/DataWarehouse/toolkit/main_EDAreport.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/demo_dataentry.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/demo_stepone.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/demo_tobegin.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/main_easydata_version_one.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/result.xlsx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/static/css/bootstrap-theme.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/static/css/bootstrap-theme.css.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/static/css/bootstrap-theme.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/static/css/bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/static/css/bootstrap.css.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/static/css/bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/static/fonts/glyphicons-halflings-regular.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/static/fonts/glyphicons-halflings-regular.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/static/fonts/glyphicons-halflings-regular.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/static/fonts/glyphicons-halflings-regular.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/static/fonts/glyphicons-halflings-regular.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/static/js/bootstrap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/static/js/bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/static/js/npm.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/templates/404.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/templates/base.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/templates/default.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/templates/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/templates/region.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/templates/result.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/templates/time.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/FlaskWeb/practise/templates/user.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/MatchTheory/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/MatchTheory/class_Match.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/MatchTheory/class_Proposal.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/MatchTheory/class_SampleGenerator.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/MatchTheory/demo_main.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/MatchTheory/demo_match_next2version.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/MatchTheory/demo_match_nextversion.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/MatchTheory/demo_match_originversion.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/RegionStudy/RegionDataDrived/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/RegionStudy/RegionDataExport/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/RegionStudy/RegionDataExport/demo_provincedata.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/RegionStudy/RegionDataExport/demo_provincedataexport.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/RegionStudy/RegionDataExport/demo_regiondataexport.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/RegionStudy/RegionDataInterface/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/RegionStudy/RegionDataInterface/class_regionaldatainterface.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/RegionStudy/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/.idea/.name" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/.idea/SmartAnalyst.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/.idea/encodings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/.idea/misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/.idea/modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/.idea/scopes/scope_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/.idea/vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/.idea/workspace.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/application/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/application/class_RegionReportGenerator.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/application/demo_RegionExploreReport.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/bin/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/data/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/demo/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/Makefile" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/doctrees/environment.pickle" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/doctrees/file.doctree" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/doctrees/index.doctree" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/doctrees/lib.data.doctree" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/doctrees/lib.database.doctree" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/doctrees/lib.doctree" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/doctrees/lib.file.doctree" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/doctrees/lib.report.doctree" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/doctrees/lib.toolkit.doctree" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/doctrees/modules.doctree" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/.buildinfo" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_modules/file/class_Excel.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_modules/file/new.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_modules/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_modules/lib/data/class_AdminData.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_modules/lib/data/class_Format.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_modules/lib/data/class_RegionData.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_modules/lib/data/class_RegionFormat.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_modules/lib/data/class_data.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_modules/lib/database/class_AdminDatabase.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_modules/lib/database/class_CityStatDatabase.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_modules/lib/database/class_Database.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_modules/lib/database/class_MongoDB.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_modules/lib/file/class_Excel.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_modules/lib/report/class_Report.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_modules/lib/toolkit/class_CrossSectionDataExplorer.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_sources/file.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_sources/index.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_sources/lib.data.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_sources/lib.database.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_sources/lib.file.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_sources/lib.report.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_sources/lib.toolkit.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_sources/lib.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_sources/modules.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_static/ajax-loader.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_static/alabaster.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_static/basic.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_static/comment-bright.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_static/comment-close.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_static/comment.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_static/doctools.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_static/down-pressed.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_static/down.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_static/file.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_static/jquery-1.11.1.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_static/jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_static/minus.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_static/plus.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_static/pygments.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_static/searchtools.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_static/underscore-1.3.1.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_static/underscore.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_static/up-pressed.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_static/up.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/_static/websupport.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/file.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/genindex.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/lib.data.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/lib.database.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/lib.file.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/lib.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/lib.report.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/lib.toolkit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/modules.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/objects.inv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/py-modindex.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/search.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/_build/html/searchindex.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/conf.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/file.rst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/index.rst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/lib.data.rst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/lib.database.rst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/lib.file.rst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/lib.report.rst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/lib.rst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/lib.toolkit.rst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/make.bat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/docs/modules.rst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/lib/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/lib/data/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/lib/data/class_AdminData.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/lib/data/class_Data.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/lib/data/class_Format.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/lib/data/class_RegionData.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/lib/data/class_RegionFormat.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/lib/database/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/lib/database/class_AdminDatabase.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/lib/database/class_CityStatDatabase.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/lib/database/class_Database.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/lib/file/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/lib/file/class_Excel.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/lib/file/demo_dtafile.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/lib/file/demo_read_stata.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/lib/report/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/lib/report/class_Report.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/lib/toolkit/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/lib/toolkit/class_CrossSectionDataExplorer.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/tests/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/SmartAnalyst/tests/test_excel.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/Makefile" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/doctrees/environment.pickle" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/doctrees/example.doctree" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/doctrees/index.doctree" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/.buildinfo" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/_sources/example.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/_sources/index.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/_static/ajax-loader.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/_static/alabaster.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/_static/basic.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/_static/comment-bright.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/_static/comment-close.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/_static/comment.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/_static/doctools.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/_static/down-pressed.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/_static/down.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/_static/file.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/_static/jquery-1.11.1.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/_static/jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/_static/minus.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/_static/plus.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/_static/pygments.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/_static/searchtools.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/_static/underscore-1.3.1.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/_static/underscore.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/_static/up-pressed.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/_static/up.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/_static/websupport.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/example.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/genindex.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/objects.inv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/search.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/build/html/searchindex.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/make.bat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/source/conf.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/source/example.rst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/application/docs/source/index.rst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/dataanalysis/class_DataVisualization.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/dataanalysis/demo_dataanalysis_template.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/dataanalysis/demo_dataexplore.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/datalayout/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/datalayout/class_Format.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/datalayout/class_Layout.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/datamanipulation/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/datapretreatment/class_DataSheet.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/datapretreatment/demo_pandas.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/dataset/class_DataSet.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/datastruct/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/datastruct/class_SeriesData.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/graphics/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/imexport/class_Excel.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/imexport/class_FileSystem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/imexport/class_MongoDB.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/region/AdminCode/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/region/AdminCode/class_AdministrativeCode.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/region/RegionData/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/region/RegionData/class_RegionData.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/region/RegionData/class_RegionDataSet.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/region/RegionData/class_RegionalData.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/region/RegionData/demo_regiondataquery.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/region/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/report/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/report/class_report.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/report/demo_basic.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/library/report/demo_matplot.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/scratch/cookbook/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/scratch/cookbook/tip001.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/scratch/fluent/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/scratch/fluent/demo_datastruct.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/scratch/fluent/demo_function.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/scratch/testing/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/scratch/testing/mcode/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/scratch/testing/mcode/mycode.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/scratch/testing/test/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/scratch/testing/test/test_hello.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Program/Python/temp/demo_aboutNA.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/001/Image01.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/001/Image02.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/001/Image03.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/001/Image04.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/001/Image05.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/001/p01.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/001/p02.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/001/p03.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/001/p04.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/001/p05.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/001/p06.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/001/p07.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/001/p08.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/001/p09.png" afterPath="" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-11" />
+    <option name="y" value="-11" />
+    <option name="width" value="1942" />
+    <option name="height" value="1042" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane" />
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8929d1a5-131d-4922-a93f-7143468f4b86" name="Default" comment="" />
+      <created>1520831861536</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1520831861536</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-11" y="-11" width="1942" height="1042" extended-state="7" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+</project>
