@@ -29,6 +29,7 @@ StableMatcher
 
 from collections import deque
 
+
 class Individual:
     """个体基类
     :param str name: 名称
@@ -153,10 +154,14 @@ class StableMatcher:
                 for man in self._men:
                     print(man)
 
+                for woman in self._women:
+                    print(woman)
+
             round += 1
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
+    '''
     men = [Male('m1', ['w2', 'w1', 'w3']),
            Male('m2', ['w1', 'w3', 'w2']),
            Male('m3', ['w1', 'w2', 'w3'])]
@@ -173,7 +178,7 @@ if __name__ == '__main__':
     women = [Female('w1', ['m2', 'm3', 'm1', 'm4', 'm5']),
              Female('w2', ['m3', 'm1', 'm2', 'm4', 'm5']),
              Female('w3', ['m5', 'm4', 'm1', 'm2', 'm3']),
-             Female('w4', ['m1', 'm4', 'm5', 'm2', 'm3'])]'''
+             Female('w4', ['m1', 'm4', 'm5', 'm2', 'm3'])]
 
     matcher = StableMatcher(men=men, women=women)
     matcher.match()
